@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root BTCPP_format="4">
+  <BehaviorTree ID="AUV7_24">
+    <Sequence>
+      <SubTree ID="enable_mission"/>
+      <SubTree ID="CoinFlip"/>
+      <SubTree ID="Bin24"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="AUV8_24">
+    <Sequence>
+      <SubTree ID="enable_mission"/>
+      <SubTree ID="CoinFlip"/>
+      <SubTree ID="Gate24"
+               _autoremap="false"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0"
+               positionY="0.0"
+               positionZ="0.8"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="4"
+               _autoremap="true"/>
+      <SubTree ID="TrickShotSingle"/>
+      <SubTree ID="Buoy24"/>
+      <SubTree ID="Torpedoes24"
+               _autoremap="false"/>
+    </Sequence>
+  </BehaviorTree>
+
   <BehaviorTree ID="Buoy24">
     <Sequence>
       <Fallback>
@@ -57,7 +87,8 @@
       <SubTree ID="TrickShotSingle"/>
       <SubTree ID="Buoy24"/>
       <SubTree ID="Bin24"/>
-      <SubTree ID="Torpedoes24"/>
+      <SubTree ID="Torpedoes24"
+               _autoremap="false"/>
     </Sequence>
   </BehaviorTree>
 

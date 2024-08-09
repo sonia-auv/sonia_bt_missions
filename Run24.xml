@@ -57,11 +57,13 @@
       <SubTree ID="TrickShotSingle"/>
       <SubTree ID="Buoy24"/>
       <SubTree ID="Bin24"/>
+      <SubTree ID="Torpedoes24"/>
     </Sequence>
   </BehaviorTree>
 
   <BehaviorTree ID="Torpedoes24">
     <Sequence>
+      <SubTree ID="FindTorp"/>
       <SubTree ID="AlignTorpFrame"/>
       <SubTree ID="AlignTorpFrameAngle"/>
       <SubTree ID="AlignTorpFrame"/>

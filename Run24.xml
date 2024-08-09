@@ -14,14 +14,13 @@
         <SubTree ID="RotatingSearch"
                  classification="buoy"
                  ai_info="{buoy}"
-                 confidence="0.6"
-                 _autoremap="true"/>
+                 confidence="0.6"/>
       </Fallback>
       <Sequence>
         <SubTree ID="AlignBuoy"/>
         <SubTree ID="ApprocheTarget"
                  classification="buoy"
-                 offset="-0.25"
+                 offset="-0.5"
                  confidence="0.6"
                  _autoremap="true"/>
         <SubTree ID="BuoyCircle"/>
@@ -33,18 +32,9 @@
     <Sequence>
       <AiActivation activation_target="1"/>
       <SubTree ID="GateAlignTrans"/>
-      <SubTree ID="GateAlignTrans"/>
-      <SubTree ID="MoveSinglePose"
-               positionX="0.0"
-               positionY="0.0"
-               positionZ="0.5"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"
-               frame="4"/>
       <SubTree ID="ApprocheTarget"
                classification="gate_rouge"
-               offset="3"
+               offset="2"
                confidence="0.8"/>
     </Sequence>
   </BehaviorTree>
@@ -52,8 +42,7 @@
   <BehaviorTree ID="Run24">
     <Sequence>
       <SubTree ID="enable_mission"/>
-      <SubTree ID="CoinFlip"
-               _autoremap="false"/>
+      <SubTree ID="CoinFlip"/>
       <SubTree ID="Gate24"
                _autoremap="false"/>
       <SubTree ID="MoveSinglePose"
@@ -63,9 +52,11 @@
                orientationX="0.0"
                orientationY="0.0"
                orientationZ="0.0"
-               frame="4"/>
+               frame="4"
+               _autoremap="true"/>
       <SubTree ID="TrickShotSingle"/>
       <SubTree ID="Buoy24"/>
+      <SubTree ID="Bin24"/>
     </Sequence>
   </BehaviorTree>
 

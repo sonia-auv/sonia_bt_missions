@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root BTCPP_format="4">
   <BehaviorTree ID="boot_sequence">
-    <Sequence>
-      <EnableDisableDVL dvl_input="true"/>
-      <ControlSetMode set_mode="true"/>
-      <SubTree ID="MoveSinglePose"
-               positionX="0.0"
-               positionY="0.0"
-               positionZ="0.5"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"
-               frame="1"/>
-    </Sequence>
+    <SubTree ID="MoveSinglePose"
+             positionX="0.0"
+             positionY="0.0"
+             positionZ="0.5"
+             orientationX="0.0"
+             orientationY="0.0"
+             orientationZ="0.0"
+             frame="1"/>
   </BehaviorTree>
 
   <BehaviorTree ID="enable_mission">
@@ -45,16 +41,6 @@
                   type="std::string">port_side or starboard</input_port>
       <input_port name="actuator"
                   type="int">0: Dropper, 1: Torpedo</input_port>
-    </Action>
-    <Action ID="ControlSetMode">
-      <input_port name="set_mode"
-                  default="false"
-                  type="bool"/>
-    </Action>
-    <Action ID="EnableDisableDVL">
-      <input_port name="dvl_input"
-                  default="true"
-                  type="bool"/>
     </Action>
     <Condition ID="MissionSwitchStatus"/>
     <SubTree ID="MoveSinglePose"

@@ -1,64 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root BTCPP_format="4">
-  <BehaviorTree ID="Bin24">
-    <Sequence>
-      <SubTree ID="FindBins"
-               _autoremap="false"/>
-      <SubTree ID="BinAlignTrans"/>
-    </Sequence>
-  </BehaviorTree>
-
-  <BehaviorTree ID="BinAlignTrans">
+  <BehaviorTree ID="AlignOctTrans">
     <Sequence>
       <RetryUntilSuccessful num_attempts="5">
         <CheckAiInfo max_count="1"
-                     ai_info="{aiObj}"
-                     confidence="0.500000"
+                     ai_info="{oct_obj_array}"
+                     confidence="0.75"
                      camera="1"
                      min_count="1"
-                     classification="bin_rouge"/>
+                     classification="samples_table"/>
       </RetryUntilSuccessful>
-      <ExtractAiListItem aiObject="{bin_item}"
+      <ExtractAiListItem aiObject="{oct_obj}"
                          Index="0"
-                         array="{aiObj}"/>
+                         array="{oct_obj_array}"/>
       <SubTree ID="TransAlignXY"
-               detection_object="{bin_item}"
+               detection_object="{oct_obj}"
                target_x="300"
                target_y="200"
                error_margin="0.1"
-               dist="1.5"
+               dist="0.9"
                _autoremap="true"/>
     </Sequence>
   </BehaviorTree>
 
-  <BehaviorTree ID="FindBins">
-    <IfThenElse>
+  <BehaviorTree ID="FindOctogone">
+    <Sequence>
       <SubTree ID="RotatingSearch"
-               classification="bin"
-               ai_info="{bin_obj_arr}"
-               confidence="0.5"
+               classification="samples_table"
+               ai_info="{oct_obj_array}"
+               confidence="0.75"
                _autoremap="true"/>
-      <Sequence>
-        <ExtractAiListItem aiObject="{bin_obj}"
-                           Index="0"
-                           array="{bin_obj_arr}"/>
-        <Repeat num_cycles="2">
-          <SubTree ID="RotAlignZ"
-                   detection_object="{bin_obj}"
-                   target_x="300"
-                   error_margin="0.1"
-                   _autoremap="true"/>
-        </Repeat>
-        <SubTree ID="StepApproachUntilLoss"
-                 classification="bin"
-                 confidence="0.6"
+      <ExtractAiListItem aiObject="{oct_obj}"
+                         Index="0"
+                         array="{oct_obj_array}"/>
+      <Repeat num_cycles="2">
+        <SubTree ID="RotAlignZ"
+                 detection_object="{oct_obj}"
+                 target_x="300"
+                 error_margin="0.1"
                  _autoremap="true"/>
-        <SubTree ID="StepApproachUntilSuccess"
-                 classification="bin"
-                 confidence="0.6"
-                 _autoremap="true"/>
-      </Sequence>
-    </IfThenElse>
+      </Repeat>
+      <SubTree ID="StepApproachUntilLoss"
+               classification="samples_table"
+               confidence="0.75"
+               _autoremap="true"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="0.4"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="4"/>
+      <SubTree ID="StepApproachUntilSuccess"
+               classification="samples_table"
+               confidence="0.75"
+               _autoremap="true"/>
+    </Sequence>
   </BehaviorTree>
 
   <!-- Description of Node Models (used by Groot) -->
@@ -89,6 +87,23 @@
       <input_port name="array"
                   type="AiDetectionArray"/>
     </Action>
+    <SubTree ID="MoveSinglePose"
+             editable="true">
+      <input_port name="positionX"
+                  default="0.0"/>
+      <input_port name="positionY"
+                  default="0.0"/>
+      <input_port name="positionZ"
+                  default="0.0"/>
+      <input_port name="orientationX"
+                  default="0.0"/>
+      <input_port name="orientationY"
+                  default="0.0"/>
+      <input_port name="orientationZ"
+                  default="0.0"/>
+      <input_port name="frame"
+                  default="1"/>
+    </SubTree>
     <SubTree ID="RotAlignZ"
              editable="true">
       <input_port name="detection_object"/>

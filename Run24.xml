@@ -2,30 +2,18 @@
 <root BTCPP_format="4">
   <BehaviorTree ID="Buoy24">
     <Sequence>
-      <Fallback>
-        <RetryUntilSuccessful num_attempts="5">
-          <CheckAiInfo max_count="1"
-                       ai_info="{buoy}"
-                       confidence="0.6"
-                       camera="0"
-                       min_count="1"
-                       classification="buoy"/>
-        </RetryUntilSuccessful>
-        <SubTree ID="RotatingSearch"
-                 classification="buoy"
-                 ai_info="{buoy}"
-                 confidence="0.6"
-                 _autoremap="true"/>
-      </Fallback>
-      <Sequence>
-        <SubTree ID="AlignBuoy"/>
-        <SubTree ID="ApprocheTarget"
-                 classification="buoy"
-                 offset="-0.4"
-                 confidence="0.6"
-                 _autoremap="true"/>
-        <SubTree ID="BuoyCircle"/>
-      </Sequence>
+      <SubTree ID="RotatingSearch"
+               classification="buoy"
+               ai_info="{buoy}"
+               confidence="0.6"
+               _autoremap="true"/>
+      <SubTree ID="AlignBuoy"/>
+      <SubTree ID="ApprocheTarget"
+               classification="buoy"
+               offset="-0.4"
+               confidence="0.6"
+               _autoremap="true"/>
+      <SubTree ID="BuoyCircle"/>
     </Sequence>
   </BehaviorTree>
 
@@ -111,24 +99,6 @@
       <input_port name="confidence"
                   default="0.8"/>
     </SubTree>
-    <Condition ID="CheckAiInfo">
-      <input_port name="max_count"
-                  default="1"
-                  type="int"/>
-      <output_port name="ai_info"
-                   type="AiDetectionArray"/>
-      <input_port name="confidence"
-                  default="0.800000"
-                  type="float"/>
-      <input_port name="camera"
-                  default="0"
-                  type="int">0: Front, 1: Bottom</input_port>
-      <input_port name="min_count"
-                  default="1"
-                  type="int"/>
-      <input_port name="classification"
-                  type="std::string"/>
-    </Condition>
     <SubTree ID="MoveSinglePose"
              editable="true">
       <input_port name="positionX"

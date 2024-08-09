@@ -2,7 +2,36 @@
 <root BTCPP_format="4">
   <BehaviorTree ID="RotatingSearch">
     <Fallback>
-      <RetryUntilSuccessful num_attempts="2">
+      <RetryUntilSuccessful num_attempts="5">
+        <CheckAiInfo max_count="1"
+                     ai_info="{ai_info}"
+                     confidence="{confidence}"
+                     camera="0"
+                     min_count="1"
+                     classification="{classification}"/>
+      </RetryUntilSuccessful>
+      <Fallback>
+        <RetryUntilSuccessful num_attempts="2">
+          <Sequence>
+            <SubTree ID="MoveSinglePose"
+                     positionX="0.0"
+                     positionY="0.0"
+                     positionZ="0.0"
+                     orientationX="0.0"
+                     orientationY="0.0"
+                     orientationZ="20"
+                     frame="1"
+                     _autoremap="true"/>
+            <RetryUntilSuccessful num_attempts="3">
+              <CheckAiInfo max_count="1"
+                           ai_info="{ai_info}"
+                           confidence="{confidence}"
+                           camera="0"
+                           min_count="1"
+                           classification="{classification}"/>
+            </RetryUntilSuccessful>
+          </Sequence>
+        </RetryUntilSuccessful>
         <Sequence>
           <SubTree ID="MoveSinglePose"
                    positionX="0.0"
@@ -10,64 +39,45 @@
                    positionZ="0.0"
                    orientationX="0.0"
                    orientationY="0.0"
-                   orientationZ="20"
+                   orientationZ="-40"
                    frame="1"
                    _autoremap="true"/>
-          <RetryUntilSuccessful num_attempts="3">
-            <CheckAiInfo max_count="1"
-                         ai_info="{ai_info}"
-                         confidence="{confidence}"
-                         camera="0"
-                         min_count="1"
-                         classification="{classification}"/>
-          </RetryUntilSuccessful>
-        </Sequence>
-      </RetryUntilSuccessful>
-      <Sequence>
-        <SubTree ID="MoveSinglePose"
-                 positionX="0.0"
-                 positionY="0.0"
-                 positionZ="0.0"
-                 orientationX="0.0"
-                 orientationY="0.0"
-                 orientationZ="-40"
-                 frame="1"
-                 _autoremap="true"/>
-        <Fallback>
-          <RetryUntilSuccessful num_attempts="2">
-            <Sequence>
+          <Fallback>
+            <RetryUntilSuccessful num_attempts="2">
+              <Sequence>
+                <SubTree ID="MoveSinglePose"
+                         positionX="0.0"
+                         positionY="0.0"
+                         positionZ="0.0"
+                         orientationX="0.0"
+                         orientationY="0.0"
+                         orientationZ="-20"
+                         frame="1"
+                         _autoremap="true"/>
+                <RetryUntilSuccessful num_attempts="3">
+                  <CheckAiInfo max_count="1"
+                               ai_info="{ai_info}"
+                               confidence="{confidence}"
+                               camera="0"
+                               min_count="1"
+                               classification="{classification}"/>
+                </RetryUntilSuccessful>
+              </Sequence>
+            </RetryUntilSuccessful>
+            <ForceFailure>
               <SubTree ID="MoveSinglePose"
                        positionX="0.0"
                        positionY="0.0"
                        positionZ="0.0"
                        orientationX="0.0"
                        orientationY="0.0"
-                       orientationZ="-20"
+                       orientationZ="40"
                        frame="1"
                        _autoremap="true"/>
-              <RetryUntilSuccessful num_attempts="3">
-                <CheckAiInfo max_count="1"
-                             ai_info="{ai_info}"
-                             confidence="{confidence}"
-                             camera="0"
-                             min_count="1"
-                             classification="{classification}"/>
-              </RetryUntilSuccessful>
-            </Sequence>
-          </RetryUntilSuccessful>
-          <ForceFailure>
-            <SubTree ID="MoveSinglePose"
-                     positionX="0.0"
-                     positionY="0.0"
-                     positionZ="0.0"
-                     orientationX="0.0"
-                     orientationY="0.0"
-                     orientationZ="40"
-                     frame="1"
-                     _autoremap="true"/>
-          </ForceFailure>
-        </Fallback>
-      </Sequence>
+            </ForceFailure>
+          </Fallback>
+        </Sequence>
+      </Fallback>
     </Fallback>
   </BehaviorTree>
 

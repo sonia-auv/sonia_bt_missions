@@ -29,6 +29,7 @@
             <input_port name="classification" type="std::string"/>
         </Condition>
         <Condition ID="CheckRotationZAlign">
+            <input_port name="pixel_to_degrees" type="float" default="0.066600">0.0666 for the auv8, 0.11 for the auv7</input_port>
             <input_port name="error_margin" type="float" default="0.050000">percentage of error off the target (0-1)</input_port>
             <input_port name="target_x" type="int"/>
             <inout_port name="traj" type="Trajectory"/>

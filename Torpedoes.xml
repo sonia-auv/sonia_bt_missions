@@ -127,6 +127,14 @@
     </Sequence>
   </BehaviorTree>
 
+  <BehaviorTree ID="FindTorp">
+    <SubTree ID="RotatingSearch"
+             classification="torpille"
+             ai_info="{torp_targ_arr}"
+             confidence="0.6"
+             _autoremap="true"/>
+  </BehaviorTree>
+
   <!-- Description of Node Models (used by Groot) -->
   <TreeNodesModel>
     <SubTree ID="AlignSize"
@@ -197,6 +205,13 @@
       <input_port name="aiObj"
                   type="AiDetection"/>
     </Action>
+    <SubTree ID="RotatingSearch"
+             editable="true">
+      <input_port name="classification"/>
+      <output_port name="ai_info"/>
+      <input_port name="confidence"
+                  default="0.8"/>
+    </SubTree>
     <Action ID="SendTrajToPlanner">
       <inout_port name="trajectory"
                   type="Trajectory"/>

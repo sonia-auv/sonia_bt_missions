@@ -4,7 +4,49 @@
     <Sequence>
       <SubTree ID="FindBins"
                _autoremap="false"/>
-      <SubTree ID="BinAlignTrans"/>
+      <Repeat num_cycles="5">
+        <SubTree ID="BinAlignTrans"
+                 classification="bin"
+                 _autoremap="true"/>
+      </Repeat>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="1"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="4"
+               _autoremap="true"/>
+      <Repeat num_cycles="2">
+        <SubTree ID="BinAlignTrans"
+                 classification="bin_rouge"
+                 _autoremap="true"/>
+      </Repeat>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="1.5"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="4"
+               _autoremap="true"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="-0.05"
+               positionY="-0.12"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1"
+               _autoremap="true"/>
+      <Repeat num_cycles="2">
+        <Delay delay_msec="5000">
+          <ActuatorsAction side="starboard"
+                           actuator="0"/>
+        </Delay>
+      </Repeat>
     </Sequence>
   </BehaviorTree>
 
@@ -16,7 +58,7 @@
                      confidence="0.500000"
                      camera="1"
                      min_count="1"
-                     classification="bin_rouge"/>
+                     classification="{classification}"/>
       </RetryUntilSuccessful>
       <ExtractAiListItem aiObject="{bin_item}"
                          Index="0"
@@ -63,6 +105,16 @@
 
   <!-- Description of Node Models (used by Groot) -->
   <TreeNodesModel>
+    <Action ID="ActuatorsAction">
+      <input_port name="side"
+                  type="std::string">port_side or starboard</input_port>
+      <input_port name="actuator"
+                  type="int">0: Dropper, 1: Torpedo</input_port>
+    </Action>
+    <SubTree ID="BinAlignTrans"
+             editable="true">
+      <input_port name="classification"/>
+    </SubTree>
     <Condition ID="CheckAiInfo">
       <input_port name="max_count"
                   default="1"
@@ -89,6 +141,23 @@
       <input_port name="array"
                   type="AiDetectionArray"/>
     </Action>
+    <SubTree ID="MoveSinglePose"
+             editable="true">
+      <input_port name="positionX"
+                  default="0.0"/>
+      <input_port name="positionY"
+                  default="0.0"/>
+      <input_port name="positionZ"
+                  default="0.0"/>
+      <input_port name="orientationX"
+                  default="0.0"/>
+      <input_port name="orientationY"
+                  default="0.0"/>
+      <input_port name="orientationZ"
+                  default="0.0"/>
+      <input_port name="frame"
+                  default="1"/>
+    </SubTree>
     <SubTree ID="RotAlignZ"
              editable="true">
       <input_port name="detection_object"/>

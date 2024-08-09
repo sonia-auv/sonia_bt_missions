@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root BTCPP_format="4">
+  <BehaviorTree ID="AUV7_24">
+    <Sequence>
+      <SubTree ID="enable_mission"/>
+      <SubTree ID="CoinFlip"/>
+      <SubTree ID="Bin24"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="AUV8_24">
+    <Sequence>
+      <SubTree ID="enable_mission"/>
+      <SubTree ID="CoinFlip"/>
+      <SubTree ID="Gate24"
+               _autoremap="false"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0"
+               positionY="0.0"
+               positionZ="0.8"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="4"
+               _autoremap="true"/>
+      <SubTree ID="TrickShotSingle"/>
+      <SubTree ID="Buoy24"/>
+      <SubTree ID="Torpedoes24"
+               _autoremap="false"/>
+    </Sequence>
+  </BehaviorTree>
+
   <BehaviorTree ID="Buoy24">
     <Sequence>
       <SubTree ID="RotatingSearch"
@@ -21,18 +51,9 @@
     <Sequence>
       <AiActivation activation_target="1"/>
       <SubTree ID="GateAlignTrans"/>
-      <SubTree ID="GateAlignTrans"/>
-      <SubTree ID="MoveSinglePose"
-               positionX="0.0"
-               positionY="0.0"
-               positionZ="0.5"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"
-               frame="4"/>
       <SubTree ID="ApprocheTarget"
                classification="gate_rouge"
-               offset="3"
+               offset="2"
                confidence="0.8"/>
     </Sequence>
   </BehaviorTree>
@@ -40,8 +61,7 @@
   <BehaviorTree ID="Run24">
     <Sequence>
       <SubTree ID="enable_mission"/>
-      <SubTree ID="CoinFlip"
-               _autoremap="false"/>
+      <SubTree ID="CoinFlip"/>
       <SubTree ID="Gate24"
                _autoremap="false"/>
       <SubTree ID="MoveSinglePose"
@@ -51,14 +71,19 @@
                orientationX="0.0"
                orientationY="0.0"
                orientationZ="0.0"
-               frame="4"/>
+               frame="4"
+               _autoremap="true"/>
       <SubTree ID="TrickShotSingle"/>
       <SubTree ID="Buoy24"/>
+      <SubTree ID="Bin24"/>
+      <SubTree ID="Torpedoes24"
+               _autoremap="false"/>
     </Sequence>
   </BehaviorTree>
 
   <BehaviorTree ID="Torpedoes24">
     <Sequence>
+      <SubTree ID="FindTorp"/>
       <SubTree ID="AlignTorpFrame"/>
       <SubTree ID="AlignTorpFrameAngle"/>
       <SubTree ID="AlignTorpFrame"/>

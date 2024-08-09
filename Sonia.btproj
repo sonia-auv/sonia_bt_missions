@@ -49,6 +49,9 @@
             <input_port name="offset" default="0"/>
             <input_port name="confidence" default="0.8"/>
         </SubTree>
+        <SubTree ID="BinAlignTrans" editable="true">
+            <input_port name="classification"/>
+        </SubTree>
         <Condition ID="CheckAiInfo">
             <input_port name="max_count" default="1" type="int"/>
             <output_port name="ai_info" type="AiDetectionArray"/>

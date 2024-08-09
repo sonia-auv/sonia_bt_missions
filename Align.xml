@@ -143,6 +143,32 @@
     </WhileDoElse>
   </BehaviorTree>
 
+  <BehaviorTree ID="StepApproachUntilSuccess">
+    <RetryUntilSuccessful num_attempts="6">
+      <Fallback>
+        <RetryUntilSuccessful num_attempts="3">
+          <CheckAiInfo max_count="1"
+                       ai_info="{step_ob_arr}"
+                       confidence="{confidence}"
+                       camera="1"
+                       min_count="1"
+                       classification="{classification}"/>
+        </RetryUntilSuccessful>
+        <ForceFailure>
+          <SubTree ID="MoveSinglePose"
+                   positionX="1"
+                   positionY="0.0"
+                   positionZ="0.0"
+                   orientationX="0.0"
+                   orientationY="0.0"
+                   orientationZ="0.0"
+                   frame="1"
+                   _autoremap="true"/>
+        </ForceFailure>
+      </Fallback>
+    </RetryUntilSuccessful>
+  </BehaviorTree>
+
   <BehaviorTree ID="TransAlignXY">
     <Sequence>
       <InitTraj trajectory="{transAlign}"/>

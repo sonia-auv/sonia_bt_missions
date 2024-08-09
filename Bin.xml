@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root BTCPP_format="4">
+  <BehaviorTree ID="Bin24">
+    <Sequence>
+      <SubTree ID="FindBins"
+               _autoremap="false"/>
+      <SubTree ID="BinAlignTrans"/>
+    </Sequence>
+  </BehaviorTree>
+
   <BehaviorTree ID="BinAlignTrans">
     <IfThenElse>
       <RetryUntilSuccessful num_attempts="5">
@@ -29,7 +37,7 @@
   <BehaviorTree ID="FindBins">
     <IfThenElse>
       <SubTree ID="RotatingSearch"
-               classification="{bin_type}"
+               classification="bin"
                ai_info="{bin_obj_arr}"
                confidence="0.5"
                _autoremap="true"/>
@@ -41,6 +49,14 @@
                  detection_object="{bin_obj}"
                  target_x="300"
                  error_margin="0.1"
+                 _autoremap="true"/>
+        <SubTree ID="StepApproachUntilLoss"
+                 classification="bin"
+                 confidence="0.6"
+                 _autoremap="true"/>
+        <SubTree ID="StepApproachUntilSuccess"
+                 classification="bin"
+                 confidence="0.6"
                  _autoremap="true"/>
       </Sequence>
     </IfThenElse>
@@ -86,6 +102,17 @@
              editable="true">
       <input_port name="classification"/>
       <output_port name="ai_info"/>
+      <input_port name="confidence"
+                  default="0.8"/>
+    </SubTree>
+    <SubTree ID="StepApproachUntilLoss"
+             editable="true">
+      <input_port name="classification"/>
+      <input_port name="confidence"/>
+    </SubTree>
+    <SubTree ID="StepApproachUntilSuccess"
+             editable="true">
+      <input_port name="classification"/>
       <input_port name="confidence"
                   default="0.8"/>
     </SubTree>

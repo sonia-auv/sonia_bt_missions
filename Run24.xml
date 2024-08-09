@@ -1,32 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root BTCPP_format="4">
   <BehaviorTree ID="AUV7_24">
-    <Sequence>
-      <SubTree ID="enable_mission"/>
-      <SubTree ID="CoinFlip"/>
-      <SubTree ID="Bin24"/>
-    </Sequence>
+    <Fallback>
+      <Sequence>
+        <SubTree ID="enable_mission"/>
+        <SubTree ID="CoinFlip"/>
+        <SubTree ID="Gate24"/>
+        <SubTree ID="Bin24"/>
+        <SubTree ID="Octogone24"/>
+      </Sequence>
+      <SubTree ID="EndCase"/>
+    </Fallback>
   </BehaviorTree>
 
   <BehaviorTree ID="AUV8_24">
+    <IfThenElse>
+      <Sequence>
+        <SubTree ID="enable_mission"/>
+        <SubTree ID="CoinFlip"/>
+        <SubTree ID="Gate24"
+                 _autoremap="false"/>
+        <SubTree ID="MoveSinglePose"
+                 positionX="0"
+                 positionY="0.0"
+                 positionZ="0.8"
+                 orientationX="0.0"
+                 orientationY="0.0"
+                 orientationZ="0.0"
+                 frame="4"
+                 _autoremap="true"/>
+        <SubTree ID="TrickShotSingle"/>
+        <SubTree ID="Buoy24"/>
+        <SubTree ID="Torpedoes24"
+                 _autoremap="false"/>
+      </Sequence>
+      <SubTree ID="Backflip"/>
+      <SubTree ID="EndCase"/>
+    </IfThenElse>
+  </BehaviorTree>
+
+  <BehaviorTree ID="Backflip">
     <Sequence>
-      <SubTree ID="enable_mission"/>
-      <SubTree ID="CoinFlip"/>
-      <SubTree ID="Gate24"
-               _autoremap="false"/>
-      <SubTree ID="MoveSinglePose"
-               positionX="0"
-               positionY="0.0"
-               positionZ="0.8"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"
-               frame="4"
-               _autoremap="true"/>
-      <SubTree ID="TrickShotSingle"/>
-      <SubTree ID="Buoy24"/>
-      <SubTree ID="Torpedoes24"
-               _autoremap="false"/>
+      <InitTraj trajectory="{back_traj}"/>
+      <AddPoseToTraj trajectory="{back_traj}"
+                     precision="0"
+                     speed="0"
+                     frame="1"
+                     orientationZ="0.000000"
+                     longRotation="false"
+                     positionZ="0.000000"
+                     positionY="0.000000"
+                     orientationY="180"
+                     orientationX="0.000000"
+                     positionX="0.000000"/>
+      <AddPoseToTraj trajectory="{back_traj}"
+                     precision="0"
+                     speed="0"
+                     frame="1"
+                     orientationZ="0.000000"
+                     longRotation="false"
+                     positionZ="0.000000"
+                     positionY="0.000000"
+                     orientationY="180"
+                     orientationX="0.000000"
+                     positionX="0.000000"/>
+      <SendTrajToPlanner trajectory="{back_traj}"
+                         interpolation="0"/>
+      <WaitTargetReached timeout="5"/>
     </Sequence>
   </BehaviorTree>
 
@@ -47,9 +87,39 @@
     </Sequence>
   </BehaviorTree>
 
+  <BehaviorTree ID="EndCase">
+    <Sequence>
+      <InitTraj trajectory="{end_traj}"/>
+      <AddPoseToTraj trajectory="{end_traj}"
+                     precision="0"
+                     speed="0"
+                     frame="1"
+                     orientationZ="180"
+                     longRotation="false"
+                     positionZ="0.000000"
+                     positionY="0.000000"
+                     orientationY="0.000000"
+                     orientationX="0.000000"
+                     positionX="0.000000"/>
+      <AddPoseToTraj trajectory="{end_traj}"
+                     precision="0"
+                     speed="0"
+                     frame="1"
+                     orientationZ="180"
+                     longRotation="false"
+                     positionZ="0.000000"
+                     positionY="0.000000"
+                     orientationY="0.000000"
+                     orientationX="0.000000"
+                     positionX="0.000000"/>
+      <SendTrajToPlanner trajectory="{end_traj}"
+                         interpolation="0"/>
+      <WaitTargetReached timeout="5"/>
+    </Sequence>
+  </BehaviorTree>
+
   <BehaviorTree ID="Gate24">
     <Sequence>
-      <AiActivation activation_target="1"/>
       <SubTree ID="GateAlignTrans"/>
       <SubTree ID="ApprocheTarget"
                classification="gate_rouge"
@@ -106,10 +176,39 @@
 
   <!-- Description of Node Models (used by Groot) -->
   <TreeNodesModel>
-    <Action ID="AiActivation">
-      <input_port name="activation_target"
+    <Action ID="AddPoseToTraj">
+      <inout_port name="trajectory"
+                  type="Trajectory"/>
+      <input_port name="precision"
                   default="0"
-                  type="int">0: OFF, 1: FRONT, 2: BOTTOM, 3: BOTH</input_port>
+                  type="int"/>
+      <input_port name="speed"
+                  default="0"
+                  type="int"/>
+      <input_port name="frame"
+                  default="1"
+                  type="int"/>
+      <input_port name="orientationZ"
+                  default="0.000000"
+                  type="float"/>
+      <input_port name="longRotation"
+                  default="false"
+                  type="bool"/>
+      <input_port name="positionZ"
+                  default="0.000000"
+                  type="float"/>
+      <input_port name="positionY"
+                  default="0.000000"
+                  type="float"/>
+      <input_port name="orientationY"
+                  default="0.000000"
+                  type="float"/>
+      <input_port name="orientationX"
+                  default="0.000000"
+                  type="float"/>
+      <input_port name="positionX"
+                  default="0.000000"
+                  type="float"/>
     </Action>
     <SubTree ID="AlignTorpID"
              editable="true">
@@ -124,6 +223,10 @@
       <input_port name="confidence"
                   default="0.8"/>
     </SubTree>
+    <Action ID="InitTraj">
+      <output_port name="trajectory"
+                   type="Trajectory"/>
+    </Action>
     <SubTree ID="MoveSinglePose"
              editable="true">
       <input_port name="positionX"
@@ -148,6 +251,18 @@
       <input_port name="confidence"
                   default="0.8"/>
     </SubTree>
+    <Action ID="SendTrajToPlanner">
+      <inout_port name="trajectory"
+                  type="Trajectory"/>
+      <input_port name="interpolation"
+                  default="0"
+                  type="int"/>
+    </Action>
+    <Action ID="WaitTargetReached">
+      <input_port name="timeout"
+                  default="5"
+                  type="int"/>
+    </Action>
   </TreeNodesModel>
 
 </root>

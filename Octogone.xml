@@ -30,15 +30,23 @@
                ai_info="{oct_obj_array}"
                confidence="0.75"
                _autoremap="true"/>
-      <ExtractAiListItem aiObject="{oct_obj}"
-                         Index="0"
-                         array="{oct_obj_array}"/>
       <Repeat num_cycles="2">
-        <SubTree ID="RotAlignZ"
-                 detection_object="{oct_obj}"
-                 target_x="300"
-                 error_margin="0.1"
-                 _autoremap="true"/>
+        <Sequence>
+          <CheckAiInfo max_count="1"
+                       ai_info="{oct_obj_array}"
+                       confidence="0.75"
+                       camera="0"
+                       min_count="1"
+                       classification="samples_table"/>
+          <ExtractAiListItem aiObject="{oct_obj}"
+                             Index="0"
+                             array="{oct_obj_array}"/>
+          <SubTree ID="RotAlignZ"
+                   detection_object="{oct_obj}"
+                   target_x="300"
+                   error_margin="0.1"
+                   _autoremap="true"/>
+        </Sequence>
       </Repeat>
       <SubTree ID="StepApproachUntilLoss"
                classification="samples_table"
@@ -56,6 +64,16 @@
                classification="samples_table"
                confidence="0.75"
                _autoremap="true"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="Octogone24">
+    <Sequence>
+      <SubTree ID="FindOctogone"/>
+      <Repeat num_cycles="3">
+        <SubTree ID="AlignOctTrans"/>
+      </Repeat>
+      <ControlSetMode set_mode="false"/>
     </Sequence>
   </BehaviorTree>
 
@@ -79,6 +97,11 @@
       <input_port name="classification"
                   type="std::string"/>
     </Condition>
+    <Action ID="ControlSetMode">
+      <input_port name="set_mode"
+                  default="false"
+                  type="bool"/>
+    </Action>
     <Action ID="ExtractAiListItem">
       <output_port name="aiObject"
                    type="AiDetection"/>

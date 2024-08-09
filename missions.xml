@@ -30,7 +30,7 @@
         <MissionSwitchStatus/>
       </RetryUntilSuccessful>
       <ActuatorsAction side="port_side"
-                       actuator=""/>
+                       actuator="0"/>
     </Sequence>
   </BehaviorTree>
 

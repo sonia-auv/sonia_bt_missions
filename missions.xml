@@ -8,7 +8,8 @@
              orientationX="0.0"
              orientationY="0.0"
              orientationZ="0.0"
-             frame="1"/>
+             frame="1"
+             _autoremap="true"/>
   </BehaviorTree>
 
   <BehaviorTree ID="enable_mission">

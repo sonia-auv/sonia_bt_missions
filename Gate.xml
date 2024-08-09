@@ -48,25 +48,23 @@
   </BehaviorTree>
 
   <BehaviorTree ID="GateAlignTrans">
-    <IfThenElse>
+    <Sequence>
       <RetryUntilSuccessful num_attempts="3">
         <SubTree ID="FindGate"
                  classification="gate_rouge"
-                 gate_info="{gate_info}"/>
-      </RetryUntilSuccessful>
-      <Sequence>
-        <ExtractAiListItem aiObject="{gate_item}"
-                           Index="0"
-                           array="{gate_info}"/>
-        <SubTree ID="TransAlignYZ"
-                 detection_object="{gate_item}"
-                 target_x="300"
-                 target_y="150"
-                 error_margin="0.05"
+                 gate_info="{gate_info}"
                  _autoremap="true"/>
-      </Sequence>
-      <AlwaysFailure/>
-    </IfThenElse>
+      </RetryUntilSuccessful>
+      <ExtractAiListItem aiObject="{gate_item}"
+                         Index="0"
+                         array="{gate_info}"/>
+      <SubTree ID="TransAlignYZ"
+               detection_object="{gate_item}"
+               target_x="300"
+               target_y="100"
+               error_margin="0.05"
+               _autoremap="true"/>
+    </Sequence>
   </BehaviorTree>
 
   <BehaviorTree ID="GateStrafeSearchPattern">

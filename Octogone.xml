@@ -59,7 +59,8 @@
                orientationX="0.0"
                orientationY="0.0"
                orientationZ="0.0"
-               frame="4"/>
+               frame="4"
+               _autoremap="true"/>
       <SubTree ID="StepApproachUntilSuccess"
                classification="samples_table"
                confidence="0.75"

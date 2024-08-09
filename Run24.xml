@@ -77,7 +77,9 @@
                ai_info="{buoy}"
                confidence="0.6"
                _autoremap="true"/>
-      <SubTree ID="AlignBuoy"/>
+      <Repeat num_cycles="2">
+        <SubTree ID="AlignBuoy"/>
+      </Repeat>
       <SubTree ID="ApprocheTarget"
                classification="buoy"
                offset="-0.4"
@@ -120,11 +122,23 @@
 
   <BehaviorTree ID="Gate24">
     <Sequence>
-      <SubTree ID="GateAlignTrans"/>
+      <Repeat num_cycles="2">
+        <SubTree ID="GateAlignTrans"/>
+      </Repeat>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="0.5"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="4"
+               _autoremap="true"/>
       <SubTree ID="ApprocheTarget"
                classification="gate_rouge"
-               offset="2"
-               confidence="0.8"/>
+               offset="3"
+               confidence="0.7"
+               _autoremap="true"/>
     </Sequence>
   </BehaviorTree>
 
@@ -158,7 +172,8 @@
       <SubTree ID="AlignTorpFrameAngle"/>
       <SubTree ID="AlignTorpFrame"/>
       <SubTree ID="AlignTorpID"
-               sizeID="0"/>
+               sizeID="0"
+               _autoremap="true"/>
       <SubTree ID="AlignStar"/>
       <SubTree ID="MoveSinglePose"
                positionX="-1.5"
@@ -167,9 +182,11 @@
                orientationX="0.0"
                orientationY="0.0"
                orientationZ="0.0"
-               frame="1"/>
+               frame="1"
+               _autoremap="true"/>
       <SubTree ID="AlignTorpID"
-               sizeID="1"/>
+               sizeID="1"
+               _autoremap="true"/>
       <SubTree ID="AlignPort"/>
     </Sequence>
   </BehaviorTree>

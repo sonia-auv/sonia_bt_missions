@@ -69,7 +69,7 @@
   </BehaviorTree>
 
   <BehaviorTree ID="ApprocheTarget">
-    <IfThenElse>
+    <Sequence>
       <RetryUntilSuccessful num_attempts="5">
         <CheckAiInfo max_count="1"
                      ai_info="{target_list}"
@@ -78,19 +78,17 @@
                      min_count="1"
                      classification="{classification}"/>
       </RetryUntilSuccessful>
-      <Sequence>
-        <ExtractAiListItem aiObject="{target}"
-                           Index="0"
-                           array="{target_list}"/>
-        <InitTraj trajectory="{traj}"/>
-        <MoveToTarget trajectory="{traj}"
-                      offset="{offset}"
-                      aiObj="{target}"/>
-        <SendTrajToPlanner trajectory="{traj}"
-                           interpolation="0"/>
-        <WaitTargetReached timeout="5"/>
-      </Sequence>
-    </IfThenElse>
+      <ExtractAiListItem aiObject="{target}"
+                         Index="0"
+                         array="{target_list}"/>
+      <InitTraj trajectory="{traj}"/>
+      <MoveToTarget trajectory="{traj}"
+                    offset="{offset}"
+                    aiObj="{target}"/>
+      <SendTrajToPlanner trajectory="{traj}"
+                         interpolation="0"/>
+      <WaitTargetReached timeout="5"/>
+    </Sequence>
   </BehaviorTree>
 
   <BehaviorTree ID="RotAlignZ">
@@ -327,7 +325,7 @@
       <input_port name="error_margin"
                   default="0.05"/>
       <input_port name="pixel_to_degrees"
-                  default="0.0666"/>
+                  default="0.0676"/>
     </SubTree>
     <Action ID="SendTrajToPlanner">
       <inout_port name="trajectory"

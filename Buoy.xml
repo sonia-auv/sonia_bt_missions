@@ -140,7 +140,7 @@
       <input_port name="error_margin"
                   default="0.05"/>
       <input_port name="pixel_to_degrees"
-                  default="0.0666"/>
+                  default="0.0676"/>
     </SubTree>
     <Action ID="SendTrajToPlanner">
       <inout_port name="trajectory"

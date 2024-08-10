@@ -82,7 +82,7 @@
       </Repeat>
       <SubTree ID="ApprocheTarget"
                classification="buoy"
-               offset="-0.4"
+               offset="-1"
                confidence="0.6"
                _autoremap="true"/>
       <SubTree ID="BuoyCircle"/>
@@ -172,7 +172,10 @@
                _autoremap="false"/>
       <SubTree ID="AlignTorpFrameAngle"/>
       <SubTree ID="AlignTorpFrame"/>
-      <SubTree ID="MoveToFrame"/>
+      <SubTree ID="ApprocheTarget"
+               classification="torpille"
+               offset="-1.5"
+               confidence="0.6"/>
       <SubTree ID="AlignTorpID"
                sizeID="0"
                _autoremap="true"/>

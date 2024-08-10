@@ -6,8 +6,22 @@
         <SubTree ID="enable_mission"/>
         <SubTree ID="CoinFlip"/>
         <SubTree ID="Gate24"/>
-        <SubTree ID="Bin24"/>
-        <SubTree ID="Octogone24"/>
+        <IfThenElse>
+          <SubTree ID="Bin24"/>
+          <SubTree ID="Octogone24"/>
+          <Sequence>
+            <SubTree ID="MoveSinglePose"
+                     positionX="0.0"
+                     positionY="0.0"
+                     positionZ="0.0"
+                     orientationX="0.0"
+                     orientationY="0.0"
+                     orientationZ="0.0"
+                     frame="2"
+                     _autoremap="true"/>
+            <SubTree ID="Octogone24"/>
+          </Sequence>
+        </IfThenElse>
       </Sequence>
       <SubTree ID="EndCase"/>
     </Fallback>

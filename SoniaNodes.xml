@@ -67,6 +67,10 @@
             <output_port name="detected_angle" type="float"/>
             <input_port name="aiObj" type="AiDetectionArray"/>
         </Action>
+        <Action ID="GetClosestObj">
+            <output_port name="aiObj" type="AiDetection"/>
+            <input_port name="array" type="AiDetectionArray"/>
+        </Action>
         <Action ID="GetTorpedoTarget">
             <output_port name="selected_target" type="AiDetection"/>
             <input_port name="size" type="int">0: smallest, 3: biggest</input_port>

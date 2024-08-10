@@ -95,6 +95,7 @@
                    detection_object="{bin_obj}"
                    target_x="300"
                    error_margin="0.1"
+                   pixel_to_degrees="0.082"
                    _autoremap="true"/>
         </Sequence>
       </Repeat>
@@ -171,6 +172,8 @@
                   default="300"/>
       <input_port name="error_margin"
                   default="0.05"/>
+      <input_port name="pixel_to_degrees"
+                  default="0.0666"/>
     </SubTree>
     <SubTree ID="RotatingSearch"
              editable="true">

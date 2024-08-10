@@ -17,6 +17,7 @@
                detection_object="{buoyObj}"
                target_x="300"
                error_margin="0.1"
+               pixel_to_degrees="0.0676"
                _autoremap="true"/>
     </Sequence>
   </BehaviorTree>
@@ -138,6 +139,8 @@
                   default="300"/>
       <input_port name="error_margin"
                   default="0.05"/>
+      <input_port name="pixel_to_degrees"
+                  default="0.0666"/>
     </SubTree>
     <Action ID="SendTrajToPlanner">
       <inout_port name="trajectory"

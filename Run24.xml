@@ -168,13 +168,19 @@
   <BehaviorTree ID="Torpedoes24">
     <Sequence>
       <SubTree ID="FindTorp"/>
-      <SubTree ID="AlignTorpFrame"/>
+      <SubTree ID="AlignTorpFrame"
+               _autoremap="false"/>
       <SubTree ID="AlignTorpFrameAngle"/>
       <SubTree ID="AlignTorpFrame"/>
+      <SubTree ID="MoveToFrame"/>
       <SubTree ID="AlignTorpID"
                sizeID="0"
                _autoremap="true"/>
       <SubTree ID="AlignStar"/>
+      <Repeat num_cycles="3">
+        <ActuatorsAction side="starboard"
+                         actuator="1"/>
+      </Repeat>
       <SubTree ID="MoveSinglePose"
                positionX="-1.5"
                positionY="0.0"
@@ -188,11 +194,21 @@
                sizeID="1"
                _autoremap="true"/>
       <SubTree ID="AlignPort"/>
+      <Repeat num_cycles="3">
+        <ActuatorsAction side="port_side"
+                         actuator="1"/>
+      </Repeat>
     </Sequence>
   </BehaviorTree>
 
   <!-- Description of Node Models (used by Groot) -->
   <TreeNodesModel>
+    <Action ID="ActuatorsAction">
+      <input_port name="side"
+                  type="std::string">port_side or starboard</input_port>
+      <input_port name="actuator"
+                  type="int">0: Dropper, 1: Torpedo</input_port>
+    </Action>
     <Action ID="AddPoseToTraj">
       <inout_port name="trajectory"
                   type="Trajectory"/>

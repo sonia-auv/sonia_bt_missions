@@ -5,7 +5,7 @@
       <RetryUntilSuccessful num_attempts="3">
         <CheckAiInfo max_count="1"
                      ai_info="{torp_target_arr}"
-                     confidence="0.800000"
+                     confidence="0.600000"
                      camera="0"
                      min_count="1"
                      classification="torpille_target"/>
@@ -133,6 +133,29 @@
              ai_info="{torp_targ_arr}"
              confidence="0.6"
              _autoremap="true"/>
+  </BehaviorTree>
+
+  <BehaviorTree ID="MoveToFrame">
+    <Sequence>
+      <RetryUntilSuccessful num_attempts="5">
+        <CheckAiInfo max_count="1"
+                     ai_info="{ai_torp_arr}"
+                     confidence="0.700000"
+                     camera="0"
+                     min_count="1"
+                     classification="torpille"/>
+      </RetryUntilSuccessful>
+      <ExtractAiListItem aiObject="{ai_torp}"
+                         Index="0"
+                         array="{ai_torp_arr}"/>
+      <InitTraj trajectory="{torp_frame_traj}"/>
+      <MoveToTarget trajectory="{torp_frame_traj}"
+                    offset="-1.5"
+                    aiObj="{ai_torp}"/>
+      <SendTrajToPlanner trajectory="{torp_frame_traj}"
+                         interpolation="0"/>
+      <WaitTargetReached timeout="5"/>
+    </Sequence>
   </BehaviorTree>
 
   <!-- Description of Node Models (used by Groot) -->

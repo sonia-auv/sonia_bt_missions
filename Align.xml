@@ -5,7 +5,7 @@
       <RetryUntilSuccessful num_attempts="3">
         <CheckAiInfo max_count="1"
                      ai_info="{aiObj}"
-                     confidence="0.800000"
+                     confidence="0.600000"
                      camera="0"
                      min_count="1"
                      classification="{classification}"/>
@@ -29,7 +29,7 @@
           <RetryUntilSuccessful num_attempts="3">
             <CheckAiInfo max_count="1"
                          ai_info="{aiObj}"
-                         confidence="0.800000"
+                         confidence="0.600000"
                          camera="0"
                          min_count="1"
                          classification="{classification}"/>
@@ -97,7 +97,8 @@
     <Sequence>
       <InitTraj trajectory="{traj}"/>
       <Fallback>
-        <CheckRotationZAlign error_margin="{error_margin}"
+        <CheckRotationZAlign pixel_to_degrees="{pixel_to_degrees}"
+                             error_margin="{error_margin}"
                              target_x="{target_x}"
                              traj="{traj}"
                              detection_object="{detection_object}"/>
@@ -128,6 +129,7 @@
                  detection_object="{step_obj}"
                  target_x="300"
                  error_margin="0.05"
+                 pixel_to_degrees="0.0666"
                  _autoremap="true"/>
         <SubTree ID="MoveSinglePose"
                  positionX="1"
@@ -228,6 +230,9 @@
                   type="std::string"/>
     </Condition>
     <Condition ID="CheckRotationZAlign">
+      <input_port name="pixel_to_degrees"
+                  default="0.066600"
+                  type="float">0.0666 for the auv8, 0.11 for the auv7</input_port>
       <input_port name="error_margin"
                   default="0.050000"
                   type="float">percentage of error off the target (0-1)</input_port>
@@ -321,6 +326,8 @@
                   default="300"/>
       <input_port name="error_margin"
                   default="0.05"/>
+      <input_port name="pixel_to_degrees"
+                  default="0.0666"/>
     </SubTree>
     <Action ID="SendTrajToPlanner">
       <inout_port name="trajectory"

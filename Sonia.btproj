@@ -146,6 +146,7 @@
             <input_port name="detection_object"/>
             <input_port name="target_x" default="300"/>
             <input_port name="error_margin" default="0.05"/>
+            <input_port name="pixel_to_degrees" default="0.0666"/>
         </SubTree>
         <SubTree ID="RotatingSearch" editable="true">
             <input_port name="classification"/>

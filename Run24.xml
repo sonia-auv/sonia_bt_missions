@@ -25,6 +25,74 @@
     </Fallback>
   </BehaviorTree>
 
+  <BehaviorTree ID="AUV7_SKETCHY">
+    <Sequence>
+      <SubTree ID="enable_mission"/>
+      <SubTree ID="CoinFlip"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="6"
+               positionY="0.0"
+               positionZ="0.7"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="0"
+               _autoremap="true"/>
+      <Fallback>
+        <SubTree ID="Bin24"/>
+        <Sequence>
+          <SubTree ID="MoveSinglePose"
+                   positionX="6"
+                   positionY="0.0"
+                   positionZ="0.7"
+                   orientationX="0.0"
+                   orientationY="0.0"
+                   orientationZ="0.0"
+                   frame="0"
+                   _autoremap="true"/>
+          <SubTree ID="Octogone24"/>
+        </Sequence>
+      </Fallback>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="AUV8_24_MOVE">
+    <IfThenElse>
+      <Sequence>
+        <SubTree ID="enable_mission"/>
+        <SubTree ID="CoinFlip"/>
+        <SubTree ID="Gate24"
+                 _autoremap="false"/>
+        <SubTree ID="MoveSinglePose"
+                 positionX="0"
+                 positionY="0.0"
+                 positionZ="0.8"
+                 orientationX="0.0"
+                 orientationY="0.0"
+                 orientationZ="0.0"
+                 frame="4"
+                 _autoremap="true"/>
+        <SubTree ID="TrickShotSingle"/>
+        <Fallback>
+          <SubTree ID="Buoy24"/>
+          <SubTree ID="MoveSinglePose"
+                   positionX="0.0"
+                   positionY="0.0"
+                   positionZ="0.0"
+                   orientationX="0.0"
+                   orientationY="0.0"
+                   orientationZ="0.0"
+                   frame="2"
+                   _autoremap="true"/>
+        </Fallback>
+        <SubTree ID="Torpedoes24"
+                 _autoremap="false"/>
+      </Sequence>
+      <SubTree ID="Backflip"/>
+      <SubTree ID="EndCase"/>
+    </IfThenElse>
+  </BehaviorTree>
+
   <BehaviorTree ID="AUV8_24">
     <IfThenElse>
       <Sequence>

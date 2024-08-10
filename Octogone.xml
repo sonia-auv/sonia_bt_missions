@@ -84,7 +84,17 @@
                  orientationX="0.0"
                  orientationY="0.0"
                  orientationZ="0.0"
-                 frame="4"/>
+                 frame="4"
+                 _autoremap="true"/>
+        <SubTree ID="MoveSinglePose"
+                 positionX="0.0"
+                 positionY="0.0"
+                 positionZ="0.3"
+                 orientationX="0.0"
+                 orientationY="0.0"
+                 orientationZ="0.0"
+                 frame="4"
+                 _autoremap="true"/>
       </Fallback>
     </Sequence>
   </BehaviorTree>

@@ -67,7 +67,7 @@
             <input_port name="aiObj" type="AiDetection"/>
         </Condition>
         <Condition ID="CheckRotationZAlign">
-            <input_port name="pixel_to_degrees" default="0.066600" type="float">0.0666 for the auv8, 0.11 for the auv7</input_port>
+            <input_port name="pixel_to_degrees" default="0.067600" type="float">0.0676 for the auv8, 0.082 for the auv7</input_port>
             <input_port name="error_margin" default="0.050000" type="float">percentage of error off the target (0-1)</input_port>
             <input_port name="target_x" type="int"/>
             <inout_port name="traj" type="Trajectory"/>
@@ -123,6 +123,10 @@
             <input_port name="ideal_ratio" type="float"/>
             <output_port name="detected_angle" type="float"/>
             <input_port name="aiObj" type="AiDetectionArray"/>
+        </Action>
+        <Action ID="GetClosestObj">
+            <output_port name="aiObj" type="AiDetection"/>
+            <input_port name="array" type="AiDetectionArray"/>
         </Action>
         <Action ID="GetTorpedoTarget">
             <output_port name="selected_target" type="AiDetection"/>

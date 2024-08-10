@@ -10,14 +10,15 @@
                  orientationX="0.0"
                  orientationY="0.0"
                  orientationZ="-30"
-                 frame="1"/>
+                 frame="1"
+                 _autoremap="true"/>
         <RetryUntilSuccessful num_attempts="5">
-          <CheckAiInfo max_count="1"
-                       ai_info=""
-                       confidence="0.800000"
+          <CheckAiInfo max_count="5"
+                       ai_info="{ai_info}"
+                       confidence="{confidence}"
                        camera="0"
                        min_count="1"
-                       classification=""/>
+                       classification="{classification}"/>
         </RetryUntilSuccessful>
       </Sequence>
     </RetryUntilSuccessful>
@@ -106,7 +107,8 @@
       <SubTree ID="ExtendedRotatingSearch"
                classification="{classification}"
                ai_output="{ai_info}"
-               confidence="{confidence}"/>
+               confidence="{confidence}"
+               _autoremap="true"/>
     </Fallback>
   </BehaviorTree>
 

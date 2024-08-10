@@ -189,14 +189,17 @@
       <SubTree ID="ApprocheTarget"
                classification="torpille"
                offset="-1.5"
-               confidence="0.6"/>
+               confidence="0.6"
+               _autoremap="true"/>
       <SubTree ID="AlignTorpID"
                sizeID="0"
                _autoremap="true"/>
       <SubTree ID="AlignStar"/>
       <Repeat num_cycles="3">
-        <ActuatorsAction side="starboard"
-                         actuator="1"/>
+        <Delay delay_msec="5000">
+          <ActuatorsAction side="starboard"
+                           actuator="1"/>
+        </Delay>
       </Repeat>
       <SubTree ID="MoveSinglePose"
                positionX="-1.5"
@@ -212,8 +215,10 @@
                _autoremap="true"/>
       <SubTree ID="AlignPort"/>
       <Repeat num_cycles="3">
-        <ActuatorsAction side="port_side"
-                         actuator="1"/>
+        <Delay delay_msec="5000">
+          <ActuatorsAction side="port_side"
+                           actuator="1"/>
+        </Delay>
       </Repeat>
     </Sequence>
   </BehaviorTree>

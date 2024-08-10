@@ -186,9 +186,13 @@
                ai_info="{buoy}"
                confidence="0.6"
                _autoremap="true"/>
-      <Repeat num_cycles="2">
-        <SubTree ID="AlignBuoy"/>
-      </Repeat>
+      <SubTree ID="AlignBuoy"/>
+      <SubTree ID="ApprocheTarget"
+               classification="buoy"
+               offset="-1.5"
+               confidence="0.6"
+               _autoremap="true"/>
+      <SubTree ID="AlignBuoy"/>
       <SubTree ID="ApprocheTarget"
                classification="buoy"
                offset="-0.75"
@@ -283,19 +287,28 @@
       <SubTree ID="AlignTorpFrame"/>
       <SubTree ID="ApprocheTarget"
                classification="torpille"
+               offset="-3"
+               confidence="0.6"
+               _autoremap="true"/>
+      <SubTree ID="AlignTorpFrame"/>
+      <SubTree ID="ApprocheTarget"
+               classification="torpille"
                offset="-1.5"
                confidence="0.6"
                _autoremap="true"/>
-      <SubTree ID="AlignTorpID"
-               sizeID="3"
-               _autoremap="true"/>
-      <SubTree ID="AlignStar"/>
-      <Repeat num_cycles="3">
-        <Delay delay_msec="5000">
-          <ActuatorsAction side="starboard"
-                           actuator="1"/>
-        </Delay>
-      </Repeat>
+      <Sequence>
+        <SubTree ID="AlignTorpID"
+                 sizeID="3"
+                 _autoremap="true"/>
+        <SubTree ID="AlignStar"
+                 _autoremap="false"/>
+        <Repeat num_cycles="3">
+          <Delay delay_msec="5000">
+            <ActuatorsAction side="starboard"
+                             actuator="1"/>
+          </Delay>
+        </Repeat>
+      </Sequence>
       <SubTree ID="MoveSinglePose"
                positionX="-1.5"
                positionY="0.0"
@@ -305,16 +318,18 @@
                orientationZ="0.0"
                frame="1"
                _autoremap="true"/>
-      <SubTree ID="AlignTorpID"
-               sizeID="2"
-               _autoremap="true"/>
-      <SubTree ID="AlignPort"/>
-      <Repeat num_cycles="3">
-        <Delay delay_msec="5000">
-          <ActuatorsAction side="port_side"
-                           actuator="1"/>
-        </Delay>
-      </Repeat>
+      <Sequence>
+        <SubTree ID="AlignTorpID"
+                 sizeID="2"
+                 _autoremap="true"/>
+        <SubTree ID="AlignPort"/>
+        <Repeat num_cycles="3">
+          <Delay delay_msec="5000">
+            <ActuatorsAction side="port_side"
+                             actuator="1"/>
+          </Delay>
+        </Repeat>
+      </Sequence>
     </Sequence>
   </BehaviorTree>
 

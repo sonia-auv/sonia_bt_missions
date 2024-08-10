@@ -56,7 +56,7 @@
     </Sequence>
   </BehaviorTree>
 
-  <BehaviorTree ID="AUV8_24_MOVE">
+  <BehaviorTree ID="AUV8_24">
     <IfThenElse>
       <Sequence>
         <SubTree ID="enable_mission"/>
@@ -93,7 +93,7 @@
     </IfThenElse>
   </BehaviorTree>
 
-  <BehaviorTree ID="AUV8_24">
+  <BehaviorTree ID="AUV8_24_MOVE">
     <IfThenElse>
       <Sequence>
         <SubTree ID="enable_mission"/>
@@ -111,7 +111,25 @@
                  _autoremap="true"/>
         <SubTree ID="TrickShotSingle"/>
         <Fallback>
-          <SubTree ID="Buoy24"/>
+          <Sequence>
+            <SubTree ID="Buoy24"/>
+            <SubTree ID="MoveSinglePose"
+                     positionX="0.0"
+                     positionY="0.0"
+                     positionZ="0.0"
+                     orientationX="0.0"
+                     orientationY="0.0"
+                     orientationZ="0.0"
+                     frame="2"/>
+            <SubTree ID="MoveSinglePose"
+                     positionX="0.5"
+                     positionY="0.5"
+                     positionZ="0.0"
+                     orientationX="0.0"
+                     orientationY="0.0"
+                     orientationZ="0.0"
+                     frame="1"/>
+          </Sequence>
           <SubTree ID="MoveSinglePose"
                    positionX="0.0"
                    positionY="0.0"
@@ -274,10 +292,8 @@
       <SubTree ID="AlignStar"/>
       <Repeat num_cycles="3">
         <Delay delay_msec="5000">
-          <ForceSuccess>
-            <ActuatorsAction side="starboard"
-                             actuator="1"/>
-          </ForceSuccess>
+          <ActuatorsAction side="starboard"
+                           actuator="1"/>
         </Delay>
       </Repeat>
       <SubTree ID="MoveSinglePose"
@@ -295,10 +311,8 @@
       <SubTree ID="AlignPort"/>
       <Repeat num_cycles="3">
         <Delay delay_msec="5000">
-          <ForceSuccess>
-            <ActuatorsAction side="port_side"
-                             actuator="1"/>
-          </ForceSuccess>
+          <ActuatorsAction side="port_side"
+                           actuator="1"/>
         </Delay>
       </Repeat>
     </Sequence>

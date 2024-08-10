@@ -2,10 +2,10 @@
 <root BTCPP_format="4">
   <BehaviorTree ID="AlignOctTrans">
     <Sequence>
-      <RetryUntilSuccessful num_attempts="5">
+      <RetryUntilSuccessful num_attempts="8">
         <CheckAiInfo max_count="1"
                      ai_info="{oct_obj_array}"
-                     confidence="0.75"
+                     confidence="0.6"
                      camera="1"
                      min_count="1"
                      classification="samples_table"/>
@@ -32,12 +32,14 @@
                _autoremap="true"/>
       <Repeat num_cycles="2">
         <Sequence>
-          <CheckAiInfo max_count="1"
-                       ai_info="{oct_obj_array}"
-                       confidence="0.75"
-                       camera="0"
-                       min_count="1"
-                       classification="samples_table"/>
+          <RetryUntilSuccessful num_attempts="8">
+            <CheckAiInfo max_count="1"
+                         ai_info="{oct_obj_array}"
+                         confidence="0.6"
+                         camera="0"
+                         min_count="1"
+                         classification="samples_table"/>
+          </RetryUntilSuccessful>
           <ExtractAiListItem aiObject="{oct_obj}"
                              Index="0"
                              array="{oct_obj_array}"/>
@@ -51,7 +53,7 @@
       </Repeat>
       <SubTree ID="StepApproachUntilLoss"
                classification="samples_table"
-               confidence="0.75"
+               confidence="0.6"
                _autoremap="true"/>
       <SubTree ID="MoveSinglePose"
                positionX="0.0"
@@ -64,7 +66,7 @@
                _autoremap="true"/>
       <SubTree ID="StepApproachUntilSuccess"
                classification="samples_table"
-               confidence="0.75"
+               confidence="0.6"
                _autoremap="true"/>
     </Sequence>
   </BehaviorTree>

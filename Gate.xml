@@ -2,7 +2,7 @@
 <root BTCPP_format="4">
   <BehaviorTree ID="FindGate">
     <Fallback>
-      <RetryUntilSuccessful num_attempts="5">
+      <RetryUntilSuccessful num_attempts="8">
         <CheckAiInfo max_count="1"
                      ai_info="{gate_info}"
                      confidence="0.600000"
@@ -49,12 +49,10 @@
 
   <BehaviorTree ID="GateAlignTrans">
     <Sequence>
-      <RetryUntilSuccessful num_attempts="3">
-        <SubTree ID="FindGate"
-                 classification="gate_rouge"
-                 gate_info="{gate_info}"
-                 _autoremap="true"/>
-      </RetryUntilSuccessful>
+      <SubTree ID="FindGate"
+               classification="gate_rouge"
+               gate_info="{gate_info}"
+               _autoremap="true"/>
       <ExtractAiListItem aiObject="{gate_item}"
                          Index="0"
                          array="{gate_info}"/>

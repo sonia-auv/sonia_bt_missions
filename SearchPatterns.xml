@@ -12,7 +12,7 @@
                  orientationZ="-30"
                  frame="1"
                  _autoremap="true"/>
-        <RetryUntilSuccessful num_attempts="5">
+        <RetryUntilSuccessful num_attempts="8">
           <CheckAiInfo max_count="5"
                        ai_info="{ai_info}"
                        confidence="{confidence}"
@@ -27,7 +27,7 @@
   <BehaviorTree ID="RotatingSearch">
     <Fallback>
       <Fallback>
-        <RetryUntilSuccessful num_attempts="5">
+        <RetryUntilSuccessful num_attempts="8">
           <CheckAiInfo max_count="1"
                        ai_info="{ai_info}"
                        confidence="{confidence}"
@@ -47,7 +47,7 @@
                        orientationZ="-20"
                        frame="1"
                        _autoremap="true"/>
-              <RetryUntilSuccessful num_attempts="3">
+              <RetryUntilSuccessful num_attempts="8">
                 <CheckAiInfo max_count="1"
                              ai_info="{ai_info}"
                              confidence="{confidence}"
@@ -79,7 +79,7 @@
                            orientationZ="20"
                            frame="1"
                            _autoremap="true"/>
-                  <RetryUntilSuccessful num_attempts="3">
+                  <RetryUntilSuccessful num_attempts="8">
                     <CheckAiInfo max_count="1"
                                  ai_info="{ai_info}"
                                  confidence="{confidence}"

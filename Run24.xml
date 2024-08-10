@@ -18,7 +18,8 @@
                    frame="2"
                    _autoremap="true"/>
         </Fallback>
-        <SubTree ID="Octogone24"/>
+        <SubTree ID="Octogone24"
+                 _autoremap="false"/>
       </Sequence>
       <SubTree ID="EndCase"/>
     </Fallback>

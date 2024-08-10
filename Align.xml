@@ -2,7 +2,7 @@
 <root BTCPP_format="4">
   <BehaviorTree ID="AngleAlign">
     <Sequence>
-      <RetryUntilSuccessful num_attempts="3">
+      <RetryUntilSuccessful num_attempts="8">
         <CheckAiInfo max_count="1"
                      ai_info="{aiObj}"
                      confidence="0.600000"
@@ -26,7 +26,7 @@
                    orientationZ="5"
                    frame="1"
                    _autoremap="true"/>
-          <RetryUntilSuccessful num_attempts="3">
+          <RetryUntilSuccessful num_attempts="8">
             <CheckAiInfo max_count="1"
                          ai_info="{aiObj}"
                          confidence="0.600000"
@@ -70,7 +70,7 @@
 
   <BehaviorTree ID="ApprocheTarget">
     <Sequence>
-      <RetryUntilSuccessful num_attempts="5">
+      <RetryUntilSuccessful num_attempts="8">
         <CheckAiInfo max_count="1"
                      ai_info="{target_list}"
                      confidence="{confidence}"
@@ -111,7 +111,7 @@
 
   <BehaviorTree ID="StepApproachUntilLoss">
     <WhileDoElse>
-      <RetryUntilSuccessful num_attempts="5">
+      <RetryUntilSuccessful num_attempts="8">
         <CheckAiInfo max_count="1"
                      ai_info="{step_obj_arr}"
                      confidence="{confidence}"
@@ -127,7 +127,7 @@
                  detection_object="{step_obj}"
                  target_x="300"
                  error_margin="0.05"
-                 pixel_to_degrees="0.0666"
+                 pixel_to_degrees="0.082"
                  _autoremap="true"/>
         <SubTree ID="MoveSinglePose"
                  positionX="1"
@@ -146,7 +146,7 @@
   <BehaviorTree ID="StepApproachUntilSuccess">
     <RetryUntilSuccessful num_attempts="6">
       <Fallback>
-        <RetryUntilSuccessful num_attempts="3">
+        <RetryUntilSuccessful num_attempts="8">
           <CheckAiInfo max_count="1"
                        ai_info="{step_ob_arr}"
                        confidence="{confidence}"
@@ -185,7 +185,6 @@
           <WaitTargetReached timeout="5"/>
         </Sequence>
       </Fallback>
-      <Script code="transAlign=&quot;&quot;"/>
     </Sequence>
   </BehaviorTree>
 
@@ -229,8 +228,8 @@
     </Condition>
     <Condition ID="CheckRotationZAlign">
       <input_port name="pixel_to_degrees"
-                  default="0.066600"
-                  type="float">0.0666 for the auv8, 0.11 for the auv7</input_port>
+                  default="0.067600"
+                  type="float">0.0676 for the auv8, 0.082 for the auv7</input_port>
       <input_port name="error_margin"
                   default="0.050000"
                   type="float">percentage of error off the target (0-1)</input_port>

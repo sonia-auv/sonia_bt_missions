@@ -41,12 +41,11 @@
       <GetTorpedoTarget selected_target="{torp_target}"
                         size="{size}"
                         torpedo_objs="{torp_target_list}"/>
-      <SubTree ID="TransAlign"
+      <SubTree ID="TransAlignYZ"
                detection_object="{torp_target}"
                target_x="300"
                target_y="200"
-               error_margin="0.10"
-               _autoremap="true"/>
+               error_margin="0.10"/>
     </Sequence>
   </BehaviorTree>
 
@@ -97,7 +96,7 @@
         <SubTree ID="TransAlign"
                  detection_object="{torp_frame}"
                  target_x="300"
-                 target_y="200"
+                 target_y="-1"
                  error_margin="0.1"
                  _autoremap="true"/>
       </Sequence>
@@ -243,6 +242,16 @@
                   type="int"/>
     </Action>
     <SubTree ID="TransAlign"
+             editable="true">
+      <input_port name="detection_object"/>
+      <input_port name="target_x"
+                  default="300"/>
+      <input_port name="target_y"
+                  default="200"/>
+      <input_port name="error_margin"
+                  default="0.05"/>
+    </SubTree>
+    <SubTree ID="TransAlignYZ"
              editable="true">
       <input_port name="detection_object"/>
       <input_port name="target_x"

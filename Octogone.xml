@@ -45,6 +45,7 @@
                    detection_object="{oct_obj}"
                    target_x="300"
                    error_margin="0.1"
+                   pixel_to_degrees="0.0676"
                    _autoremap="true"/>
         </Sequence>
       </Repeat>
@@ -74,7 +75,17 @@
       <Repeat num_cycles="3">
         <SubTree ID="AlignOctTrans"/>
       </Repeat>
-      <ControlSetMode set_mode="false"/>
+      <Fallback>
+        <ControlSetMode set_mode="false"/>
+        <SubTree ID="MoveSinglePose"
+                 positionX="0.0"
+                 positionY="0.0"
+                 positionZ="-0.2"
+                 orientationX="0.0"
+                 orientationY="0.0"
+                 orientationZ="0.0"
+                 frame="4"/>
+      </Fallback>
     </Sequence>
   </BehaviorTree>
 
@@ -135,6 +146,8 @@
                   default="300"/>
       <input_port name="error_margin"
                   default="0.05"/>
+      <input_port name="pixel_to_degrees"
+                  default="0.0676"/>
     </SubTree>
     <SubTree ID="RotatingSearch"
              editable="true">

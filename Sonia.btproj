@@ -97,6 +97,11 @@
         <Action ID="EnableDisableDVL">
             <input_port name="dvl_input" default="true" type="bool"/>
         </Action>
+        <SubTree ID="ExtendedRotatingSearch" editable="true">
+            <input_port name="classification"/>
+            <output_port name="ai_output"/>
+            <input_port name="confidence" default="0.8"/>
+        </SubTree>
         <Action ID="ExtractAiListItem">
             <output_port name="aiObject" type="AiDetection"/>
             <input_port name="Index" type="int"/>

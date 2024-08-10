@@ -102,9 +102,8 @@
                          min_count="1"
                          classification="bin"/>
           </RetryUntilSuccessful>
-          <ExtractAiListItem aiObject="{bin_obj}"
-                             Index="0"
-                             array="{bin_obj_arr}"/>
+          <GetClosestObj aiObj="{bin_obj}"
+                         array="{bin_obj_arr}"/>
           <SubTree ID="RotAlignZ"
                    detection_object="{bin_obj}"
                    target_x="300"
@@ -159,6 +158,12 @@
                    type="AiDetection"/>
       <input_port name="Index"
                   type="int"/>
+      <input_port name="array"
+                  type="AiDetectionArray"/>
+    </Action>
+    <Action ID="GetClosestObj">
+      <output_port name="aiObj"
+                   type="AiDetection"/>
       <input_port name="array"
                   type="AiDetectionArray"/>
     </Action>

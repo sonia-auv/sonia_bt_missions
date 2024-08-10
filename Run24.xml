@@ -6,22 +6,19 @@
         <SubTree ID="enable_mission"/>
         <SubTree ID="CoinFlip"/>
         <SubTree ID="Gate24"/>
-        <IfThenElse>
+        <Fallback>
           <SubTree ID="Bin24"/>
-          <SubTree ID="Octogone24"/>
-          <Sequence>
-            <SubTree ID="MoveSinglePose"
-                     positionX="0.0"
-                     positionY="0.0"
-                     positionZ="0.0"
-                     orientationX="0.0"
-                     orientationY="0.0"
-                     orientationZ="0.0"
-                     frame="2"
-                     _autoremap="true"/>
-            <SubTree ID="Octogone24"/>
-          </Sequence>
-        </IfThenElse>
+          <SubTree ID="MoveSinglePose"
+                   positionX="0.0"
+                   positionY="0.0"
+                   positionZ="0.0"
+                   orientationX="0.0"
+                   orientationY="0.0"
+                   orientationZ="0.0"
+                   frame="2"
+                   _autoremap="true"/>
+        </Fallback>
+        <SubTree ID="Octogone24"/>
       </Sequence>
       <SubTree ID="EndCase"/>
     </Fallback>
@@ -44,7 +41,18 @@
                  frame="4"
                  _autoremap="true"/>
         <SubTree ID="TrickShotSingle"/>
-        <SubTree ID="Buoy24"/>
+        <Fallback>
+          <SubTree ID="Buoy24"/>
+          <SubTree ID="MoveSinglePose"
+                   positionX="0.0"
+                   positionY="0.0"
+                   positionZ="0.0"
+                   orientationX="0.0"
+                   orientationY="0.0"
+                   orientationZ="0.0"
+                   frame="2"
+                   _autoremap="true"/>
+        </Fallback>
         <SubTree ID="Torpedoes24"
                  _autoremap="false"/>
       </Sequence>
@@ -192,7 +200,7 @@
                confidence="0.6"
                _autoremap="true"/>
       <SubTree ID="AlignTorpID"
-               sizeID="0"
+               sizeID="3"
                _autoremap="true"/>
       <SubTree ID="AlignStar"/>
       <Repeat num_cycles="3">
@@ -211,7 +219,7 @@
                frame="1"
                _autoremap="true"/>
       <SubTree ID="AlignTorpID"
-               sizeID="1"
+               sizeID="2"
                _autoremap="true"/>
       <SubTree ID="AlignPort"/>
       <Repeat num_cycles="3">

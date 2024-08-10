@@ -206,8 +206,10 @@
       <SubTree ID="AlignStar"/>
       <Repeat num_cycles="3">
         <Delay delay_msec="5000">
-          <ActuatorsAction side="starboard"
-                           actuator="1"/>
+          <ForceSuccess>
+            <ActuatorsAction side="starboard"
+                             actuator="1"/>
+          </ForceSuccess>
         </Delay>
       </Repeat>
       <SubTree ID="MoveSinglePose"
@@ -225,8 +227,10 @@
       <SubTree ID="AlignPort"/>
       <Repeat num_cycles="3">
         <Delay delay_msec="5000">
-          <ActuatorsAction side="port_side"
-                           actuator="1"/>
+          <ForceSuccess>
+            <ActuatorsAction side="port_side"
+                             actuator="1"/>
+          </ForceSuccess>
         </Delay>
       </Repeat>
     </Sequence>

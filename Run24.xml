@@ -222,19 +222,19 @@
                  frame="2"
                  _autoremap="true"/>
       </Fallback>
-      <Fallback>
+      <ForceSuccess>
         <SubTree ID="Torpedoes24"
                  _autoremap="false"/>
-        <SubTree ID="MoveSinglePose"
-                 positionX="6"
-                 positionY="0.0"
-                 positionZ="0.5"
-                 orientationX="0.0"
-                 orientationY="0.0"
-                 orientationZ="0.0"
-                 frame="2"
-                 _autoremap="true"/>
-      </Fallback>
+      </ForceSuccess>
+      <SubTree ID="MoveSinglePose"
+               positionX="6"
+               positionY="0.0"
+               positionZ="0.5"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="2"
+               _autoremap="true"/>
       <Fallback>
         <SubTree ID="Octogone24"/>
         <Sequence>

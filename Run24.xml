@@ -227,13 +227,13 @@
                  _autoremap="false"/>
       </ForceSuccess>
       <SubTree ID="MoveSinglePose"
-               positionX="6"
+               positionX="10"
                positionY="0.0"
                positionZ="0.5"
                orientationX="0.0"
                orientationY="0.0"
                orientationZ="0.0"
-               frame="2"
+               frame="0"
                _autoremap="true"/>
       <Fallback>
         <SubTree ID="Octogone24"/>
@@ -245,7 +245,8 @@
                    orientationX="0.0"
                    orientationY="0.0"
                    orientationZ="0.0"
-                   frame="0"/>
+                   frame="0"
+                   _autoremap="true"/>
           <SubTree ID="MoveSinglePose"
                    positionX="15"
                    positionY="0.0"
@@ -253,23 +254,26 @@
                    orientationX="0.0"
                    orientationY="0.0"
                    orientationZ="0.0"
-                   frame="0"/>
+                   frame="0"
+                   _autoremap="true"/>
           <SubTree ID="MoveSinglePose"
-                   positionX="20"
+                   positionX="19.5"
                    positionY="0.0"
                    positionZ="0.5"
                    orientationX="0.0"
                    orientationY="0.0"
                    orientationZ="0.0"
-                   frame="0"/>
+                   frame="0"
+                   _autoremap="true"/>
           <SubTree ID="MoveSinglePose"
                    positionX="0.0"
                    positionY="0.0"
                    positionZ="0.0"
                    orientationX="0.0"
-                   orientationY="180"
+                   orientationY="90"
                    orientationZ="0.0"
-                   frame="1"/>
+                   frame="1"
+                   _autoremap="true"/>
           <ControlSetMode set_mode="false"/>
         </Sequence>
       </Fallback>
@@ -416,7 +420,7 @@
       <SubTree ID="MoveSinglePose"
                positionX="0.0"
                positionY="0.0"
-               positionZ="1"
+               positionZ="1.3"
                orientationX="0.0"
                orientationY="0.0"
                orientationZ="0.0"

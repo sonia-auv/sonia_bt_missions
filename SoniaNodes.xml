@@ -20,6 +20,13 @@
         <Action ID="AiActivation">
             <input_port name="activation_target" type="int" default="0">0: OFF, 1: FRONT, 2: BOTTOM, 3: BOTH</input_port>
         </Action>
+        <Action ID="AverageAiDetection">
+            <input_port name="num_retries" type="int" default="5">Number of invalid detection allowed between good ones</input_port>
+            <input_port name="buffer_size" type="int" default="5">Number of detection to average</input_port>
+            <output_port name="average_obj" type="AiDetection"/>
+            <input_port name="classification" type="std::string"/>
+            <input_port name="camera" type="int" default="0">0: Front, 1: Bottom</input_port>
+        </Action>
         <Condition ID="CheckAiInfo">
             <input_port name="max_count" type="int" default="1"/>
             <output_port name="ai_info" type="AiDetectionArray"/>
@@ -65,7 +72,7 @@
             <input_port name="error_margin" type="float" default="0.100000"/>
             <input_port name="ideal_ratio" type="float"/>
             <output_port name="detected_angle" type="float"/>
-            <input_port name="aiObj" type="AiDetectionArray"/>
+            <input_port name="aiObj" type="AiDetection"/>
         </Action>
         <Action ID="GetClosestObj">
             <output_port name="aiObj" type="AiDetection"/>

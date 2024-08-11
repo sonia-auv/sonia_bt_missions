@@ -2,14 +2,11 @@
 <root BTCPP_format="4">
   <BehaviorTree ID="AngleAlign">
     <Sequence>
-      <RetryUntilSuccessful num_attempts="8">
-        <CheckAiInfo max_count="1"
-                     ai_info="{aiObj}"
-                     confidence="0.600000"
-                     camera="0"
-                     min_count="1"
-                     classification="{classification}"/>
-      </RetryUntilSuccessful>
+      <AverageAiDetection num_retries="5"
+                          buffer_size="5"
+                          average_obj="{aiObj}"
+                          classification="{classification}"
+                          camera="0"/>
       <IfThenElse>
         <GetAngle error_margin="0.100000"
                   ideal_ratio="1"
@@ -26,14 +23,11 @@
                    orientationZ="5"
                    frame="1"
                    _autoremap="true"/>
-          <RetryUntilSuccessful num_attempts="8">
-            <CheckAiInfo max_count="1"
-                         ai_info="{aiObj}"
-                         confidence="0.600000"
-                         camera="0"
-                         min_count="1"
-                         classification="{classification}"/>
-          </RetryUntilSuccessful>
+          <AverageAiDetection num_retries="5"
+                              buffer_size="5"
+                              average_obj="{aiObj}"
+                              classification="{classification}"
+                              camera="0"/>
           <Fallback>
             <GetAngle error_margin="0.100000"
                       ideal_ratio="1"
@@ -70,17 +64,11 @@
 
   <BehaviorTree ID="ApprocheTarget">
     <Sequence>
-      <RetryUntilSuccessful num_attempts="8">
-        <CheckAiInfo max_count="1"
-                     ai_info="{target_list}"
-                     confidence="{confidence}"
-                     camera="0"
-                     min_count="1"
-                     classification="{classification}"/>
-      </RetryUntilSuccessful>
-      <ExtractAiListItem aiObject="{target}"
-                         Index="0"
-                         array="{target_list}"/>
+      <AverageAiDetection num_retries="5"
+                          buffer_size="5"
+                          average_obj="{target}"
+                          classification="{classification}"
+                          camera="0"/>
       <InitTraj trajectory="{traj}"/>
       <MoveToTarget trajectory="{traj}"
                     offset="{offset}"
@@ -111,26 +99,20 @@
 
   <BehaviorTree ID="StepApproachUntilLoss">
     <WhileDoElse>
-      <RetryUntilSuccessful num_attempts="8">
-        <CheckAiInfo max_count="1"
-                     ai_info="{step_obj_arr}"
-                     confidence="{confidence}"
-                     camera="0"
-                     min_count="1"
-                     classification="{classification}"/>
-      </RetryUntilSuccessful>
+      <AverageAiDetection num_retries="5"
+                          buffer_size="5"
+                          average_obj="{step_obj}"
+                          classification="{classification}"
+                          camera="0"/>
       <Sequence>
-        <ExtractAiListItem aiObject="{step_obj}"
-                           Index="0"
-                           array="{step_obj_arr}"/>
         <SubTree ID="RotAlignZ"
                  detection_object="{step_obj}"
                  target_x="300"
                  error_margin="0.05"
-                 pixel_to_degrees="0.082"
+                 pixel_to_degrees="0.0676"
                  _autoremap="true"/>
         <SubTree ID="MoveSinglePose"
-                 positionX="1"
+                 positionX="1.5"
                  positionY="0.0"
                  positionZ="0.0"
                  orientationX="0.0"
@@ -208,6 +190,21 @@
 
   <!-- Description of Node Models (used by Groot) -->
   <TreeNodesModel>
+    <Action ID="AverageAiDetection">
+      <input_port name="num_retries"
+                  default="5"
+                  type="int">Number of invalid detection allowed between good ones</input_port>
+      <input_port name="buffer_size"
+                  default="5"
+                  type="int">Number of detection to average</input_port>
+      <output_port name="average_obj"
+                   type="AiDetection"/>
+      <input_port name="classification"
+                  type="std::string"/>
+      <input_port name="camera"
+                  default="0"
+                  type="int">0: Front, 1: Bottom</input_port>
+    </Action>
     <Condition ID="CheckAiInfo">
       <input_port name="max_count"
                   default="1"
@@ -268,14 +265,6 @@
       <input_port name="detection_object"
                   type="AiDetection"/>
     </Condition>
-    <Action ID="ExtractAiListItem">
-      <output_port name="aiObject"
-                   type="AiDetection"/>
-      <input_port name="Index"
-                  type="int"/>
-      <input_port name="array"
-                  type="AiDetectionArray"/>
-    </Action>
     <Action ID="GetAngle">
       <input_port name="error_margin"
                   default="0.100000"
@@ -285,7 +274,7 @@
       <output_port name="detected_angle"
                    type="float"/>
       <input_port name="aiObj"
-                  type="AiDetectionArray"/>
+                  type="AiDetection"/>
     </Action>
     <Action ID="InitTraj">
       <output_port name="trajectory"

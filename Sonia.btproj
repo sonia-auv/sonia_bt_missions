@@ -49,6 +49,13 @@
             <input_port name="offset" default="0"/>
             <input_port name="confidence" default="0.8"/>
         </SubTree>
+        <Action ID="AverageAiDetection">
+            <input_port name="num_retries" default="5" type="int">Number of invalid detection allowed between good ones</input_port>
+            <input_port name="buffer_size" default="5" type="int">Number of detection to average</input_port>
+            <output_port name="average_obj" type="AiDetection"/>
+            <input_port name="classification" type="std::string"/>
+            <input_port name="camera" default="0" type="int">0: Front, 1: Bottom</input_port>
+        </Action>
         <SubTree ID="BinAlignTrans" editable="true">
             <input_port name="classification"/>
         </SubTree>
@@ -122,7 +129,7 @@
             <input_port name="error_margin" default="0.100000" type="float"/>
             <input_port name="ideal_ratio" type="float"/>
             <output_port name="detected_angle" type="float"/>
-            <input_port name="aiObj" type="AiDetectionArray"/>
+            <input_port name="aiObj" type="AiDetection"/>
         </Action>
         <Action ID="GetClosestObj">
             <output_port name="aiObj" type="AiDetection"/>

@@ -2,17 +2,11 @@
 <root BTCPP_format="4">
   <BehaviorTree ID="AlignBuoy">
     <Sequence>
-      <RetryUntilSuccessful num_attempts="8">
-        <CheckAiInfo max_count="1"
-                     ai_info="{buoy_arr}"
-                     confidence="0.600000"
-                     camera="0"
-                     min_count="1"
-                     classification="buoy"/>
-      </RetryUntilSuccessful>
-      <ExtractAiListItem aiObject="{buoyObj}"
-                         Index="0"
-                         array="{buoy_arr}"/>
+      <AverageAiDetection num_retries="5"
+                          buffer_size="5"
+                          average_obj="{buoyObj}"
+                          classification="buoy"
+                          camera="0"/>
       <SubTree ID="RotAlignZ"
                detection_object="{buoyObj}"
                target_x="300"
@@ -102,31 +96,20 @@
                   default="0.000000"
                   type="float"/>
     </Action>
-    <Condition ID="CheckAiInfo">
-      <input_port name="max_count"
-                  default="1"
-                  type="int"/>
-      <output_port name="ai_info"
-                   type="AiDetectionArray"/>
-      <input_port name="confidence"
-                  default="0.800000"
-                  type="float"/>
+    <Action ID="AverageAiDetection">
+      <input_port name="num_retries"
+                  default="5"
+                  type="int">Number of invalid detection allowed between good ones</input_port>
+      <input_port name="buffer_size"
+                  default="5"
+                  type="int">Number of detection to average</input_port>
+      <output_port name="average_obj"
+                   type="AiDetection"/>
+      <input_port name="classification"
+                  type="std::string"/>
       <input_port name="camera"
                   default="0"
                   type="int">0: Front, 1: Bottom</input_port>
-      <input_port name="min_count"
-                  default="1"
-                  type="int"/>
-      <input_port name="classification"
-                  type="std::string"/>
-    </Condition>
-    <Action ID="ExtractAiListItem">
-      <output_port name="aiObject"
-                   type="AiDetection"/>
-      <input_port name="Index"
-                  type="int"/>
-      <input_port name="array"
-                  type="AiDetectionArray"/>
     </Action>
     <Action ID="InitTraj">
       <output_port name="trajectory"

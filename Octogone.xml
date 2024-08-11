@@ -2,17 +2,11 @@
 <root BTCPP_format="4">
   <BehaviorTree ID="AlignOctTrans">
     <Sequence>
-      <RetryUntilSuccessful num_attempts="8">
-        <CheckAiInfo max_count="1"
-                     ai_info="{oct_obj_array}"
-                     confidence="0.6"
-                     camera="1"
-                     min_count="1"
-                     classification="samples_table"/>
-      </RetryUntilSuccessful>
-      <ExtractAiListItem aiObject="{oct_obj}"
-                         Index="0"
-                         array="{oct_obj_array}"/>
+      <AverageAiDetection num_retries="5"
+                          buffer_size="5"
+                          average_obj="{oct_obj}"
+                          classification="samples_table"
+                          camera="0"/>
       <SubTree ID="TransAlignXY"
                detection_object="{oct_obj}"
                target_x="300"
@@ -25,6 +19,15 @@
 
   <BehaviorTree ID="FindOctogone">
     <Sequence>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="1"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="4"
+               _autoremap="true"/>
       <SubTree ID="RotatingSearch"
                classification="samples_table"
                ai_info="{oct_obj_array}"
@@ -32,17 +35,11 @@
                _autoremap="true"/>
       <Repeat num_cycles="2">
         <Sequence>
-          <RetryUntilSuccessful num_attempts="8">
-            <CheckAiInfo max_count="1"
-                         ai_info="{oct_obj_array}"
-                         confidence="0.6"
-                         camera="0"
-                         min_count="1"
-                         classification="samples_table"/>
-          </RetryUntilSuccessful>
-          <ExtractAiListItem aiObject="{oct_obj}"
-                             Index="0"
-                             array="{oct_obj_array}"/>
+          <AverageAiDetection num_retries="5"
+                              buffer_size="5"
+                              average_obj="{oct_obj}"
+                              classification="samples_table"
+                              camera="0"/>
           <SubTree ID="RotAlignZ"
                    detection_object="{oct_obj}"
                    target_x="300"
@@ -103,36 +100,25 @@
 
   <!-- Description of Node Models (used by Groot) -->
   <TreeNodesModel>
-    <Condition ID="CheckAiInfo">
-      <input_port name="max_count"
-                  default="1"
-                  type="int"/>
-      <output_port name="ai_info"
-                   type="AiDetectionArray"/>
-      <input_port name="confidence"
-                  default="0.800000"
-                  type="float"/>
+    <Action ID="AverageAiDetection">
+      <input_port name="num_retries"
+                  default="5"
+                  type="int">Number of invalid detection allowed between good ones</input_port>
+      <input_port name="buffer_size"
+                  default="5"
+                  type="int">Number of detection to average</input_port>
+      <output_port name="average_obj"
+                   type="AiDetection"/>
+      <input_port name="classification"
+                  type="std::string"/>
       <input_port name="camera"
                   default="0"
                   type="int">0: Front, 1: Bottom</input_port>
-      <input_port name="min_count"
-                  default="1"
-                  type="int"/>
-      <input_port name="classification"
-                  type="std::string"/>
-    </Condition>
+    </Action>
     <Action ID="ControlSetMode">
       <input_port name="set_mode"
                   default="false"
                   type="bool"/>
-    </Action>
-    <Action ID="ExtractAiListItem">
-      <output_port name="aiObject"
-                   type="AiDetection"/>
-      <input_port name="Index"
-                  type="int"/>
-      <input_port name="array"
-                  type="AiDetectionArray"/>
     </Action>
     <SubTree ID="MoveSinglePose"
              editable="true">

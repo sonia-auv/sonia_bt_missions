@@ -110,6 +110,15 @@
                  frame="4"
                  _autoremap="true"/>
         <SubTree ID="TrickShotSingle"/>
+        <SubTree ID="MoveSinglePose"
+                 positionX="0"
+                 positionY="0.0"
+                 positionZ="0.5"
+                 orientationX="0.0"
+                 orientationY="0.0"
+                 orientationZ="0.0"
+                 frame="4"
+                 _autoremap="true"/>
         <Fallback>
           <Sequence>
             <SubTree ID="Buoy24"/>
@@ -146,6 +155,125 @@
       <SubTree ID="Backflip"/>
       <SubTree ID="EndCase"/>
     </IfThenElse>
+  </BehaviorTree>
+
+  <BehaviorTree ID="AUV8_WILD">
+    <Sequence>
+      <SubTree ID="enable_mission"/>
+      <SubTree ID="CoinFlip"/>
+      <SubTree ID="Gate24"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="0.8"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="4"
+               _autoremap="true"/>
+      <SubTree ID="TrickShotSingle"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="0.5"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="4"
+               _autoremap="true"/>
+      <Fallback>
+        <Sequence>
+          <SubTree ID="Buoy24"/>
+          <SubTree ID="MoveSinglePose"
+                   positionX="0.0"
+                   positionY="0.0"
+                   positionZ="0.0"
+                   orientationX="0.0"
+                   orientationY="0.0"
+                   orientationZ="0.0"
+                   frame="2"
+                   _autoremap="true"/>
+          <SubTree ID="MoveSinglePose"
+                   positionX="-0.5"
+                   positionY="-1"
+                   positionZ="0.0"
+                   orientationX="0.0"
+                   orientationY="0.0"
+                   orientationZ="0.0"
+                   frame="1"
+                   _autoremap="true"/>
+          <SubTree ID="MoveSinglePose"
+                   positionX="1"
+                   positionY="0.0"
+                   positionZ="0.0"
+                   orientationX="0.0"
+                   orientationY="0.0"
+                   orientationZ="0.0"
+                   frame="1"
+                   _autoremap="true"/>
+        </Sequence>
+        <SubTree ID="MoveSinglePose"
+                 positionX="0.0"
+                 positionY="0.0"
+                 positionZ="0.0"
+                 orientationX="0.0"
+                 orientationY="0.0"
+                 orientationZ="0.0"
+                 frame="2"
+                 _autoremap="true"/>
+      </Fallback>
+      <Fallback>
+        <SubTree ID="Torpedoes24"
+                 _autoremap="false"/>
+        <SubTree ID="MoveSinglePose"
+                 positionX="6"
+                 positionY="0.0"
+                 positionZ="0.5"
+                 orientationX="0.0"
+                 orientationY="0.0"
+                 orientationZ="0.0"
+                 frame="2"
+                 _autoremap="true"/>
+      </Fallback>
+      <Fallback>
+        <SubTree ID="Octogone24"/>
+        <Sequence>
+          <SubTree ID="MoveSinglePose"
+                   positionX="10"
+                   positionY="0.0"
+                   positionZ="0.5"
+                   orientationX="0.0"
+                   orientationY="0.0"
+                   orientationZ="0.0"
+                   frame="0"/>
+          <SubTree ID="MoveSinglePose"
+                   positionX="15"
+                   positionY="0.0"
+                   positionZ="0.5"
+                   orientationX="0.0"
+                   orientationY="0.0"
+                   orientationZ="0.0"
+                   frame="0"/>
+          <SubTree ID="MoveSinglePose"
+                   positionX="20"
+                   positionY="0.0"
+                   positionZ="0.5"
+                   orientationX="0.0"
+                   orientationY="0.0"
+                   orientationZ="0.0"
+                   frame="0"/>
+          <SubTree ID="MoveSinglePose"
+                   positionX="0.0"
+                   positionY="0.0"
+                   positionZ="0.0"
+                   orientationX="0.0"
+                   orientationY="180"
+                   orientationZ="0.0"
+                   frame="1"/>
+          <ControlSetMode set_mode="false"/>
+        </Sequence>
+      </Fallback>
+    </Sequence>
   </BehaviorTree>
 
   <BehaviorTree ID="Backflip">
@@ -192,12 +320,16 @@
                offset="-1.5"
                confidence="0.6"
                _autoremap="true"/>
-      <SubTree ID="AlignBuoy"/>
-      <SubTree ID="ApprocheTarget"
-               classification="buoy"
-               offset="-0.75"
-               confidence="0.6"
-               _autoremap="true"/>
+      <ForceSuccess>
+        <SubTree ID="AlignBuoy"/>
+      </ForceSuccess>
+      <ForceSuccess>
+        <SubTree ID="ApprocheTarget"
+                 classification="buoy"
+                 offset="-1"
+                 confidence="0.6"
+                 _autoremap="true"/>
+      </ForceSuccess>
       <SubTree ID="BuoyCircle"/>
     </Sequence>
   </BehaviorTree>
@@ -281,6 +413,14 @@
   <BehaviorTree ID="Torpedoes24">
     <Sequence>
       <SubTree ID="FindTorp"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="1"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="4"/>
       <SubTree ID="AlignTorpFrame"
                _autoremap="false"/>
       <SubTree ID="AlignTorpFrameAngle"/>
@@ -290,27 +430,55 @@
                offset="-3"
                confidence="0.6"
                _autoremap="true"/>
-      <SubTree ID="AlignTorpFrame"/>
-      <SubTree ID="ApprocheTarget"
-               classification="torpille"
-               offset="-1.5"
-               confidence="0.6"
-               _autoremap="true"/>
+      <ForceSuccess>
+        <Fallback>
+          <Sequence>
+            <SubTree ID="AlignTorpFrame"/>
+            <SubTree ID="ApprocheTarget"
+                     classification="torpille"
+                     offset="-1.5"
+                     confidence="0.6"
+                     _autoremap="true"/>
+          </Sequence>
+          <Sequence>
+            <SubTree ID="MoveSinglePose"
+                     positionX="-1.5"
+                     positionY="0.0"
+                     positionZ="0.0"
+                     orientationX="0.0"
+                     orientationY="0.0"
+                     orientationZ="0.0"
+                     frame="1"/>
+            <SubTree ID="AlignTorpFrame"/>
+            <SubTree ID="ApprocheTarget"
+                     classification="torpille"
+                     offset="-1.5"
+                     confidence="0.6"
+                     _autoremap="true"/>
+          </Sequence>
+        </Fallback>
+      </ForceSuccess>
       <Sequence>
-        <SubTree ID="AlignTorpID"
-                 sizeID="3"
-                 _autoremap="true"/>
-        <SubTree ID="AlignStar"
-                 _autoremap="false"/>
+        <ForceSuccess>
+          <SubTree ID="AlignTorpID"
+                   sizeID="3"
+                   _autoremap="true"/>
+        </ForceSuccess>
+        <ForceSuccess>
+          <SubTree ID="AlignStar"
+                   _autoremap="false"/>
+        </ForceSuccess>
         <Repeat num_cycles="3">
           <Delay delay_msec="5000">
-            <ActuatorsAction side="starboard"
-                             actuator="1"/>
+            <ForceSuccess>
+              <ActuatorsAction side="starboard"
+                               actuator="1"/>
+            </ForceSuccess>
           </Delay>
         </Repeat>
       </Sequence>
       <SubTree ID="MoveSinglePose"
-               positionX="-1.5"
+               positionX="-1"
                positionY="0.0"
                positionZ="0.0"
                orientationX="0.0"
@@ -319,14 +487,20 @@
                frame="1"
                _autoremap="true"/>
       <Sequence>
-        <SubTree ID="AlignTorpID"
-                 sizeID="2"
-                 _autoremap="true"/>
-        <SubTree ID="AlignPort"/>
+        <ForceSuccess>
+          <SubTree ID="AlignTorpID"
+                   sizeID="2"
+                   _autoremap="true"/>
+        </ForceSuccess>
+        <ForceSuccess>
+          <SubTree ID="AlignPort"/>
+        </ForceSuccess>
         <Repeat num_cycles="3">
           <Delay delay_msec="5000">
-            <ActuatorsAction side="port_side"
-                             actuator="1"/>
+            <ForceSuccess>
+              <ActuatorsAction side="port_side"
+                               actuator="1"/>
+            </ForceSuccess>
           </Delay>
         </Repeat>
       </Sequence>
@@ -388,6 +562,11 @@
       <input_port name="confidence"
                   default="0.8"/>
     </SubTree>
+    <Action ID="ControlSetMode">
+      <input_port name="set_mode"
+                  default="false"
+                  type="bool"/>
+    </Action>
     <Action ID="InitTraj">
       <output_port name="trajectory"
                    type="Trajectory"/>

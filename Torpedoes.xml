@@ -1,33 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root BTCPP_format="4">
   <BehaviorTree ID="AlignPort">
-    <IfThenElse>
-      <RetryUntilSuccessful num_attempts="8">
-        <CheckAiInfo max_count="1"
-                     ai_info="{torp_target_arr}"
-                     confidence="0.600000"
-                     camera="0"
-                     min_count="1"
-                     classification="torpille_target"/>
-      </RetryUntilSuccessful>
-      <Sequence>
-        <ExtractAiListItem aiObject="{torp_target}"
-                           Index="0"
-                           array="{torp_target_arr}"/>
-        <InitTraj trajectory="{torp_traj_port}"/>
-        <ForceSuccess>
-          <CheckTranslationYZAlign error_margin="0.10000"
-                                   target_y="275"
-                                   target_x="225"
-                                   traj="{torp_traj_port}"
-                                   detection_object="{torp_target}"/>
-        </ForceSuccess>
-        <SendTrajToPlanner trajectory="{torp_traj_port}"
-                           interpolation="0"/>
-        <WaitTargetReached timeout="5"/>
-      </Sequence>
-      <AlwaysFailure/>
-    </IfThenElse>
+    <Sequence>
+      <AverageAiDetection num_retries="5"
+                          buffer_size="5"
+                          average_obj="{torp_target}"
+                          classification="torpille_target"
+                          camera="0"/>
+      <InitTraj trajectory="{torp_traj_port}"/>
+      <ForceSuccess>
+        <CheckTranslationYZAlign error_margin="0.10000"
+                                 target_y="275"
+                                 target_x="225"
+                                 traj="{torp_traj_port}"
+                                 detection_object="{torp_target}"/>
+      </ForceSuccess>
+      <SendTrajToPlanner trajectory="{torp_traj_port}"
+                         interpolation="0"/>
+      <WaitTargetReached timeout="5"/>
+    </Sequence>
   </BehaviorTree>
 
   <BehaviorTree ID="AlignSize">
@@ -51,49 +42,34 @@
   </BehaviorTree>
 
   <BehaviorTree ID="AlignStar">
-    <IfThenElse>
-      <RetryUntilSuccessful num_attempts="8">
-        <CheckAiInfo max_count="1"
-                     ai_info="{torp_target_arr}"
-                     confidence="0.600000"
-                     camera="0"
-                     min_count="1"
-                     classification="torpille_target"/>
-      </RetryUntilSuccessful>
-      <Sequence>
-        <ExtractAiListItem aiObject="{torp_target}"
-                           Index="0"
-                           array="{torp_target_arr}"/>
-        <InitTraj trajectory="{torp_traj_star}"/>
-        <ForceSuccess>
-          <CheckTranslationYZAlign error_margin="0.10000"
-                                   target_y="275"
-                                   target_x="375"
-                                   traj="{torp_traj_star}"
-                                   detection_object="{torp_target}"/>
-        </ForceSuccess>
-        <SendTrajToPlanner trajectory="{torp_traj_star}"
-                           interpolation="0"/>
-        <WaitTargetReached timeout="5"/>
-      </Sequence>
-      <AlwaysFailure/>
-    </IfThenElse>
+    <Sequence>
+      <AverageAiDetection num_retries="5"
+                          buffer_size="5"
+                          average_obj="{torp_target}"
+                          classification="torpille_target"
+                          camera="0"/>
+      <InitTraj trajectory="{torp_traj_star}"/>
+      <ForceSuccess>
+        <CheckTranslationYZAlign error_margin="0.10000"
+                                 target_y="275"
+                                 target_x="375"
+                                 traj="{torp_traj_star}"
+                                 detection_object="{torp_target}"/>
+      </ForceSuccess>
+      <SendTrajToPlanner trajectory="{torp_traj_star}"
+                         interpolation="0"/>
+      <WaitTargetReached timeout="5"/>
+    </Sequence>
   </BehaviorTree>
 
   <BehaviorTree ID="AlignTorpFrame">
     <Repeat num_cycles="2">
       <Sequence>
-        <RetryUntilSuccessful num_attempts="8">
-          <CheckAiInfo max_count="1"
-                       ai_info="{torp_frame_arr}"
-                       confidence="0.600000"
-                       camera="0"
-                       min_count="1"
-                       classification="torpille"/>
-        </RetryUntilSuccessful>
-        <ExtractAiListItem aiObject="{torp_frame}"
-                           Index="0"
-                           array="{torp_frame_arr}"/>
+        <AverageAiDetection num_retries="5"
+                            buffer_size="5"
+                            average_obj="{torp_frame}"
+                            classification="torpille"
+                            camera="0"/>
         <SubTree ID="TransAlignYZ"
                  detection_object="{torp_frame}"
                  target_x="300"
@@ -169,6 +145,21 @@
              editable="true">
       <input_port name="classification"/>
     </SubTree>
+    <Action ID="AverageAiDetection">
+      <input_port name="num_retries"
+                  default="5"
+                  type="int">Number of invalid detection allowed between good ones</input_port>
+      <input_port name="buffer_size"
+                  default="5"
+                  type="int">Number of detection to average</input_port>
+      <output_port name="average_obj"
+                   type="AiDetection"/>
+      <input_port name="classification"
+                  type="std::string"/>
+      <input_port name="camera"
+                  default="0"
+                  type="int">0: Front, 1: Bottom</input_port>
+    </Action>
     <Condition ID="CheckAiInfo">
       <input_port name="max_count"
                   default="1"

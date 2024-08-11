@@ -11,7 +11,7 @@
                detection_object="{buoyObj}"
                target_x="300"
                error_margin="0.1"
-               pixel_to_degrees="0.0676"
+               pixel_to_degrees="0.0584"
                _autoremap="true"/>
     </Sequence>
   </BehaviorTree>

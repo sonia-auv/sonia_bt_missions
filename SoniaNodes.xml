@@ -1,17 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<root BTCPP_format="4"
-      main_tree_to_execute="root">
-  <BehaviorTree ID="root">
-    <Sequence>
-      <RetryUntilSuccessful num_attempts="-1">
-        <MissionSwitchStatus/>
-      </RetryUntilSuccessful>
-    </Sequence>
-  </BehaviorTree>
-
-  <!-- Description of Node Models (used by Groot) -->
-  <TreeNodesModel>
-    <Condition ID="MissionSwitchStatus"/>
-  </TreeNodesModel>
-
+<root BTCPP_format="4">
+    <TreeNodesModel>
+        <Action ID="EnableDisableDVL">
+            <input_port name="dvl_input" type="bool" default="true"/>
+        </Action>
+        <Condition ID="MissionSwitchStatus"/>
+        <Action ID="Tare">
+            <input_port name="sensor" type="std::string">imu or depth</input_port>
+        </Action>
+    </TreeNodesModel>
 </root>

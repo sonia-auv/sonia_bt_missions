@@ -8,6 +8,7 @@
     <include path="Gate.xml"/>
     <include path="MoveSinglePose.xml"/>
     <include path="Octogone.xml"/>
+    <include path="PreQual.xml"/>
     <include path="Run24.xml"/>
     <include path="SearchPatterns.xml"/>
     <include path="Torpedoes.xml"/>

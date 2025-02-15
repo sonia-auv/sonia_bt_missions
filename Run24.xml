@@ -511,6 +511,28 @@
     </Sequence>
   </BehaviorTree>
 
+  <BehaviorTree ID="test">
+    <Sequence>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="2"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="4"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="2"
+               positionY="0.0"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1"/>
+      <SubTree ID="Backflip"/>
+    </Sequence>
+  </BehaviorTree>
+
   <!-- Description of Node Models (used by Groot) -->
   <TreeNodesModel>
     <Action ID="ActuatorsAction">

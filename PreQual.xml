@@ -60,7 +60,7 @@
                      longRotation="false"
                      positionZ="0.000000"
                      positionY="0"
-                     orientationY="0.000000"
+                     orientationY="1.5"
                      orientationX="0.000000"
                      positionX="10.5"/>
       <SendTrajToPlanner trajectory="{traj}"

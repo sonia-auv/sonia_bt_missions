@@ -2,6 +2,9 @@
 <root BTCPP_format="4">
   <BehaviorTree ID="PreQual">
     <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
       <InitTraj trajectory="{traj}"/>
       <AddPoseToTraj trajectory="{traj}"
                      precision="0"
@@ -13,7 +16,7 @@
                      positionY="0"
                      orientationY="0.000000"
                      orientationX="0.000000"
-                     positionX="10"/>
+                     positionX="10.5"/>
       <AddPoseToTraj trajectory="{traj}"
                      precision="0"
                      speed="0"
@@ -33,7 +36,7 @@
                        orientationZ="30"
                        longRotation="false"
                        positionZ="0.000000"
-                       positionY="-0.55"
+                       positionY="-0.45"
                        orientationY="0.000000"
                        orientationX="0.000000"
                        positionX="0.000000"/>
@@ -59,7 +62,7 @@
                      positionY="0"
                      orientationY="0.000000"
                      orientationX="0.000000"
-                     positionX="10"/>
+                     positionX="10.5"/>
       <SendTrajToPlanner trajectory="{traj}"
                          interpolation="0"/>
       <WaitTargetReached timeout="5"/>
@@ -106,6 +109,7 @@
       <output_port name="trajectory"
                    type="Trajectory"/>
     </Action>
+    <Condition ID="MissionSwitchStatus"/>
     <Action ID="SendTrajToPlanner">
       <inout_port name="trajectory"
                   type="Trajectory"/>

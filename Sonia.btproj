@@ -3,12 +3,6 @@
     <include path="Test1.xml"/>
     <!-- Description of Node Models (used by Groot) -->
     <TreeNodesModel>
-        <Action ID="EnableDisableDVL">
-            <input_port name="dvl_input" default="true" type="bool"/>
-        </Action>
         <Condition ID="MissionSwitchStatus"/>
-        <Action ID="Tare">
-            <input_port name="sensor" type="std::string">imu or depth</input_port>
-        </Action>
     </TreeNodesModel>
 </root>

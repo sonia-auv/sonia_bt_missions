@@ -1,5 +1,20 @@
 <root BTCPP_format="4">
     <TreeNodesModel>
+        <Action ID="ControlSetMode">
+            <input_port name="set_mode" type="bool" default="false"/>
+        </Action>
+        <Action ID="Droppers">
+            <input_port name="side" type="std::string">port_side or starboard</input_port>
+        </Action>
+        <Action ID="EnableDisableDVL">
+            <input_port name="dvl_input" type="bool" default="true"/>
+        </Action>
         <Condition ID="MissionSwitchStatus"/>
+        <Action ID="Tare">
+            <input_port name="sensor" type="std::string">imu or depth</input_port>
+        </Action>
+        <Action ID="Torpedos">
+            <input_port name="side" type="std::string">port_side or starboard</input_port>
+        </Action>
     </TreeNodesModel>
 </root>

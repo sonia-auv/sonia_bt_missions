@@ -9,9 +9,25 @@
     </Sequence>
   </BehaviorTree>
 
+  <BehaviorTree ID="test1">
+    <Sequence>
+      <Torpedos side="port_side"/>
+      <Droppers side="starboard"/>
+      <Torpedos side="starboard"/>
+    </Sequence>
+  </BehaviorTree>
+
   <!-- Description of Node Models (used by Groot) -->
   <TreeNodesModel>
+    <Action ID="Droppers">
+      <input_port name="side"
+                  type="std::string">port_side or starboard</input_port>
+    </Action>
     <Condition ID="MissionSwitchStatus"/>
+    <Action ID="Torpedos">
+      <input_port name="side"
+                  type="std::string">port_side or starboard</input_port>
+    </Action>
   </TreeNodesModel>
 
 </root>

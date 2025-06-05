@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root BTCPP_format="4"
       main_tree_to_execute="root">
+  <BehaviorTree ID="Denise1.0">
+    <Sequence>
+      <SubTree ID="boot_sequence"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="2"
+               positionY="0.0"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="0.0"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="MoveSinglePose">
+    <Sequence>
+      <InitializeTrajectory trajectory="{traj}"/>
+      <TrajectoryAppendPose precision="0"
+                            speed="0"
+                            orientationZ="{orientationZ}"
+                            orientationY="{orientationY}"
+                            orientationX="{orientationX}"
+                            frame="{frame}"
+                            positionZ="{positionZ}"
+                            trajectory="{traj}"
+                            longRotation="false"
+                            positionY="{positionY}"
+                            positionX="{positionX}"/>
+      <SendTrajectory trajectory="{traj}"
+                      interpolation="0"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="boot_sequence">
+    <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
+      <Tare sensor="imu"/>
+      <Tare sensor="depth"/>
+      <EnableDisableDVL dvl_input="true"/>
+      <ControlSetMode set_mode="true"/>
+    </Sequence>
+  </BehaviorTree>
+
   <BehaviorTree ID="root">
     <Sequence>
       <RetryUntilSuccessful num_attempts="-1">
@@ -19,14 +64,90 @@
 
   <!-- Description of Node Models (used by Groot) -->
   <TreeNodesModel>
+    <Action ID="ControlSetMode">
+      <input_port name="set_mode"
+                  default="false"
+                  type="bool"/>
+    </Action>
     <Action ID="Droppers">
       <input_port name="side"
                   type="std::string">port_side or starboard</input_port>
     </Action>
+    <Action ID="EnableDisableDVL">
+      <input_port name="dvl_input"
+                  default="false"
+                  type="bool">true: start, false: stop</input_port>
+    </Action>
+    <Action ID="InitializeTrajectory">
+      <output_port name="trajectory"
+                   type="Trajectory"/>
+    </Action>
     <Condition ID="MissionSwitchStatus"/>
+    <SubTree ID="MoveSinglePose"
+             editable="true">
+      <input_port name="positionX"
+                  default="0.0"/>
+      <input_port name="positionY"
+                  default="0.0"/>
+      <input_port name="positionZ"
+                  default="0.0"/>
+      <input_port name="orientationX"
+                  default="0.0"/>
+      <input_port name="orientationY"
+                  default="0.0"/>
+      <input_port name="orientationZ"
+                  default="0.0"/>
+      <input_port name="frame"
+                  default="0.0"/>
+    </SubTree>
+    <Action ID="SendTrajectory">
+      <input_port name="trajectory"
+                  type="Trajectory"/>
+      <input_port name="interpolation"
+                  default="0"
+                  type="int"/>
+    </Action>
+    <Action ID="Tare">
+      <input_port name="sensor"
+                  type="std::string">imu or depth</input_port>
+    </Action>
     <Action ID="Torpedos">
       <input_port name="side"
                   type="std::string">port_side or starboard</input_port>
+    </Action>
+    <Action ID="TrajectoryAppendPose">
+      <input_port name="precision"
+                  default="0"
+                  type="int"/>
+      <input_port name="speed"
+                  default="0"
+                  type="int"/>
+      <input_port name="orientationZ"
+                  default="0.000000"
+                  type="float"/>
+      <input_port name="orientationY"
+                  default="0.000000"
+                  type="float"/>
+      <input_port name="orientationX"
+                  default="0.000000"
+                  type="float"/>
+      <input_port name="frame"
+                  default="1"
+                  type="int"/>
+      <input_port name="positionZ"
+                  default="0.000000"
+                  type="float"/>
+      <inout_port name="trajectory"
+                  type="Trajectory"/>
+      <input_port name="longRotation"
+                  default="false"
+                  type="bool"/>
+      <input_port name="positionY"
+                  default="0.000000"
+                  type="float"/>
+      <input_port name="positionX"
+                  default="0.000000"
+                  type="float"/>
     </Action>
   </TreeNodesModel>
 

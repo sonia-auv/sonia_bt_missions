@@ -48,9 +48,16 @@
 
   <BehaviorTree ID="root">
     <Sequence>
-      <RetryUntilSuccessful num_attempts="-1">
-        <MissionSwitchStatus/>
-      </RetryUntilSuccessful>
+      <SubTree ID="boot_sequence"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="2"
+               positionY="0.0"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="0.0"/>
+      <ControlSetMode set_mode="false"/>
     </Sequence>
   </BehaviorTree>
 

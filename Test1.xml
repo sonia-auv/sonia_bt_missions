@@ -50,9 +50,9 @@
     <Sequence>
       <SubTree ID="boot_sequence"/>
       <SubTree ID="MoveSinglePose"
-               positionX="2"
+               positionX="0.0"
                positionY="0.0"
-               positionZ="0.0"
+               positionZ="0.5"
                orientationX="0.0"
                orientationY="0.0"
                orientationZ="0.0"

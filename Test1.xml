@@ -31,6 +31,7 @@
                             positionX="{positionX}"/>
       <SendTrajectory trajectory="{traj}"
                       interpolation="0"/>
+      <WaitTargetReached timeout="5"/>
     </Sequence>
   </BehaviorTree>
 
@@ -155,6 +156,11 @@
       <input_port name="positionX"
                   default="0.000000"
                   type="float"/>
+    </Action>
+    <Action ID="WaitTargetReached">
+      <input_port name="timeout"
+                  default="5"
+                  type="int"/>
     </Action>
   </TreeNodesModel>
 

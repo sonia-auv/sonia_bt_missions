@@ -2,14 +2,14 @@
     <TreeNodesModel>
         <Action ID="AiActivation">
             <input_port name="Bottom" type="bool" default="false">true: ON, talse: OFF</input_port>
+            <input_port name="Model" type="int" default="0">model choice, default = 0</input_port>
             <input_port name="Front" type="bool" default="false">true: ON, talse: OFF</input_port>
         </Action>
         <Action ID="AirFilter">
             <input_port name="Max_depth" type="int">Maximum allowed depth</input_port>
             <input_port name="Max_frame" type="int">maximum allowed frames</input_port>
-            <input_port name="Max_count" type="int">Maximum count</input_port>
-            <input_port name="Min_count" type="int">Minimum count</input_port>
-            <input_port name="Confidence" type="float" default="0.800000">Ai confidence</input_port>
+            <input_port name="Expected_count" type="int">object count</input_port>
+            <input_port name="Confidence" type="float" default="0.600000">Ai confidence</input_port>
             <input_port name="Object" type="int">Searched object</input_port>
         </Action>
         <Action ID="ControlSetMode">
@@ -47,6 +47,9 @@
             <input_port name="longRotation" type="bool" default="false"/>
             <input_port name="positionY" type="float" default="0.000000"/>
             <input_port name="positionX" type="float" default="0.000000"/>
+        </Action>
+        <Action ID="WaitTargetReached">
+            <input_port name="timeout" type="int" default="5"/>
         </Action>
     </TreeNodesModel>
 </root>

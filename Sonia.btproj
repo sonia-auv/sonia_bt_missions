@@ -4,8 +4,8 @@
     <!-- Description of Node Models (used by Groot) -->
     <TreeNodesModel>
         <Action ID="AiActivation">
-            <input_port name="Bottom" default="false" type="bool">true: ON, talse: OFF</input_port>
             <input_port name="Model" default="0" type="int">model choice, default = 0</input_port>
+            <input_port name="Bottom" default="false" type="bool">true: ON, talse: OFF</input_port>
             <input_port name="Front" default="false" type="bool">true: ON, talse: OFF</input_port>
         </Action>
         <Action ID="AirFilter">
@@ -48,16 +48,16 @@
             <input_port name="side" type="std::string">port_side or starboard</input_port>
         </Action>
         <Action ID="TrajectoryAppendPose">
+            <inout_port name="trajectory" type="Trajectory"/>
             <input_port name="precision" default="0" type="int"/>
             <input_port name="speed" default="0" type="int"/>
+            <input_port name="frame" default="1" type="int"/>
             <input_port name="orientationZ" default="0.000000" type="float"/>
+            <input_port name="longRotation" default="false" type="bool"/>
+            <input_port name="positionZ" default="0.000000" type="float"/>
+            <input_port name="positionY" default="0.000000" type="float"/>
             <input_port name="orientationY" default="0.000000" type="float"/>
             <input_port name="orientationX" default="0.000000" type="float"/>
-            <input_port name="frame" default="1" type="int"/>
-            <input_port name="positionZ" default="0.000000" type="float"/>
-            <inout_port name="trajectory" type="Trajectory"/>
-            <input_port name="longRotation" default="false" type="bool"/>
-            <input_port name="positionY" default="0.000000" type="float"/>
             <input_port name="positionX" default="0.000000" type="float"/>
         </Action>
         <Action ID="WaitTargetReached">

@@ -18,16 +18,16 @@
   <BehaviorTree ID="MoveSinglePose">
     <Sequence>
       <InitializeTrajectory trajectory="{traj}"/>
-      <TrajectoryAppendPose trajectory="{traj}"
-                            precision="0"
+      <TrajectoryAppendPose precision="0"
                             speed="0"
-                            frame="{frame}"
                             orientationZ="{orientationZ}"
-                            longRotation="false"
-                            positionZ="{positionZ}"
-                            positionY="{positionY}"
                             orientationY="{orientationY}"
                             orientationX="{orientationX}"
+                            frame="{frame}"
+                            positionZ="{positionZ}"
+                            trajectory="{traj}"
+                            longRotation="false"
+                            positionY="{positionY}"
                             positionX="{positionX}"/>
       <SendTrajectory trajectory="{traj}"
                       interpolation="0"/>
@@ -48,36 +48,12 @@
 
   <BehaviorTree ID="root">
     <Sequence>
-      <SubTree ID="boot_sequence"/>
-      <Delay delay_msec="5000">
-        <SubTree ID="MoveSinglePose"
-                 positionX="0.0"
-                 positionY="0.0"
-                 positionZ="0.3"
-                 orientationX="0.0"
-                 orientationY="0.0"
-                 orientationZ="0.0"
-                 frame="1.0"/>
-      </Delay>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
+      <Tare sensor="imu"/>
       <Delay delay_msec="3000">
-        <SubTree ID="MoveSinglePose"
-                 positionX="0.0"
-                 positionY="0.0"
-                 positionZ="0.0"
-                 orientationX="0.0"
-                 orientationY="0.0"
-                 orientationZ="90"
-                 frame="1.0"/>
-      </Delay>
-      <Delay delay_msec="3000">
-        <SubTree ID="MoveSinglePose"
-                 positionX="0.0"
-                 positionY="0.0"
-                 positionZ="0.0"
-                 orientationX="0.0"
-                 orientationY="0.0"
-                 orientationZ="-90"
-                 frame="1.0"/>
+        <Tare sensor="depth"/>
       </Delay>
     </Sequence>
   </BehaviorTree>
@@ -144,33 +120,33 @@
                   type="std::string">port_side or starboard</input_port>
     </Action>
     <Action ID="TrajectoryAppendPose">
-      <inout_port name="trajectory"
-                  type="Trajectory"/>
       <input_port name="precision"
                   default="0"
                   type="int"/>
       <input_port name="speed"
                   default="0"
                   type="int"/>
-      <input_port name="frame"
-                  default="1"
-                  type="int"/>
       <input_port name="orientationZ"
-                  default="0.000000"
-                  type="float"/>
-      <input_port name="longRotation"
-                  default="false"
-                  type="bool"/>
-      <input_port name="positionZ"
-                  default="0.000000"
-                  type="float"/>
-      <input_port name="positionY"
                   default="0.000000"
                   type="float"/>
       <input_port name="orientationY"
                   default="0.000000"
                   type="float"/>
       <input_port name="orientationX"
+                  default="0.000000"
+                  type="float"/>
+      <input_port name="frame"
+                  default="1"
+                  type="int"/>
+      <input_port name="positionZ"
+                  default="0.000000"
+                  type="float"/>
+      <inout_port name="trajectory"
+                  type="Trajectory"/>
+      <input_port name="longRotation"
+                  default="false"
+                  type="bool"/>
+      <input_port name="positionY"
                   default="0.000000"
                   type="float"/>
       <input_port name="positionX"

@@ -51,10 +51,11 @@
       <RetryUntilSuccessful num_attempts="-1">
         <MissionSwitchStatus/>
       </RetryUntilSuccessful>
-      <Tare sensor="imu"/>
-      <Delay delay_msec="3000">
-        <Tare sensor="depth"/>
-      </Delay>
+      <RetryUntilSuccessful num_attempts="-1">
+        <Inverter>
+          <MissionSwitchStatus/>
+        </Inverter>
+      </RetryUntilSuccessful>
     </Sequence>
   </BehaviorTree>
 

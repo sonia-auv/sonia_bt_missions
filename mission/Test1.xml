@@ -51,11 +51,9 @@
       <RetryUntilSuccessful num_attempts="-1">
         <MissionSwitchStatus/>
       </RetryUntilSuccessful>
-      <RetryUntilSuccessful num_attempts="-1">
-        <Inverter>
-          <MissionSwitchStatus/>
-        </Inverter>
-      </RetryUntilSuccessful>
+      <Delay delay_msec="1500">
+        <EnableDisableDVL dvl_input="false"/>
+      </Delay>
     </Sequence>
   </BehaviorTree>
 

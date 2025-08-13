@@ -125,9 +125,7 @@
       <RetryUntilSuccessful num_attempts="-1">
         <MissionSwitchStatus/>
       </RetryUntilSuccessful>
-      <Torpedos side="port_side"/>
       <Droppers side="port_side"/>
-      <Torpedos side="starboard"/>
     </Sequence>
   </BehaviorTree>
 

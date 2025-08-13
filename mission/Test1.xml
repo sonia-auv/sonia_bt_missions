@@ -122,6 +122,9 @@
 
   <BehaviorTree ID="test1">
     <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
       <Torpedos side="port_side"/>
       <Droppers side="starboard"/>
       <Torpedos side="starboard"/>

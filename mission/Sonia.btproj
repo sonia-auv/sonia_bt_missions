@@ -36,7 +36,7 @@
             <input_port name="orientationX" default="0.0"/>
             <input_port name="orientationY" default="0.0"/>
             <input_port name="orientationZ" default="0.0"/>
-            <input_port name="frame" default="0.0"/>
+            <input_port name="frame" default="1.0"/>
         </SubTree>
         <Action ID="SendTrajectory">
             <input_port name="trajectory" type="Trajectory"/>

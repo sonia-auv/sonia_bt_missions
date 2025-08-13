@@ -57,6 +57,72 @@
     </Sequence>
   </BehaviorTree>
 
+  <BehaviorTree ID="surface">
+    <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="1"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="2.5"
+               positionY="0.0"
+               positionZ="0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
+      <Droppers side="port_side"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="-1.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="180"
+               frame="1.0"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="180"
+               frame="1.0"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="1"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="2.5"
+               positionY="0.0"
+               positionZ="0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
+      <ControlSetMode set_mode="false"/>
+    </Sequence>
+  </BehaviorTree>
+
   <BehaviorTree ID="test1">
     <Sequence>
       <Torpedos side="port_side"/>
@@ -101,7 +167,7 @@
       <input_port name="orientationZ"
                   default="0.0"/>
       <input_port name="frame"
-                  default="0.0"/>
+                  default="1.0"/>
     </SubTree>
     <Action ID="SendTrajectory">
       <input_port name="trajectory"

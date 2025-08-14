@@ -37,6 +37,9 @@
 
   <BehaviorTree ID="aifilter">
     <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
       <AiActivation Bottom="false"
                     Model="0"
                     Front="true"/>

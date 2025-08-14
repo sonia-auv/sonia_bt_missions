@@ -48,6 +48,9 @@
 
   <BehaviorTree ID="coin_flip">
     <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
       <SubTree ID="MoveSinglePose"
                positionX="0.0"
                positionY="0.0"
@@ -136,8 +139,8 @@
                orientationY="0.0"
                orientationZ="0.0"
                frame="1"/>
-      <Torpedo side="port_side"/>
-      <Torpedo side="port"/>
+      <Torpedos side="port_side"/>
+      <Torpedos side="port"/>
     </Sequence>
   </BehaviorTree>
 
@@ -219,80 +222,14 @@
                orientationZ="90"
                frame="1.0"/>
       <Delay delay_msec="2000">
-        <Torpedo side="starboard"/>
+        <Torpedos side="starboard"/>
       </Delay>
       <Delay delay_msec="2000">
-        <Torpedo side="port_side"/>
+        <Torpedos side="port_side"/>
       </Delay>
       <Delay delay_msec="2000">
         <ControlSetMode set_mode="false"/>
       </Delay>
-    </Sequence>
-  </BehaviorTree>
-
-  <BehaviorTree ID="surface">
-    <Sequence>
-      <RetryUntilSuccessful num_attempts="-1">
-        <MissionSwitchStatus/>
-      </RetryUntilSuccessful>
-      <SubTree ID="MoveSinglePose"
-               positionX="0.0"
-               positionY="0.0"
-               positionZ="1"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"
-               frame="1.0"/>
-      <SubTree ID="MoveSinglePose"
-               positionX="2.5"
-               positionY="0.0"
-               positionZ="0"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"
-               frame="1.0"/>
-      <Dropper side="port_side"/>
-      <SubTree ID="MoveSinglePose"
-               positionX="0.0"
-               positionY="0.0"
-               positionZ="-1.0"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"
-               frame="1.0"/>
-      <SubTree ID="MoveSinglePose"
-               positionX="0.0"
-               positionY="0.0"
-               positionZ="0.0"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="180"
-               frame="1.0"/>
-      <SubTree ID="MoveSinglePose"
-               positionX="0.0"
-               positionY="0.0"
-               positionZ="0.0"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="180"
-               frame="1.0"/>
-      <SubTree ID="MoveSinglePose"
-               positionX="0.0"
-               positionY="0.0"
-               positionZ="1"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"
-               frame="1.0"/>
-      <SubTree ID="MoveSinglePose"
-               positionX="2.5"
-               positionY="0.0"
-               positionZ="0"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"
-               frame="1.0"/>
-      <ControlSetMode set_mode="false"/>
     </Sequence>
   </BehaviorTree>
 

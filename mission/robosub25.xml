@@ -88,6 +88,34 @@
     <MissionSwitchStatus/>
   </BehaviorTree>
 
+  <BehaviorTree ID="torps">
+    <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
+      <AiActivation Bottom="false"
+                    Model="0"
+                    Front="true"/>
+      <Repeat num_cycles="10">
+        <Delay delay_msec="5000">
+          <Fallback>
+            <AiFilter detected_object_array="{detect_array}"
+                      Max_frame="20"
+                      Max_depth="200"
+                      Min_detection="2"
+                      Confidence="0.4"
+                      Object_class="torpedo-poster"
+                      Max_size_output="5"
+                      Camera="1"/>
+            <AiActivation Bottom="false"
+                          Model="0"
+                          Front="false"/>
+          </Fallback>
+        </Delay>
+      </Repeat>
+    </Sequence>
+  </BehaviorTree>
+
   <BehaviorTree ID="trickshot">
     <Sequence>
       <RetryUntilSuccessful num_attempts="-1">

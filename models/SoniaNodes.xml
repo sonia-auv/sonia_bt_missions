@@ -6,11 +6,13 @@
             <input_port name="Front" type="bool" default="false">true: ON, talse: OFF</input_port>
         </Action>
         <Action ID="AiFilter">
-            <input_port name="Max_depth" type="int">Maximum allowed depth</input_port>
+            <output_port name="detected_object_array" type="AiDetectionArray"/>
             <input_port name="Max_frame" type="int">maximum allowed frames</input_port>
-            <input_port name="Buffer_size" type="int">Number of detection to average</input_port>
+            <input_port name="Max_depth" type="float">Maximum allowed depth</input_port>
+            <input_port name="Min_detection" type="int">minumum number of frames with at least one detection before sending results</input_port>
             <input_port name="Confidence" type="float" default="0.600000">Ai confidence</input_port>
-            <input_port name="Object" type="int">Searched object</input_port>
+            <input_port name="Object_class" type="std::string">Searched object</input_port>
+            <input_port name="Max_size_output" type="int">Max size of the output array</input_port>
             <input_port name="Camera" type="int" default="1">0: Front, 1: Bottom</input_port>
         </Action>
         <Action ID="ControlSetMode">

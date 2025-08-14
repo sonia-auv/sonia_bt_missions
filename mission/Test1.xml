@@ -45,14 +45,19 @@
                     Front="true"/>
       <Repeat num_cycles="10">
         <Delay delay_msec="5000">
-          <AiFilter detected_object_array="{detect_array}"
-                    Max_frame="10"
-                    Max_depth="200"
-                    Min_detection="3"
-                    Confidence="0.4"
-                    Object_class="gate_sawfish"
-                    Max_size_output="5"
-                    Camera="1"/>
+          <Fallback>
+            <AiFilter detected_object_array="{detect_array}"
+                      Max_frame="10"
+                      Max_depth="200"
+                      Min_detection="3"
+                      Confidence="0.4"
+                      Object_class="gate_sawfish"
+                      Max_size_output="5"
+                      Camera="1"/>
+            <AiActivation Bottom="false"
+                          Model="0"
+                          Front="false"/>
+          </Fallback>
         </Delay>
       </Repeat>
     </Sequence>

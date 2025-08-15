@@ -68,7 +68,7 @@
       <SubTree ID="MoveSinglePose"
                positionX="0.0"
                positionY="0.0"
-               positionZ="1.0"
+               positionZ="0.5"
                orientationX="0.0"
                orientationY="0.0"
                orientationZ="0.0"
@@ -296,7 +296,7 @@
                     Front="true"/>
       <Repeat num_cycles="10">
         <Delay delay_msec="5000">
-          <Fallback>
+          <Sequence>
             <AiFilter detected_object_array="{detect_array}"
                       Max_frame="20"
                       Max_depth="200"
@@ -308,7 +308,7 @@
             <AiActivation Bottom="false"
                           Model="0"
                           Front="false"/>
-          </Fallback>
+          </Sequence>
         </Delay>
       </Repeat>
     </Sequence>

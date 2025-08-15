@@ -5,7 +5,7 @@
     <Sequence>
       <InitializeTrajectory trajectory="{traj}"/>
       <TrajectoryAppendPose precision="0"
-                            speed="0"
+                            speed="2"
                             orientationZ="{orientationZ}"
                             orientationY="{orientationY}"
                             orientationX="{orientationX}"

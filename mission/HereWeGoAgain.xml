@@ -30,6 +30,27 @@
     </Sequence>
   </BehaviorTree>
 
+  <BehaviorTree ID="DeadHome">
+    <Sequence>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="-41"
+               frame="1.0"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="15.5"
+               positionY="0.0"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
+    </Sequence>
+  </BehaviorTree>
+
   <BehaviorTree ID="DeadSlalom">
     <Sequence>
       <SubTree ID="MoveSinglePose"
@@ -180,10 +201,11 @@
                frame="2.0"/>
       <SubTree ID="DeadGate"/>
       <SubTree ID="StyleShot"
-               _autoremap="true"/>
+               _autoremap="false"/>
       <SubTree ID="DeadSlalom"/>
       <SubTree ID="DeadTorp"/>
       <SubTree ID="DeadTable"/>
+      <SubTree ID="DeadHome"/>
     </Sequence>
   </BehaviorTree>
 

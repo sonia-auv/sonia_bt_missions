@@ -156,6 +156,48 @@
     </Sequence>
   </BehaviorTree>
 
+  <BehaviorTree ID="gate_solo">
+    <Sequence>
+      <AiFilter detected_object_array="{detect_array}"
+                Max_frame="20"
+                Max_depth="200"
+                Min_detection="1"
+                Confidence="0.4"
+                Object_class="gate-shark"
+                Max_size_output="5"
+                Camera="1"/>
+      <Alignment frame="{frame}"
+                 orientationZ="{orientationZ}"
+                 normalized_coords="0"
+                 detections="{detect_array}"
+                 alpha="0.5"
+                 speed="{speed}"
+                 alignement_by_translation="True"
+                 positionX="{positionX}"
+                 positionY="{positionY}"
+                 bearing_rad="{bearing_rad}"
+                 norm_x="{norm_x}"
+                 has_metric="{has_metric}"
+                 positionZ="{positionZ}"
+                 lateral_m="{lateral_m}"
+                 orientationX="{orientationX}"
+                 longRotation="{longRotation}"
+                 precision="{precision}"
+                 orientationY="{orientationY}"/>
+      <TrajectoryAppendPose precision="0"
+                            speed="0"
+                            orientationZ="0.000000"
+                            orientationY="0.000000"
+                            orientationX="0.000000"
+                            frame="1"
+                            positionZ="0.000000"
+                            trajectory=""
+                            longRotation="false"
+                            positionY="0.000000"
+                            positionX="{positionX}"/>
+    </Sequence>
+  </BehaviorTree>
+
   <BehaviorTree ID="run25">
     <Sequence>
       <SubTree ID="gate"/>
@@ -518,6 +560,44 @@
       <input_port name="Camera"
                   default="1"
                   type="int">0: Front, 1: Bottom</input_port>
+    </Action>
+    <Action ID="Alignment">
+      <output_port name="frame"
+                   type="int"/>
+      <output_port name="orientationZ"
+                   type="float"/>
+      <input_port name="normalized_coords"
+                  type="bool"/>
+      <input_port name="detections"
+                  type="AiDetectionArray"/>
+      <input_port name="alpha"
+                  type="float"/>
+      <output_port name="speed"
+                   type="int"/>
+      <input_port name="alignement_by_translation"
+                  type="bool"/>
+      <output_port name="positionX"
+                   type="float"/>
+      <output_port name="positionY"
+                   type="float"/>
+      <output_port name="bearing_rad"
+                   type="float"/>
+      <output_port name="norm_x"
+                   type="float"/>
+      <output_port name="has_metric"
+                   type="int"/>
+      <output_port name="positionZ"
+                   type="float"/>
+      <output_port name="lateral_m"
+                   type="float"/>
+      <output_port name="orientationX"
+                   type="float"/>
+      <output_port name="longRotation"
+                   type="bool"/>
+      <output_port name="precision"
+                   type="int"/>
+      <output_port name="orientationY"
+                   type="float"/>
     </Action>
     <Action ID="ControlSetMode">
       <input_port name="set_mode"

@@ -20,6 +20,26 @@
             <input_port name="Max_size_output" type="int">Max size of the output array</input_port>
             <input_port name="Camera" default="1" type="int">0: Front, 1: Bottom</input_port>
         </Action>
+        <Action ID="Alignment">
+            <output_port name="frame" type="int"/>
+            <output_port name="orientationZ" type="float"/>
+            <input_port name="normalized_coords" type="bool"/>
+            <input_port name="detections" type="AiDetectionArray"/>
+            <input_port name="alpha" type="float"/>
+            <output_port name="speed" type="int"/>
+            <input_port name="alignement_by_translation" type="bool"/>
+            <output_port name="positionX" type="float"/>
+            <output_port name="positionY" type="float"/>
+            <output_port name="bearing_rad" type="float"/>
+            <output_port name="norm_x" type="float"/>
+            <output_port name="has_metric" type="int"/>
+            <output_port name="positionZ" type="float"/>
+            <output_port name="lateral_m" type="float"/>
+            <output_port name="orientationX" type="float"/>
+            <output_port name="longRotation" type="bool"/>
+            <output_port name="precision" type="int"/>
+            <output_port name="orientationY" type="float"/>
+        </Action>
         <Action ID="ControlSetMode">
             <input_port name="set_mode" default="false" type="bool"/>
         </Action>

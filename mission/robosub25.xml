@@ -316,11 +316,15 @@
       <AiActivation Bottom="false"
                     Model="0"
                     Front="true"/>
+      <SubTree ID="torpedo_solo"/>
     </Sequence>
   </BehaviorTree>
 
   <BehaviorTree ID="torpedo_solo">
     <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
       <Fallback>
         <AiFilter detected_object_array=""
                   Max_frame="5"

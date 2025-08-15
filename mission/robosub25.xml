@@ -326,7 +326,7 @@
         <MissionSwitchStatus/>
       </RetryUntilSuccessful>
       <Fallback>
-        <AiFilter detected_object_array=""
+        <AiFilter detected_object_array="{detect_array}"
                   Max_frame="5"
                   Max_depth="25"
                   Min_detection="1"
@@ -344,7 +344,7 @@
                  frame="1.0"/>
       </Fallback>
       <Fallback>
-        <AiFilter detected_object_array=""
+        <AiFilter detected_object_array="{detect_array}"
                   Max_frame="5"
                   Max_depth="25"
                   Min_detection="1"
@@ -362,7 +362,7 @@
                  frame="1.0"/>
       </Fallback>
       <Fallback>
-        <AiFilter detected_object_array=""
+        <AiFilter detected_object_array="{detect_array}"
                   Max_frame="5"
                   Max_depth="25"
                   Min_detection="1"
@@ -380,7 +380,7 @@
                  frame="1.0"/>
       </Fallback>
       <Fallback>
-        <AiFilter detected_object_array=""
+        <AiFilter detected_object_array="{detect_array}"
                   Max_frame="5"
                   Max_depth="25"
                   Min_detection="1"

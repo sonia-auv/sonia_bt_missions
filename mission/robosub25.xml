@@ -322,7 +322,7 @@
       <SubTree ID="MoveSinglePose"
                positionX="0.0"
                positionY="0.0"
-               positionZ="1"
+               positionZ="0.75"
                orientationX="0.0"
                orientationY="0.0"
                orientationZ="0.0"

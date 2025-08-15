@@ -158,7 +158,13 @@
 
   <BehaviorTree ID="gate_solo">
     <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
       <InitializeTrajectory trajectory="{traj}"/>
+      <AiActivation Bottom="false"
+                    Model="0"
+                    Front="true"/>
       <AiFilter detected_object_array="{detect_array}"
                 Max_frame="20"
                 Max_depth="200"

@@ -130,6 +130,23 @@
                orientationY="0.0"
                orientationZ="180"
                frame="1.0"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="-0.7"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
+      <Sleep msec="4000"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="0.7"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
     </Sequence>
   </BehaviorTree>
 
@@ -204,6 +221,8 @@
                _autoremap="false"/>
       <SubTree ID="DeadSlalom"/>
       <SubTree ID="DeadTorp"/>
+      <Torpedo side="port_side"/>
+      <Torpedo side="port_side"/>
       <SubTree ID="DeadTable"/>
       <SubTree ID="DeadHome"/>
     </Sequence>
@@ -274,6 +293,10 @@
       <input_port name="frame"
                   default="1.0"/>
     </SubTree>
+    <Action ID="Torpedo">
+      <input_port name="side"
+                  type="std::string">port_side or starboard</input_port>
+    </Action>
   </TreeNodesModel>
 
 </root>

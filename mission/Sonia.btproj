@@ -89,5 +89,8 @@
         <Action ID="WaitTargetReached">
             <input_port name="timeout" default="5" type="int"/>
         </Action>
+        <SubTree ID="gate_solo" editable="true">
+            <input_port name="choix_translation" default="true"/>
+        </SubTree>
     </TreeNodesModel>
 </root>

@@ -351,6 +351,94 @@
     </Sequence>
   </BehaviorTree>
 
+  <BehaviorTree ID="search_rot">
+    <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
+      <Fallback>
+        <AiFilter detected_object_array="{detect_array}"
+                  Max_frame="5"
+                  Max_depth="25"
+                  Min_detection="1"
+                  Confidence="0.600000"
+                  Object_class="{object_class}"
+                  Max_size_output="1"
+                  Camera="1"/>
+        <SubTree ID="MoveSinglePose"
+                 positionX="0.0"
+                 positionY="0.0"
+                 positionZ="0.0"
+                 orientationX="0.0"
+                 orientationY="0.0"
+                 orientationZ="15"
+                 frame="1.0"/>
+      </Fallback>
+      <Fallback>
+        <AiFilter detected_object_array="{detect_array}"
+                  Max_frame="5"
+                  Max_depth="25"
+                  Min_detection="1"
+                  Confidence="0.600000"
+                  Object_class="{object_class}"
+                  Max_size_output="1"
+                  Camera="1"/>
+        <SubTree ID="MoveSinglePose"
+                 positionX="0.0"
+                 positionY="0.0"
+                 positionZ="0.0"
+                 orientationX="0.0"
+                 orientationY="0.0"
+                 orientationZ="15"
+                 frame="1.0"/>
+      </Fallback>
+      <Fallback>
+        <AiFilter detected_object_array="{detect_array}"
+                  Max_frame="5"
+                  Max_depth="25"
+                  Min_detection="1"
+                  Confidence="0.600000"
+                  Object_class="{object_class}"
+                  Max_size_output="1"
+                  Camera="1"/>
+        <SubTree ID="MoveSinglePose"
+                 positionX="0.0"
+                 positionY="0.0"
+                 positionZ="0.0"
+                 orientationX="0.0"
+                 orientationY="0.0"
+                 orientationZ="-45"
+                 frame="1.0"/>
+      </Fallback>
+      <Fallback>
+        <AiFilter detected_object_array="{detect_array}"
+                  Max_frame="5"
+                  Max_depth="25"
+                  Min_detection="1"
+                  Confidence="0.600000"
+                  Object_class="{object_class}"
+                  Max_size_output="1"
+                  Camera="1"/>
+        <SubTree ID="MoveSinglePose"
+                 positionX="0.0"
+                 positionY="0.0"
+                 positionZ="0.0"
+                 orientationX="0.0"
+                 orientationY="0.0"
+                 orientationZ="-15"
+                 frame="1.0"/>
+      </Fallback>
+      <AiFilter detected_object_array=""
+                Max_frame="5"
+                Max_depth="25"
+                Min_detection="1"
+                Confidence="0.600000"
+                Object_class="{object_class}"
+                Max_size_output="1"
+                Camera="1"/>
+    </Sequence>
+  </BehaviorTree>
+
   <BehaviorTree ID="slalom">
     <Sequence>
       <RetryUntilSuccessful num_attempts="-1">
@@ -462,6 +550,7 @@
       <AiActivation Model="0"
                     Bottom="false"
                     Front="true"/>
+<<<<<<< Updated upstream
       <SubTree ID="torpedo_solo"/>
     </Sequence>
   </BehaviorTree>
@@ -575,6 +664,10 @@
                orientationY="0.0"
                orientationZ="180"
                frame="1.0"/>
+=======
+      <SubTree ID="search_rot"
+               object_class="torpedo-poster"/>
+>>>>>>> Stashed changes
     </Sequence>
   </BehaviorTree>
 
@@ -972,6 +1065,10 @@
              editable="true">
       <input_port name="choix_translation"
                   default="true"/>
+    </SubTree>
+    <SubTree ID="search_rot"
+             editable="true">
+      <input_port name="object_class"/>
     </SubTree>
   </TreeNodesModel>
 

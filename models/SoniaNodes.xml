@@ -26,6 +26,10 @@
             <inout_port name="traj" type="Trajectory"/>
             <input_port name="detections" type="AiDetectionArray"/>
         </Action>
+        <Action ID="CheckDistance">
+            <output_port name="TranslationX" type="float"/>
+            <input_port name="Object" type="sonia_common_ros2::msg::Detection_&lt;std::allocator&lt;void&gt; &gt;"/>
+        </Action>
         <Action ID="ControlSetMode">
             <input_port name="set_mode" type="bool" default="false"/>
         </Action>

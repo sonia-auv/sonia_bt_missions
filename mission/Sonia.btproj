@@ -93,5 +93,8 @@
         <SubTree ID="gate_solo" editable="true">
             <input_port name="choix_translation" default="true"/>
         </SubTree>
+        <SubTree ID="search_rot" editable="true">
+            <input_port name="object_class"/>
+        </SubTree>
     </TreeNodesModel>
 </root>

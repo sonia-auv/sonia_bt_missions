@@ -284,26 +284,6 @@
     </Sequence>
   </BehaviorTree>
 
-  <BehaviorTree ID="gate_search">
-    <Sequence>
-      <AiActivation Model="0"
-                    Bottom="false"
-                    Front="true"/>
-      <SubTree ID="coin_flip"/>
-      <SubTree ID="gate_solo"
-               choix_translation="true"/>
-      <SubTree ID="trickshot_legacy"/>
-      <SubTree ID="MoveSinglePose"
-               positionX="0.0"
-               positionY="0.0"
-               positionZ="-0.5"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"
-               frame="1.0"/>
-    </Sequence>
-  </BehaviorTree>
-
   <BehaviorTree ID="gate_solo">
     <Sequence>
       <RetryUntilSuccessful num_attempts="-1">
@@ -341,13 +321,30 @@
     </Sequence>
   </BehaviorTree>
 
+  <BehaviorTree ID="gate_step">
+    <Sequence>
+      <SubTree ID="coin_flip"/>
+      <SubTree ID="gate_solo"
+               choix_translation="true"/>
+      <SubTree ID="trickshot_legacy"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="-0.5"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
+    </Sequence>
+  </BehaviorTree>
+
   <BehaviorTree ID="run25">
     <Sequence>
-      <SubTree ID="gate"/>
-      <SubTree ID="slalom"/>
-      <SubTree ID="droppers"/>
-      <SubTree ID="torpidoes"/>
-      <SubTree ID="table"/>
+      <AiActivation Model="0"
+                    Bottom="false"
+                    Front="true"/>
+      <SubTree ID="gate_step"/>
+      <SubTree ID="torpedo_step"/>
     </Sequence>
   </BehaviorTree>
 
@@ -358,84 +355,92 @@
       </RetryUntilSuccessful>
       <Fallback>
         <AiFilter detected_object_array="{detect_array}"
-                  Max_frame="5"
-                  Max_depth="25"
                   Min_detection="1"
                   Confidence="0.600000"
-                  Object_class="{object_class}"
                   Max_size_output="1"
-                  Camera="1"/>
-        <SubTree ID="MoveSinglePose"
-                 positionX="0.0"
-                 positionY="0.0"
-                 positionZ="0.0"
-                 orientationX="0.0"
-                 orientationY="0.0"
-                 orientationZ="15"
-                 frame="1.0"/>
-      </Fallback>
-      <Fallback>
-        <AiFilter detected_object_array="{detect_array}"
-                  Max_frame="5"
                   Max_depth="25"
-                  Min_detection="1"
-                  Confidence="0.600000"
                   Object_class="{object_class}"
-                  Max_size_output="1"
-                  Camera="1"/>
-        <SubTree ID="MoveSinglePose"
-                 positionX="0.0"
-                 positionY="0.0"
-                 positionZ="0.0"
-                 orientationX="0.0"
-                 orientationY="0.0"
-                 orientationZ="15"
-                 frame="1.0"/>
-      </Fallback>
-      <Fallback>
-        <AiFilter detected_object_array="{detect_array}"
                   Max_frame="5"
-                  Max_depth="25"
-                  Min_detection="1"
-                  Confidence="0.600000"
-                  Object_class="{object_class}"
-                  Max_size_output="1"
                   Camera="1"/>
-        <SubTree ID="MoveSinglePose"
-                 positionX="0.0"
-                 positionY="0.0"
-                 positionZ="0.0"
-                 orientationX="0.0"
-                 orientationY="0.0"
-                 orientationZ="-45"
-                 frame="1.0"/>
+        <Sequence>
+          <SubTree ID="MoveSinglePose"
+                   positionX="0.0"
+                   positionY="0.0"
+                   positionZ="0.0"
+                   orientationX="0.0"
+                   orientationY="0.0"
+                   orientationZ="30"
+                   frame="1.0"/>
+          <Fallback>
+            <AiFilter detected_object_array="{detect_array}"
+                      Min_detection="1"
+                      Confidence="0.600000"
+                      Max_size_output="1"
+                      Max_depth="25"
+                      Object_class="{object_class}"
+                      Max_frame="5"
+                      Camera="1"/>
+            <Sequence>
+              <SubTree ID="MoveSinglePose"
+                       positionX="0.0"
+                       positionY="0.0"
+                       positionZ="0.0"
+                       orientationX="0.0"
+                       orientationY="0.0"
+                       orientationZ="30"
+                       frame="1.0"/>
+              <Fallback>
+                <AiFilter detected_object_array="{detect_array}"
+                          Min_detection="1"
+                          Confidence="0.600000"
+                          Max_size_output="1"
+                          Max_depth="25"
+                          Object_class="{object_class}"
+                          Max_frame="5"
+                          Camera="1"/>
+                <Sequence>
+                  <SubTree ID="MoveSinglePose"
+                           positionX="0.0"
+                           positionY="0.0"
+                           positionZ="0.0"
+                           orientationX="0.0"
+                           orientationY="0.0"
+                           orientationZ="-90"
+                           frame="1.0"/>
+                  <Fallback>
+                    <AiFilter detected_object_array="{detect_array}"
+                              Min_detection="1"
+                              Confidence="0.600000"
+                              Max_size_output="1"
+                              Max_depth="25"
+                              Object_class="{object_class}"
+                              Max_frame="5"
+                              Camera="1"/>
+                    <Sequence>
+                      <SubTree ID="MoveSinglePose"
+                               positionX="0.0"
+                               positionY="0.0"
+                               positionZ="0.0"
+                               orientationX="0.0"
+                               orientationY="0.0"
+                               orientationZ="-30"
+                               frame="1.0"/>
+                      <AiFilter detected_object_array=""
+                                Min_detection="1"
+                                Confidence="0.600000"
+                                Max_size_output="1"
+                                Max_depth="25"
+                                Object_class="{object_class}"
+                                Max_frame="5"
+                                Camera="1"/>
+                    </Sequence>
+                  </Fallback>
+                </Sequence>
+              </Fallback>
+            </Sequence>
+          </Fallback>
+        </Sequence>
       </Fallback>
-      <Fallback>
-        <AiFilter detected_object_array="{detect_array}"
-                  Max_frame="5"
-                  Max_depth="25"
-                  Min_detection="1"
-                  Confidence="0.600000"
-                  Object_class="{object_class}"
-                  Max_size_output="1"
-                  Camera="1"/>
-        <SubTree ID="MoveSinglePose"
-                 positionX="0.0"
-                 positionY="0.0"
-                 positionZ="0.0"
-                 orientationX="0.0"
-                 orientationY="0.0"
-                 orientationZ="-15"
-                 frame="1.0"/>
-      </Fallback>
-      <AiFilter detected_object_array=""
-                Max_frame="5"
-                Max_depth="25"
-                Min_detection="1"
-                Confidence="0.600000"
-                Object_class="{object_class}"
-                Max_size_output="1"
-                Camera="1"/>
     </Sequence>
   </BehaviorTree>
 
@@ -550,124 +555,23 @@
       <AiActivation Model="0"
                     Bottom="false"
                     Front="true"/>
-<<<<<<< Updated upstream
-      <SubTree ID="torpedo_solo"/>
+      <SubTree ID="search_rot"
+               object_class="torpedo-poster"/>
     </Sequence>
   </BehaviorTree>
 
-  <BehaviorTree ID="torpedo_solo">
+  <BehaviorTree ID="torpedo_step">
     <Sequence>
-      <RetryUntilSuccessful num_attempts="-1">
-        <MissionSwitchStatus/>
-      </RetryUntilSuccessful>
-      <Fallback>
-        <AiFilter detected_object_array="{detect_array}"
-                  Min_detection="1"
-                  Confidence="0.600000"
-                  Max_size_output="1"
-                  Max_depth="25"
-                  Object_class="torpedo-poster"
-                  Max_frame="5"
-                  Camera="1"/>
-        <Sequence>
-          <SubTree ID="MoveSinglePose"
-                   positionX="0.0"
-                   positionY="0.0"
-                   positionZ="0.0"
-                   orientationX="0.0"
-                   orientationY="0.0"
-                   orientationZ="30"
-                   frame="1.0"/>
-          <Fallback>
-            <AiFilter detected_object_array="{detect_array}"
-                      Min_detection="1"
-                      Confidence="0.600000"
-                      Max_size_output="1"
-                      Max_depth="25"
-                      Object_class="torpedo-poster"
-                      Max_frame="5"
-                      Camera="1"/>
-            <Sequence>
-              <SubTree ID="MoveSinglePose"
-                       positionX="0.0"
-                       positionY="0.0"
-                       positionZ="0.0"
-                       orientationX="0.0"
-                       orientationY="0.0"
-                       orientationZ="30"
-                       frame="1.0"/>
-              <Fallback>
-                <AiFilter detected_object_array="{detect_array}"
-                          Min_detection="1"
-                          Confidence="0.600000"
-                          Max_size_output="1"
-                          Max_depth="25"
-                          Object_class="torpedo-poster"
-                          Max_frame="5"
-                          Camera="1"/>
-                <Sequence>
-                  <SubTree ID="MoveSinglePose"
-                           positionX="0.0"
-                           positionY="0.0"
-                           positionZ="0.0"
-                           orientationX="0.0"
-                           orientationY="0.0"
-                           orientationZ="-90"
-                           frame="1.0"/>
-                  <Fallback>
-                    <AiFilter detected_object_array="{detect_array}"
-                              Min_detection="1"
-                              Confidence="0.600000"
-                              Max_size_output="1"
-                              Max_depth="25"
-                              Object_class="torpedo-poster"
-                              Max_frame="5"
-                              Camera="1"/>
-                    <Sequence>
-                      <SubTree ID="MoveSinglePose"
-                               positionX="0.0"
-                               positionY="0.0"
-                               positionZ="0.0"
-                               orientationX="0.0"
-                               orientationY="0.0"
-                               orientationZ="-30"
-                               frame="1.0"/>
-                      <AiFilter detected_object_array=""
-                                Min_detection="1"
-                                Confidence="0.600000"
-                                Max_size_output="1"
-                                Max_depth="25"
-                                Object_class="torpedo-poster"
-                                Max_frame="5"
-                                Camera="1"/>
-                    </Sequence>
-                  </Fallback>
-                </Sequence>
-              </Fallback>
-            </Sequence>
-          </Fallback>
-        </Sequence>
-      </Fallback>
-      <SubTree ID="MoveSinglePose"
-               positionX="0.0"
-               positionY="0.0"
-               positionZ="0.0"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="180"
-               frame="1.0"/>
-      <SubTree ID="MoveSinglePose"
-               positionX="0.0"
-               positionY="0.0"
-               positionZ="0.0"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="180"
-               frame="1.0"/>
-=======
       <SubTree ID="search_rot"
                object_class="torpedo-poster"/>
->>>>>>> Stashed changes
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
     </Sequence>
   </BehaviorTree>
 

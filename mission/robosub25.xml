@@ -4,16 +4,16 @@
   <BehaviorTree ID="MoveSinglePose">
     <Sequence>
       <InitializeTrajectory trajectory="{traj}"/>
-      <TrajectoryAppendPose trajectory="{traj}"
-                            precision="0"
+      <TrajectoryAppendPose precision="0"
                             speed="2"
-                            frame="{frame}"
                             orientationZ="{orientationZ}"
-                            longRotation="false"
-                            positionZ="{positionZ}"
-                            positionY="{positionY}"
                             orientationY="{orientationY}"
                             orientationX="{orientationX}"
+                            frame="{frame}"
+                            positionZ="{positionZ}"
+                            trajectory="{traj}"
+                            longRotation="false"
+                            positionY="{positionY}"
                             positionX="{positionX}"/>
       <SendTrajectory trajectory="{traj}"
                       interpolation="0"/>
@@ -26,22 +26,22 @@
       <RetryUntilSuccessful num_attempts="-1">
         <MissionSwitchStatus/>
       </RetryUntilSuccessful>
-      <AiActivation Model="0"
-                    Bottom="false"
+      <AiActivation Bottom="false"
+                    Model="0"
                     Front="true"/>
       <Repeat num_cycles="10">
         <Delay delay_msec="5000">
           <Fallback>
             <AiFilter detected_object_array="{detect_array}"
+                      Max_frame="10"
+                      Max_depth="200"
                       Min_detection="3"
                       Confidence="0.4"
-                      Max_size_output="5"
-                      Max_depth="200"
                       Object_class="gate_sawfish"
-                      Max_frame="10"
+                      Max_size_output="5"
                       Camera="1"/>
-            <AiActivation Model="0"
-                          Bottom="false"
+            <AiActivation Bottom="false"
+                          Model="0"
                           Front="false"/>
           </Fallback>
         </Delay>
@@ -53,8 +53,8 @@
     <Sequence>
       <Script code="dropper_offset_x:=0"/>
       <Script code="dropper_offset_y:=0"/>
-      <AiActivation Model="0"
-                    Bottom="false"
+      <AiActivation Bottom="false"
+                    Model="0"
                     Front="true"/>
       <RetryUntilSuccessful num_attempts="-1">
         <MissionSwitchStatus/>
@@ -75,12 +75,12 @@
                frame="1.0"/>
       <IfThenElse>
         <AiFilter detected_object_array="{arr}"
+                  Max_frame=""
+                  Max_depth="25"
                   Min_detection="1"
                   Confidence="0.600000"
-                  Max_size_output="1"
-                  Max_depth="25"
                   Object_class="bin"
-                  Max_frame=""
+                  Max_size_output="1"
                   Camera="1"/>
         <Sequence>
           <SubTree ID="bin_search_front"
@@ -118,29 +118,29 @@
 
   <BehaviorTree ID="bin_search_bottom">
     <Sequence>
-      <AiActivation Model="0"
-                    Bottom="true"
+      <AiActivation Bottom="true"
+                    Model="0"
                     Front="false"/>
       <RetryUntilSuccessful num_attempts="-1">
         <MissionSwitchStatus/>
       </RetryUntilSuccessful>
       <InitializeTrajectory trajectory="{traj}"/>
       <AiFilter detected_object_array="{detect_array}"
+                Max_frame="20"
+                Max_depth="200"
                 Min_detection="1"
                 Confidence="0.4"
-                Max_size_output="5"
-                Max_depth="200"
                 Object_class="{object_class}"
-                Max_frame="20"
+                Max_size_output="5"
                 Camera="0"/>
-      <Alignment lateral_m="{lateral_m}"
-                 alignement_by_translation="true"
-                 has_metric="{has_metric}"
-                 alpha="0.5"
-                 normalized_coords="0"
+      <Alignment has_metric="{has_metric}"
                  norm_x="{norm_x}"
                  bearing_rad="{bearing_rad}"
                  traj="{traj}"
+                 lateral_m="{lateral_m}"
+                 alignement_by_translation="true"
+                 alpha="0.5"
+                 normalized_coords="0"
                  detections="{detect_array}"/>
       <SendTrajectory trajectory="{traj}"
                       interpolation="0"/>
@@ -155,21 +155,21 @@
       </RetryUntilSuccessful>
       <InitializeTrajectory trajectory="{traj}"/>
       <AiFilter detected_object_array="{detect_array}"
+                Max_frame="20"
+                Max_depth="200"
                 Min_detection="1"
                 Confidence="0.4"
-                Max_size_output="5"
-                Max_depth="200"
                 Object_class="{object_class}"
-                Max_frame="20"
+                Max_size_output="5"
                 Camera="1"/>
-      <Alignment lateral_m="{lateral_m}"
-                 alignement_by_translation="{translation_choice}"
-                 has_metric="{has_metric}"
-                 alpha="0.5"
-                 normalized_coords="0"
+      <Alignment has_metric="{has_metric}"
                  norm_x="{norm_x}"
                  bearing_rad="{bearing_rad}"
                  traj="{traj}"
+                 lateral_m="{lateral_m}"
+                 alignement_by_translation="{translation_choice}"
+                 alpha="0.5"
+                 normalized_coords="0"
                  detections="{detect_array}"/>
       <SendTrajectory trajectory="{traj}"
                       interpolation="0"/>
@@ -258,28 +258,28 @@
         <MissionSwitchStatus/>
       </RetryUntilSuccessful>
       <SubTree ID="coin_flip"/>
-      <TrajectoryAppendPose trajectory=""
-                            precision="0"
+      <TrajectoryAppendPose precision="0"
                             speed="0"
-                            frame="1"
                             orientationZ="0.000000"
-                            longRotation="false"
-                            positionZ="0.000000"
-                            positionY="0.000000"
                             orientationY="0.000000"
                             orientationX="0.000000"
+                            frame="1"
+                            positionZ="0.000000"
+                            trajectory=""
+                            longRotation="false"
+                            positionY="0.000000"
                             positionX="1.5"/>
       <SubTree ID="trickshot"/>
-      <TrajectoryAppendPose trajectory=""
-                            precision="0"
+      <TrajectoryAppendPose precision="0"
                             speed="0"
-                            frame="1"
                             orientationZ="0.000000"
-                            longRotation="false"
-                            positionZ="0.000000"
-                            positionY="0.000000"
                             orientationY="0.000000"
                             orientationX="0.000000"
+                            frame="1"
+                            positionZ="0.000000"
+                            trajectory=""
+                            longRotation="false"
+                            positionY="0.000000"
                             positionX="1"/>
     </Sequence>
   </BehaviorTree>
@@ -291,27 +291,30 @@
       </RetryUntilSuccessful>
       <InitializeTrajectory trajectory="{traj}"/>
       <AiFilter detected_object_array="{detect_array}"
+                Max_frame="20"
+                Max_depth="200"
                 Min_detection="1"
                 Confidence="0.4"
-                Max_size_output="5"
-                Max_depth="200"
                 Object_class="gate-shark"
-                Max_frame="20"
+                Max_size_output="5"
                 Camera="1"/>
-      <Alignment lateral_m="{lateral_m}"
-                 alignement_by_translation="{choix_translation}"
-                 has_metric="{has_metric}"
-                 alpha="0.5"
-                 normalized_coords="0"
+      <Alignment has_metric="{has_metric}"
                  norm_x="{norm_x}"
                  bearing_rad="{bearing_rad}"
                  traj="{traj}"
+                 lateral_m="{lateral_m}"
+                 alignement_by_translation="{choix_translation}"
+                 alpha="0.5"
+                 normalized_coords="0"
                  detections="{detect_array}"/>
       <SendTrajectory trajectory="{traj}"
                       interpolation="0"/>
       <WaitTargetReached timeout="5"/>
+      <CheckDistance TranslationX="{dist_gate}"
+                     Object="gate-shark"/>
+      <Script code="dist_gate:=dist_gate+1.25"/>
       <SubTree ID="MoveSinglePose"
-               positionX="3.5"
+               positionX="{dist_gate}"
                positionY="0.0"
                positionZ="0.0"
                orientationX="0.0"
@@ -330,7 +333,7 @@
       <SubTree ID="MoveSinglePose"
                positionX="0.0"
                positionY="0.0"
-               positionZ="-0.5"
+               positionZ="-0.2"
                orientationX="0.0"
                orientationY="0.0"
                orientationZ="0.0"
@@ -340,11 +343,94 @@
 
   <BehaviorTree ID="run25">
     <Sequence>
-      <AiActivation Model="0"
-                    Bottom="false"
+      <AiActivation Bottom="false"
+                    Model="0"
                     Front="true"/>
       <SubTree ID="gate_step"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="-1"
+               positionZ="0.2"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
+      <SubTree ID="AlignSlalom"
+               direction="left"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="2.75"
+               positionY="0.0"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.25"
+               positionY="0.0"
+               positionZ="0.5"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
       <SubTree ID="torpedo_step"/>
+      <AiFilter detected_object_array="{detect_array}"
+                Max_frame="15"
+                Max_depth="30"
+                Min_detection="2"
+                Confidence="0.500000"
+                Object_class="torpedo-poster"
+                Max_size_output="1"
+                Camera="1"/>
+      <InitializeTrajectory trajectory="{traj}"/>
+      <Alignment has_metric=""
+                 norm_x=""
+                 bearing_rad=""
+                 traj="{traj}"
+                 lateral_m=""
+                 alignement_by_translation="true"
+                 alpha="0.5"
+                 normalized_coords="0"
+                 detections="{detect_array}"/>
+      <SendTrajectory trajectory="{traj}"
+                      interpolation="0"/>
+      <CheckDistance TranslationX="{distance_torp}"
+                     Object="torpedo-poster"/>
+      <Script code="distance_torp:=distance_torp-0.4"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="{distance_torp}"
+               positionY="0.0"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
+      <Repeat num_cycles="2">
+        <Delay delay_msec="2500">
+          <Torpedo side="port_side"/>
+        </Delay>
+      </Repeat>
+      <Repeat num_cycles="2">
+        <Delay delay_msec="2500">
+          <Torpedo side="starboard"/>
+        </Delay>
+      </Repeat>
+      <SubTree ID="MoveSinglePose"
+               positionX="6"
+               positionY="0.0"
+               positionZ="0.5"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="180"
+               frame="0"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="1"
+               positionY="0.0"
+               positionZ="0.5"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="180"
+               frame="0"/>
     </Sequence>
   </BehaviorTree>
 
@@ -355,12 +441,12 @@
       </RetryUntilSuccessful>
       <Fallback>
         <AiFilter detected_object_array="{detect_array}"
+                  Max_frame="5"
+                  Max_depth="25"
                   Min_detection="1"
                   Confidence="0.600000"
-                  Max_size_output="1"
-                  Max_depth="25"
                   Object_class="{object_class}"
-                  Max_frame="5"
+                  Max_size_output="1"
                   Camera="1"/>
         <Sequence>
           <SubTree ID="MoveSinglePose"
@@ -373,12 +459,12 @@
                    frame="1.0"/>
           <Fallback>
             <AiFilter detected_object_array="{detect_array}"
+                      Max_frame="5"
+                      Max_depth="25"
                       Min_detection="1"
                       Confidence="0.600000"
-                      Max_size_output="1"
-                      Max_depth="25"
                       Object_class="{object_class}"
-                      Max_frame="5"
+                      Max_size_output="1"
                       Camera="1"/>
             <Sequence>
               <SubTree ID="MoveSinglePose"
@@ -391,12 +477,12 @@
                        frame="1.0"/>
               <Fallback>
                 <AiFilter detected_object_array="{detect_array}"
+                          Max_frame="5"
+                          Max_depth="25"
                           Min_detection="1"
                           Confidence="0.600000"
-                          Max_size_output="1"
-                          Max_depth="25"
                           Object_class="{object_class}"
-                          Max_frame="5"
+                          Max_size_output="1"
                           Camera="1"/>
                 <Sequence>
                   <SubTree ID="MoveSinglePose"
@@ -409,12 +495,12 @@
                            frame="1.0"/>
                   <Fallback>
                     <AiFilter detected_object_array="{detect_array}"
+                              Max_frame="5"
+                              Max_depth="25"
                               Min_detection="1"
                               Confidence="0.600000"
-                              Max_size_output="1"
-                              Max_depth="25"
                               Object_class="{object_class}"
-                              Max_frame="5"
+                              Max_size_output="1"
                               Camera="1"/>
                     <Sequence>
                       <SubTree ID="MoveSinglePose"
@@ -426,12 +512,12 @@
                                orientationZ="-30"
                                frame="1.0"/>
                       <AiFilter detected_object_array=""
+                                Max_frame="5"
+                                Max_depth="25"
                                 Min_detection="1"
                                 Confidence="0.600000"
-                                Max_size_output="1"
-                                Max_depth="25"
                                 Object_class="{object_class}"
-                                Max_frame="5"
+                                Max_size_output="1"
                                 Camera="1"/>
                     </Sequence>
                   </Fallback>
@@ -526,8 +612,8 @@
 
   <BehaviorTree ID="test_gate_rot">
     <Sequence>
-      <AiActivation Model="0"
-                    Bottom="false"
+      <AiActivation Bottom="false"
+                    Model="0"
                     Front="true"/>
       <SubTree ID="gate_solo"
                choix_translation="false"/>
@@ -536,8 +622,8 @@
 
   <BehaviorTree ID="test_gate_trans">
     <Sequence>
-      <AiActivation Model="0"
-                    Bottom="false"
+      <AiActivation Bottom="false"
+                    Model="0"
                     Front="true"/>
       <Delay delay_msec="5000">
         <SubTree ID="gate_solo"
@@ -552,8 +638,8 @@
 
   <BehaviorTree ID="test_torpedo">
     <Sequence>
-      <AiActivation Model="0"
-                    Bottom="false"
+      <AiActivation Bottom="false"
+                    Model="0"
                     Front="true"/>
       <SubTree ID="search_rot"
                object_class="torpedo-poster"/>
@@ -567,12 +653,12 @@
       </RetryUntilSuccessful>
       <Fallback>
         <AiFilter detected_object_array="{detect_array}"
+                  Max_frame="5"
+                  Max_depth="25"
                   Min_detection="1"
                   Confidence="0.600000"
-                  Max_size_output="1"
-                  Max_depth="25"
                   Object_class="torpedo-poster"
-                  Max_frame="5"
+                  Max_size_output="1"
                   Camera="1"/>
         <Sequence>
           <SubTree ID="MoveSinglePose"
@@ -585,12 +671,12 @@
                    frame="1.0"/>
           <Fallback>
             <AiFilter detected_object_array="{detect_array}"
+                      Max_frame="5"
+                      Max_depth="25"
                       Min_detection="1"
                       Confidence="0.600000"
-                      Max_size_output="1"
-                      Max_depth="25"
                       Object_class="torpedo-poster"
-                      Max_frame="5"
+                      Max_size_output="1"
                       Camera="1"/>
             <Sequence>
               <SubTree ID="MoveSinglePose"
@@ -603,12 +689,12 @@
                        frame="1.0"/>
               <Fallback>
                 <AiFilter detected_object_array="{detect_array}"
+                          Max_frame="5"
+                          Max_depth="25"
                           Min_detection="1"
                           Confidence="0.600000"
-                          Max_size_output="1"
-                          Max_depth="25"
                           Object_class="torpedo-poster"
-                          Max_frame="5"
+                          Max_size_output="1"
                           Camera="1"/>
                 <Sequence>
                   <SubTree ID="MoveSinglePose"
@@ -621,12 +707,12 @@
                            frame="1.0"/>
                   <Fallback>
                     <AiFilter detected_object_array="{detect_array}"
+                              Max_frame="5"
+                              Max_depth="25"
                               Min_detection="1"
                               Confidence="0.600000"
-                              Max_size_output="1"
-                              Max_depth="25"
                               Object_class="torpedo-poster"
-                              Max_frame="5"
+                              Max_size_output="1"
                               Camera="1"/>
                     <Sequence>
                       <SubTree ID="MoveSinglePose"
@@ -638,12 +724,12 @@
                                orientationZ="-30"
                                frame="1.0"/>
                       <AiFilter detected_object_array=""
+                                Max_frame="5"
+                                Max_depth="25"
                                 Min_detection="1"
                                 Confidence="0.600000"
-                                Max_size_output="1"
-                                Max_depth="25"
                                 Object_class="torpedo-poster"
-                                Max_frame="5"
+                                Max_size_output="1"
                                 Camera="1"/>
                     </Sequence>
                   </Fallback>
@@ -653,24 +739,6 @@
           </Fallback>
         </Sequence>
       </Fallback>
-      <SubTree ID="MoveSinglePose"
-               positionX="0.0"
-               positionY="0.0"
-               positionZ="0.0"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="180"
-               frame="1.0"/>
-      <SubTree ID="MoveSinglePose"
-               positionX="0.0"
-               positionY="0.0"
-               positionZ="0.0"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="180"
-               frame="1.0"/>
-      <SubTree ID="search_rot"
-               object_class="torpedo-poster"/>
     </Sequence>
   </BehaviorTree>
 
@@ -719,22 +787,22 @@
       <RetryUntilSuccessful num_attempts="-1">
         <MissionSwitchStatus/>
       </RetryUntilSuccessful>
-      <AiActivation Model="0"
-                    Bottom="false"
+      <AiActivation Bottom="false"
+                    Model="0"
                     Front="true"/>
       <Repeat num_cycles="10">
         <Delay delay_msec="5000">
           <Sequence>
             <AiFilter detected_object_array="{detect_array}"
+                      Max_frame="20"
+                      Max_depth="200"
                       Min_detection="2"
                       Confidence="0.4"
-                      Max_size_output="5"
-                      Max_depth="200"
                       Object_class="torpedo-poster"
-                      Max_frame="20"
+                      Max_size_output="5"
                       Camera="1"/>
-            <AiActivation Model="0"
-                          Bottom="false"
+            <AiActivation Bottom="false"
+                          Model="0"
                           Front="false"/>
           </Sequence>
         </Delay>
@@ -756,82 +824,82 @@
                orientationZ="0.0"
                frame="4"/>
       <InitializeTrajectory trajectory="{traj}"/>
-      <TrajectoryAppendPose trajectory="{traj}"
-                            precision="0"
+      <TrajectoryAppendPose precision="0"
                             speed="2"
-                            frame="1"
                             orientationZ="0.000000"
-                            longRotation="false"
-                            positionZ="0.000000"
-                            positionY="0.000000"
                             orientationY="90"
                             orientationX="0"
-                            positionX="0.000000"/>
-      <TrajectoryAppendPose trajectory="{traj}"
-                            precision="0"
-                            speed="2"
                             frame="1"
-                            orientationZ="0"
-                            longRotation="false"
                             positionZ="0.000000"
+                            trajectory="{traj}"
+                            longRotation="false"
                             positionY="0.000000"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose precision="0"
+                            speed="2"
+                            orientationZ="0"
                             orientationY="0.000000"
                             orientationX="0180"
-                            positionX="0.000000"/>
-      <TrajectoryAppendPose trajectory="{traj}"
-                            precision="0"
-                            speed="2"
                             frame="1"
-                            orientationZ="180"
-                            longRotation="false"
                             positionZ="0.000000"
+                            trajectory="{traj}"
+                            longRotation="false"
                             positionY="0.000000"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose precision="0"
+                            speed="2"
+                            orientationZ="180"
                             orientationY="0.000000"
                             orientationX="0.000000"
-                            positionX="0.000000"/>
-      <TrajectoryAppendPose trajectory="{traj}"
-                            precision="0"
-                            speed="2"
                             frame="1"
-                            orientationZ="180"
-                            longRotation="false"
                             positionZ="0.000000"
+                            trajectory="{traj}"
+                            longRotation="false"
                             positionY="0.000000"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose precision="0"
+                            speed="2"
+                            orientationZ="180"
                             orientationY="0.000000"
                             orientationX="0"
-                            positionX="0.000000"/>
-      <TrajectoryAppendPose trajectory="{traj}"
-                            precision="0"
-                            speed="2"
                             frame="1"
-                            orientationZ="0"
-                            longRotation="false"
                             positionZ="0.000000"
+                            trajectory="{traj}"
+                            longRotation="false"
                             positionY="0.000000"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose precision="0"
+                            speed="2"
+                            orientationZ="0"
                             orientationY="-180"
                             orientationX="0"
-                            positionX="0.000000"/>
-      <TrajectoryAppendPose trajectory="{traj}"
-                            precision="0"
-                            speed="2"
                             frame="1"
-                            orientationZ="0"
-                            longRotation="false"
                             positionZ="0.000000"
+                            trajectory="{traj}"
+                            longRotation="false"
                             positionY="0.000000"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose precision="0"
+                            speed="2"
+                            orientationZ="0"
                             orientationY="-90"
                             orientationX="0"
-                            positionX="0.000000"/>
-      <TrajectoryAppendPose trajectory="{traj}"
-                            precision="0"
-                            speed="2"
                             frame="1"
-                            orientationZ="0"
-                            longRotation="false"
                             positionZ="0.000000"
+                            trajectory="{traj}"
+                            longRotation="false"
                             positionY="0.000000"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose precision="0"
+                            speed="2"
+                            orientationZ="0"
                             orientationY="0.000000"
                             orientationX="180"
+                            frame="1"
+                            positionZ="0.000000"
+                            trajectory="{traj}"
+                            longRotation="false"
+                            positionY="0.000000"
                             positionX="0.000000"/>
       <SendTrajectory trajectory="{traj}"
                       interpolation="0"/>
@@ -847,66 +915,66 @@
       <SubTree ID="MoveSinglePose"
                positionX="0.0"
                positionY="0.0"
-               positionZ="0.5"
+               positionZ="0.2"
                orientationX="0.0"
                orientationY="0.0"
                orientationZ="0.0"
                frame="1"/>
       <InitializeTrajectory trajectory="{traj}"/>
-      <TrajectoryAppendPose trajectory="{traj}"
-                            precision="0"
+      <TrajectoryAppendPose precision="0"
                             speed="0"
-                            frame="1"
                             orientationZ="0.000000"
-                            longRotation="false"
-                            positionZ="0.000000"
-                            positionY="0.000000"
                             orientationY="90"
                             orientationX="0.000000"
-                            positionX="0.000000"/>
-      <TrajectoryAppendPose trajectory="{traj}"
-                            precision="0"
-                            speed="0"
                             frame="1"
-                            orientationZ="0.000000"
-                            longRotation="false"
                             positionZ="0.000000"
+                            trajectory="{traj}"
+                            longRotation="false"
                             positionY="0.000000"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose precision="0"
+                            speed="0"
+                            orientationZ="0.000000"
                             orientationY="0.000000"
                             orientationX="180"
-                            positionX="0.000000"/>
-      <TrajectoryAppendPose trajectory="{traj}"
-                            precision="0"
-                            speed="0"
                             frame="1"
-                            orientationZ="0.000000"
-                            longRotation="false"
                             positionZ="0.000000"
+                            trajectory="{traj}"
+                            longRotation="false"
                             positionY="0.000000"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose precision="0"
+                            speed="0"
+                            orientationZ="0.000000"
                             orientationY="0.000000"
                             orientationX="180"
-                            positionX="0.000000"/>
-      <TrajectoryAppendPose trajectory="{traj}"
-                            precision="0"
-                            speed="0"
                             frame="1"
-                            orientationZ="0.000000"
-                            longRotation="false"
                             positionZ="0.000000"
+                            trajectory="{traj}"
+                            longRotation="false"
                             positionY="0.000000"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose precision="0"
+                            speed="0"
+                            orientationZ="0.000000"
                             orientationY="90"
                             orientationX="0.000000"
-                            positionX="0.000000"/>
-      <TrajectoryAppendPose trajectory="{traj}"
-                            precision="0"
-                            speed="0"
                             frame="1"
-                            orientationZ="0.000000"
-                            longRotation="false"
                             positionZ="0.000000"
+                            trajectory="{traj}"
+                            longRotation="false"
                             positionY="0.000000"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose precision="0"
+                            speed="0"
+                            orientationZ="0.000000"
                             orientationY="180"
                             orientationX="0.000000"
+                            frame="1"
+                            positionZ="0.000000"
+                            trajectory="{traj}"
+                            longRotation="false"
+                            positionY="0.000000"
                             positionX="0.000000"/>
       <SendTrajectory trajectory="{traj}"
                       interpolation="0"/>
@@ -917,12 +985,12 @@
   <!-- Description of Node Models (used by Groot) -->
   <TreeNodesModel>
     <Action ID="AiActivation">
-      <input_port name="Model"
-                  default="0"
-                  type="int">model choice, default = 0</input_port>
       <input_port name="Bottom"
                   default="false"
                   type="bool">true: ON, talse: OFF</input_port>
+      <input_port name="Model"
+                  default="0"
+                  type="int">model choice, default = 0</input_port>
       <input_port name="Front"
                   default="false"
                   type="bool">true: ON, talse: OFF</input_port>
@@ -930,42 +998,53 @@
     <Action ID="AiFilter">
       <output_port name="detected_object_array"
                    type="AiDetectionArray"/>
+      <input_port name="Max_frame"
+                  type="int">maximum allowed frames</input_port>
+      <input_port name="Max_depth"
+                  type="float">Maximum allowed depth</input_port>
       <input_port name="Min_detection"
                   type="int">minumum number of frames with at least one detection before sending results</input_port>
       <input_port name="Confidence"
                   default="0.600000"
                   type="float">Ai confidence</input_port>
-      <input_port name="Max_size_output"
-                  type="int">Max size of the output array</input_port>
-      <input_port name="Max_depth"
-                  type="float">Maximum allowed depth</input_port>
       <input_port name="Object_class"
                   type="std::string">Searched object</input_port>
-      <input_port name="Max_frame"
-                  type="int">maximum allowed frames</input_port>
+      <input_port name="Max_size_output"
+                  type="int">Max size of the output array</input_port>
       <input_port name="Camera"
                   default="1"
-                  type="int">1: Front, 0: Bottom</input_port>
+                  type="int">0: Front, 1: Bottom</input_port>
     </Action>
+    <SubTree ID="AlignSlalom"
+             editable="true">
+      <input_port name="direction"
+                  default="left">Side of slalom to move</input_port>
+    </SubTree>
     <Action ID="Alignment">
-      <output_port name="lateral_m"
-                   type="float"/>
-      <input_port name="alignement_by_translation"
-                  type="bool"/>
       <output_port name="has_metric"
                    type="int"/>
-      <input_port name="alpha"
-                  type="float"/>
-      <input_port name="normalized_coords"
-                  type="bool"/>
       <output_port name="norm_x"
                    type="float"/>
       <output_port name="bearing_rad"
                    type="float"/>
       <inout_port name="traj"
                   type="Trajectory"/>
+      <output_port name="lateral_m"
+                   type="float"/>
+      <input_port name="alignement_by_translation"
+                  type="bool"/>
+      <input_port name="alpha"
+                  type="float"/>
+      <input_port name="normalized_coords"
+                  type="bool"/>
       <input_port name="detections"
                   type="AiDetectionArray"/>
+    </Action>
+    <Action ID="CheckDistance">
+      <output_port name="TranslationX"
+                   type="float"/>
+      <input_port name="Object"
+                  type="sonia_common_ros2::msg::Detection_&lt;std::allocator&lt;void&gt; &gt;"/>
     </Action>
     <Action ID="ControlSetMode">
       <input_port name="set_mode"
@@ -1014,34 +1093,38 @@
       <input_port name="sensor"
                   type="std::string">imu or depth</input_port>
     </Action>
+    <Action ID="Torpedo">
+      <input_port name="side"
+                  type="std::string">port_side or starboard</input_port>
+    </Action>
     <Action ID="TrajectoryAppendPose">
-      <inout_port name="trajectory"
-                  type="Trajectory"/>
       <input_port name="precision"
                   default="0"
                   type="int"/>
       <input_port name="speed"
                   default="0"
                   type="int"/>
-      <input_port name="frame"
-                  default="1"
-                  type="int"/>
       <input_port name="orientationZ"
-                  default="0.000000"
-                  type="float"/>
-      <input_port name="longRotation"
-                  default="false"
-                  type="bool"/>
-      <input_port name="positionZ"
-                  default="0.000000"
-                  type="float"/>
-      <input_port name="positionY"
                   default="0.000000"
                   type="float"/>
       <input_port name="orientationY"
                   default="0.000000"
                   type="float"/>
       <input_port name="orientationX"
+                  default="0.000000"
+                  type="float"/>
+      <input_port name="frame"
+                  default="1"
+                  type="int"/>
+      <input_port name="positionZ"
+                  default="0.000000"
+                  type="float"/>
+      <inout_port name="trajectory"
+                  type="Trajectory"/>
+      <input_port name="longRotation"
+                  default="false"
+                  type="bool"/>
+      <input_port name="positionY"
                   default="0.000000"
                   type="float"/>
       <input_port name="positionX"

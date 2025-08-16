@@ -195,7 +195,7 @@
                   Min_detection="1"
                   Confidence="0.4"
                   Object_class="{object_class}"
-                  Max_size_output="5"
+                  Max_size_output="1"
                   Camera="1"/>
         <Alignment has_metric="{has_metric}"
                    norm_x="{norm_x}"

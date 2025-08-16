@@ -49,6 +49,134 @@
     </Sequence>
   </BehaviorTree>
 
+  <BehaviorTree ID="bin">
+    <Sequence>
+      <Script code="dropper_offset_x:=0"/>
+      <Script code="dropper_offset_y:=0"/>
+      <AiActivation Model="0"
+                    Bottom="false"
+                    Front="true"/>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
+      <SubTree ID="bin_search_front"
+               object_class="bin"
+               object_distance="{distance}"
+               translation_choice="false"
+               _autoremap="false"/>
+      <Script code="half_distance:=distance/2"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="{half_distance}"
+               positionY="0.0"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
+      <IfThenElse>
+        <AiFilter detected_object_array="{arr}"
+                  Min_detection="1"
+                  Confidence="0.600000"
+                  Max_size_output="1"
+                  Max_depth="25"
+                  Object_class="bin"
+                  Max_frame=""
+                  Camera="1"/>
+        <Sequence>
+          <SubTree ID="bin_search_front"
+                   object_class="bin"
+                   object_distance="{distance2}"
+                   translation_choice="false"
+                   _autoremap="false"/>
+          <SubTree ID="MoveSinglePose"
+                   positionX="{distance2}"
+                   positionY="0.0"
+                   positionZ="0.0"
+                   orientationX="0.0"
+                   orientationY="0.0"
+                   orientationZ="0.0"
+                   frame="1.0"/>
+        </Sequence>
+      </IfThenElse>
+      <SubTree ID="bin_search_bottom"
+               object_class="inner_bin"
+               y_found="{y_offset}"
+               x_found="{x_offset}"/>
+      <Script code="x_movement := x_offset + dropper_offset_x"/>
+      <Script code="y_movement := y_offset + dropper_offset_y"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="x_movement"
+               positionY="y_movement"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
+      <Dropper side=""/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="bin_search_bottom">
+    <Sequence>
+      <AiActivation Model="0"
+                    Bottom="true"
+                    Front="false"/>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
+      <InitializeTrajectory trajectory="{traj}"/>
+      <AiFilter detected_object_array="{detect_array}"
+                Min_detection="1"
+                Confidence="0.4"
+                Max_size_output="5"
+                Max_depth="200"
+                Object_class="{object_class}"
+                Max_frame="20"
+                Camera="1"/>
+      <Alignment lateral_m="{lateral_m}"
+                 alignement_by_translation="true"
+                 has_metric="{has_metric}"
+                 alpha="0.5"
+                 normalized_coords="0"
+                 norm_x="{norm_x}"
+                 bearing_rad="{bearing_rad}"
+                 traj="{traj}"
+                 detections="{detect_array}"/>
+      <SendTrajectory trajectory="{traj}"
+                      interpolation="0"/>
+      <WaitTargetReached timeout="5"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="bin_search_front">
+    <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
+      <InitializeTrajectory trajectory="{traj}"/>
+      <AiFilter detected_object_array="{detect_array}"
+                Min_detection="1"
+                Confidence="0.4"
+                Max_size_output="5"
+                Max_depth="200"
+                Object_class="{object_class}"
+                Max_frame="20"
+                Camera="1"/>
+      <Alignment lateral_m="{lateral_m}"
+                 alignement_by_translation="translation_choice"
+                 has_metric="{has_metric}"
+                 alpha="0.5"
+                 normalized_coords="0"
+                 norm_x="{norm_x}"
+                 bearing_rad="{bearing_rad}"
+                 traj="{traj}"
+                 detections="{detect_array}"/>
+      <SendTrajectory trajectory="{traj}"
+                      interpolation="0"/>
+      <WaitTargetReached timeout="5"/>
+    </Sequence>
+  </BehaviorTree>
+
   <BehaviorTree ID="boot_sequence">
     <Sequence>
       <RetryUntilSuccessful num_attempts="-1">
@@ -748,6 +876,10 @@
                   default="false"
                   type="bool"/>
     </Action>
+    <Action ID="Dropper">
+      <input_port name="side"
+                  type="std::string">port_side or starboard</input_port>
+    </Action>
     <Action ID="EnableDisableDVL">
       <input_port name="dvl_input"
                   default="false"
@@ -825,6 +957,17 @@
                   default="5"
                   type="int"/>
     </Action>
+    <SubTree ID="bin_search_bottom"
+             editable="true">
+      <input_port name="object_class"/>
+      <output_port name="y_found"/>
+      <output_port name="x_found"/>
+    </SubTree>
+    <SubTree ID="bin_search_front"
+             editable="true">
+      <input_port name="object_class"/>
+      <output_port name="object_distance"/>
+    </SubTree>
     <SubTree ID="gate_solo"
              editable="true">
       <input_port name="choix_translation"

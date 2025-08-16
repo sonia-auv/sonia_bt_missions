@@ -206,6 +206,16 @@
                    alpha="0.5"
                    normalized_coords="0"
                    detections="{detect_array}"/>
+        <CheckDistance TranslationX="{translationX}"
+                       Object="{detect_array}"/>
+        <SubTree ID="MoveSinglePose"
+                 positionX="translationX"
+                 positionY="0.0"
+                 positionZ="0.0"
+                 orientationX="0.0"
+                 orientationY="0.0"
+                 orientationZ="0.0"
+                 frame="1.0"/>
       </Sequence>
     </Repeat>
   </BehaviorTree>
@@ -251,6 +261,12 @@
                   type="bool"/>
       <input_port name="detections"
                   type="AiDetectionArray"/>
+    </Action>
+    <Action ID="CheckDistance">
+      <output_port name="TranslationX"
+                   type="float"/>
+      <input_port name="Object"
+                  type="sonia_common_ros2::msg::Detection_&lt;std::allocator&lt;void&gt; &gt;"/>
     </Action>
     <Action ID="ControlSetMode">
       <input_port name="set_mode"

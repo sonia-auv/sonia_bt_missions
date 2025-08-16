@@ -550,7 +550,6 @@
       <AiActivation Model="0"
                     Bottom="false"
                     Front="true"/>
-<<<<<<< Updated upstream
       <SubTree ID="torpedo_solo"/>
     </Sequence>
   </BehaviorTree>
@@ -664,10 +663,8 @@
                orientationY="0.0"
                orientationZ="180"
                frame="1.0"/>
-=======
       <SubTree ID="search_rot"
                object_class="torpedo-poster"/>
->>>>>>> Stashed changes
     </Sequence>
   </BehaviorTree>
 

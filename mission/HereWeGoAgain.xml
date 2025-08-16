@@ -12,15 +12,7 @@
                orientationZ="0.0"
                frame="1.0"/>
       <SubTree ID="MoveSinglePose"
-               positionX="3.27"
-               positionY="0.0"
-               positionZ="0.0"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"
-               frame="1.0"/>
-      <SubTree ID="MoveSinglePose"
-               positionX="1"
+               positionX="4.27"
                positionY="0.0"
                positionZ="0.0"
                orientationX="0.0"
@@ -221,8 +213,24 @@
                _autoremap="false"/>
       <SubTree ID="DeadSlalom"/>
       <SubTree ID="DeadTorp"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="0.4"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
       <Torpedo side="port_side"/>
       <Torpedo side="port_side"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="-0.4"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
       <SubTree ID="DeadTable"/>
       <SubTree ID="DeadHome"/>
     </Sequence>
@@ -230,6 +238,14 @@
 
   <BehaviorTree ID="StyleShot">
     <Sequence>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="0.3"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
       <SubTree ID="MoveSinglePose"
                positionX="0.0"
                positionY="0.0"
@@ -268,6 +284,14 @@
                positionZ="0.0"
                orientationX="0.0"
                orientationY="180"
+               orientationZ="0.0"
+               frame="1.0"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="-0.3"
+               orientationX="0.0"
+               orientationY="0.0"
                orientationZ="0.0"
                frame="1.0"/>
     </Sequence>

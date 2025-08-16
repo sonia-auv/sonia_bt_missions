@@ -158,7 +158,21 @@
 
   <BehaviorTree ID="gate_search">
     <Sequence>
-      <SubTree ID="test_gate_rot"/>
+      <AiActivation Model="0"
+                    Bottom="false"
+                    Front="true"/>
+      <SubTree ID="coin_flip"/>
+      <SubTree ID="gate_solo"
+               choix_translation="true"/>
+      <SubTree ID="trickshot_legacy"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="-0.5"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
     </Sequence>
   </BehaviorTree>
 
@@ -188,14 +202,6 @@
       <SendTrajectory trajectory="{traj}"
                       interpolation="0"/>
       <WaitTargetReached timeout="5"/>
-      <SubTree ID="MoveSinglePose"
-               positionX="0.0"
-               positionY="0.0"
-               positionZ="0.5"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"
-               frame="1.0"/>
       <SubTree ID="MoveSinglePose"
                positionX="2.5"
                positionY="0.0"
@@ -312,9 +318,15 @@
       <AiActivation Model="0"
                     Bottom="false"
                     Front="true"/>
-      <SubTree ID="gate_solo"
-               choix_translation="true"/>
+      <Delay delay_msec="5000">
+        <SubTree ID="gate_solo"
+                 choix_translation="true"/>
+      </Delay>
     </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="test_slalom">
+    <AlwaysSuccess/>
   </BehaviorTree>
 
   <BehaviorTree ID="test_torpedo">
@@ -611,7 +623,7 @@
       <SubTree ID="MoveSinglePose"
                positionX="0.0"
                positionY="0.0"
-               positionZ="1"
+               positionZ="0.5"
                orientationX="0.0"
                orientationY="0.0"
                orientationZ="0.0"

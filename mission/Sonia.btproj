@@ -21,6 +21,9 @@
             <input_port name="Max_frame" type="int">maximum allowed frames</input_port>
             <input_port name="Camera" default="1" type="int">1: Front, 0: Bottom</input_port>
         </Action>
+        <SubTree ID="AlignSlalom" editable="true">
+            <input_port name="direction" default="left">Side of slalom to move</input_port>
+        </SubTree>
         <Action ID="Alignment">
             <output_port name="lateral_m" type="float"/>
             <input_port name="alignement_by_translation" type="bool"/>
@@ -90,6 +93,15 @@
         <Action ID="WaitTargetReached">
             <input_port name="timeout" default="5" type="int"/>
         </Action>
+        <SubTree ID="bin_search_bottom" editable="true">
+            <input_port name="object_class"/>
+            <output_port name="y_found"/>
+            <output_port name="x_found"/>
+        </SubTree>
+        <SubTree ID="bin_search_front" editable="true">
+            <input_port name="object_class"/>
+            <output_port name="object_distance"/>
+        </SubTree>
         <SubTree ID="gate_solo" editable="true">
             <input_port name="choix_translation" default="true"/>
         </SubTree>

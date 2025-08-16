@@ -112,7 +112,7 @@
                orientationY="0.0"
                orientationZ="0.0"
                frame="1.0"/>
-      <Dropper side=""/>
+      <Dropper side="port_side"/>
     </Sequence>
   </BehaviorTree>
 
@@ -132,7 +132,7 @@
                 Max_depth="200"
                 Object_class="{object_class}"
                 Max_frame="20"
-                Camera="1"/>
+                Camera="0"/>
       <Alignment lateral_m="{lateral_m}"
                  alignement_by_translation="true"
                  has_metric="{has_metric}"
@@ -163,7 +163,7 @@
                 Max_frame="20"
                 Camera="1"/>
       <Alignment lateral_m="{lateral_m}"
-                 alignement_by_translation="translation_choice"
+                 alignement_by_translation="{translation_choice}"
                  has_metric="{has_metric}"
                  alpha="0.5"
                  normalized_coords="0"

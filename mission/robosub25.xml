@@ -989,23 +989,17 @@
                   default="left">Side of slalom to move</input_port>
     </SubTree>
     <Action ID="Alignment">
-      <output_port name="has_metric"
-                   type="int"/>
-      <output_port name="norm_x"
+      <output_port name="TranslationY"
                    type="float"/>
       <inout_port name="traj"
                   type="Trajectory"/>
       <output_port name="RotationZ"
                    type="float"/>
-      <inout_port name="traj"
-                  type="Trajectory"/>
-      <output_port name="lateral_m"
+      <output_port name="Camera_front"
+                   type="bool"/>
+      <output_port name="TranslationX_CamBottom"
                    type="float"/>
       <input_port name="alignement_by_translation"
-                  type="bool"/>
-      <input_port name="alpha"
-                  type="float"/>
-      <input_port name="normalized_coords"
                   type="bool"/>
       <input_port name="detections"
                   type="AiDetectionArray"/>

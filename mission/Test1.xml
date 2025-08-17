@@ -23,7 +23,6 @@
         <CheckBoundingBox New_width="{New_width}"
                           New_width_growth="{New_width_growth}"
                           Width_growing="{Width_growing}"
-                          Current_width=""
                           Object="{slalom_det_arr}"
                           Previous_width="{Previous_width}"/>
         <AlwaysSuccess/>
@@ -59,7 +58,6 @@
           <CheckBoundingBox New_width="{New_width}"
                             New_width_growth="{New_width_growth}"
                             Width_growing="{Width_growing}"
-                            Current_width=""
                             Object="{slalom_det_arr}"
                             Previous_width="{Previous_width}"/>
           <SubTree ID="MoveSinglePose"
@@ -291,8 +289,6 @@
                   type="bool"/>
       <input_port name="Width_growing"
                   type="bool"/>
-      <input_port name="Current_width"
-                  type="int"/>
       <input_port name="Object"
                   type="AiDetectionArray"/>
       <input_port name="Previous_width"

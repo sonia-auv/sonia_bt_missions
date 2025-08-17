@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root BTCPP_format="4" project_name="Project">
-    <include path="mission/Test1.xml"/>
     <include path="mission/robosub25.xml"/>
     <!-- Description of Node Models (used by Groot) -->
     <TreeNodesModel>
@@ -56,15 +55,15 @@
             <input_port name="orientationZ" default="0.0"/>
             <input_port name="frame" default="1.0"/>
         </SubTree>
+        <SubTree ID="PositionAbsolutAngle" editable="true">
+            <input_port name="angle"/>
+        </SubTree>
         <Action ID="SendTrajectory">
             <input_port name="trajectory" type="Trajectory"/>
             <input_port name="interpolation" default="0" type="int"/>
         </Action>
         <Action ID="Tare">
             <input_port name="sensor" type="std::string">imu or depth</input_port>
-        </Action>
-        <Action ID="Torpedo">
-            <input_port name="side" type="std::string">port_side or starboard</input_port>
         </Action>
         <Action ID="TrajectoryAppendPose">
             <inout_port name="trajectory" type="Trajectory"/>
@@ -82,12 +81,12 @@
         <Action ID="WaitTargetReached">
             <input_port name="timeout" default="5" type="int"/>
         </Action>
-        <SubTree ID="bin_search_bottom" editable="true">
+        <SubTree ID="bin_position_bottom" editable="true">
             <input_port name="object_class"/>
             <output_port name="y_found"/>
             <output_port name="x_found"/>
         </SubTree>
-        <SubTree ID="bin_search_front" editable="true">
+        <SubTree ID="bin_position_front" editable="true">
             <input_port name="object_class"/>
             <output_port name="object_distance"/>
         </SubTree>

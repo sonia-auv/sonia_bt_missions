@@ -12,23 +12,12 @@
                 Object_class="red-slalom"
                 Max_size_output="1"
                 Camera="1"/>
-<<<<<<< Updated upstream
-      <Alignment lateral_m="{lat_trans}"
-                 alignement_by_translation="true"
-                 has_metric=""
-                 alpha="0.5"
-                 normalized_coords="0"
-                 norm_x=""
-                 bearing_rad=""
-                 traj="{slalom_traj}"
-=======
       <Alignment TranslationY="{lat_trans}"
                  traj="{slalom_traj}"
                  RotationZ="{RotationZ}"
                  Camera_front="false"
                  TranslationX_CamBottom="{TranslationX_CamBottom}"
                  alignement_by_translation="true"
->>>>>>> Stashed changes
                  detections="{slalom_det_arr}"/>
       <SendTrajectory trajectory="{slalom_traj}"
                       interpolation="0"/>
@@ -372,9 +361,6 @@
                   type="int">1: Front, 0: Bottom</input_port>
     </Action>
     <Action ID="Alignment">
-<<<<<<< Updated upstream
-      <output_port name="lateral_m"
-=======
       <output_port name="TranslationY"
                    type="float"/>
       <inout_port name="traj"
@@ -384,7 +370,6 @@
       <input_port name="Camera_front"
                   type="bool"/>
       <output_port name="TranslationX_CamBottom"
->>>>>>> Stashed changes
                    type="float"/>
       <input_port name="alignement_by_translation"
                   type="bool"/>

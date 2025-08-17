@@ -74,23 +74,12 @@
                 Object_class="{object_class}"
                 Max_size_output="1"
                 Camera="0"/>
-<<<<<<< Updated upstream
-      <Alignment has_metric="{has_metric}"
-                 norm_x="{norm_x}"
-                 bearing_rad="{bearing_rad}"
-                 traj="{traj}"
-                 lateral_m="{lateral_m}"
-                 alignement_by_translation="true"
-                 alpha="0.5"
-                 normalized_coords="0"
-=======
       <Alignment TranslationY="{y_found}"
                  traj="{traj}"
                  RotationZ="{RotationZ}"
                  Camera_front="false"
                  TranslationX_CamBottom="{x_found}"
                  alignement_by_translation="true"
->>>>>>> Stashed changes
                  detections="{detect_array}"/>
       <SendTrajectory trajectory="{traj}"
                       interpolation="0"/>
@@ -112,23 +101,12 @@
                 Object_class="{object_class}"
                 Max_size_output="5"
                 Camera="1"/>
-<<<<<<< Updated upstream
-      <Alignment has_metric="{has_metric}"
-                 norm_x="{norm_x}"
-                 bearing_rad="{bearing_rad}"
-                 traj="{traj}"
-                 lateral_m="{lateral_m}"
-                 alignement_by_translation="{translation_choice}"
-                 alpha="0.5"
-                 normalized_coords="0"
-=======
       <Alignment TranslationY="{TranslationY}"
                  traj="{traj}"
                  RotationZ="{RotationZ}"
                  Camera_front="false"
                  TranslationX_CamBottom="{TranslationX_CamBottom}"
                  alignement_by_translation="{translation_choice}"
->>>>>>> Stashed changes
                  detections="{detect_array}"/>
       <SendTrajectory trajectory="{traj}"
                       interpolation="0"/>
@@ -329,23 +307,12 @@
                 Object_class="gate-shark"
                 Max_size_output="1"
                 Camera="1"/>
-<<<<<<< Updated upstream
-      <Alignment has_metric="{has_metric}"
-                 norm_x="{norm_x}"
-                 bearing_rad="{bearing_rad}"
-                 traj="{traj}"
-                 lateral_m="{lateral_m}"
-                 alignement_by_translation="{choix_translation}"
-                 alpha="0.5"
-                 normalized_coords="0"
-=======
       <Alignment TranslationY="{TranslationY}"
                  traj="{traj}"
                  RotationZ="{RotationZ}"
                  Camera_front="false"
                  TranslationX_CamBottom="{TranslationX_CamBottom}"
                  alignement_by_translation="true"
->>>>>>> Stashed changes
                  detections="{detect_array}"/>
       <SendTrajectory trajectory="{traj}"
                       interpolation="0"/>
@@ -1026,13 +993,9 @@
                    type="int"/>
       <output_port name="norm_x"
                    type="float"/>
-<<<<<<< Updated upstream
-      <output_port name="bearing_rad"
-=======
       <inout_port name="traj"
                   type="Trajectory"/>
       <output_port name="RotationZ"
->>>>>>> Stashed changes
                    type="float"/>
       <inout_port name="traj"
                   type="Trajectory"/>

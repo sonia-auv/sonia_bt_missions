@@ -8,32 +8,30 @@
     <!-- Description of Node Models (used by Groot) -->
     <TreeNodesModel>
         <Action ID="AiActivation">
-            <input_port name="Model" default="0" type="int">model choice, default = 0</input_port>
             <input_port name="Bottom" default="false" type="bool">true: ON, talse: OFF</input_port>
+            <input_port name="Model" default="0" type="int">model choice, default = 0</input_port>
             <input_port name="Front" default="false" type="bool">true: ON, talse: OFF</input_port>
         </Action>
         <Action ID="AiFilter">
             <output_port name="detected_object_array" type="AiDetectionArray"/>
+            <input_port name="Max_frame" type="int">maximum allowed frames</input_port>
+            <input_port name="Max_depth" type="float">Maximum allowed depth</input_port>
             <input_port name="Min_detection" type="int">minumum number of frames with at least one detection before sending results</input_port>
             <input_port name="Confidence" default="0.600000" type="float">Ai confidence</input_port>
-            <input_port name="Max_size_output" type="int">Max size of the output array</input_port>
-            <input_port name="Max_depth" type="float">Maximum allowed depth</input_port>
             <input_port name="Object_class" type="std::string">Searched object</input_port>
-            <input_port name="Max_frame" type="int">maximum allowed frames</input_port>
+            <input_port name="Max_size_output" type="int">Max size of the output array</input_port>
             <input_port name="Camera" default="1" type="int">1: Front, 0: Bottom</input_port>
         </Action>
         <SubTree ID="AlignSlalom" editable="true">
             <input_port name="direction" default="left">Side of slalom to move</input_port>
         </SubTree>
         <Action ID="Alignment">
-            <output_port name="has_metric" type="int"/>
-            <output_port name="norm_x" type="float"/>
-            <output_port name="bearing_rad" type="float"/>
+            <output_port name="TranslationY" type="float"/>
+            <output_port name="RotationZ" type="float"/>
+            <input_port name="Camera_front" type="bool"/>
             <inout_port name="traj" type="Trajectory"/>
-            <output_port name="lateral_m" type="float"/>
+            <output_port name="TranslationX_CamBottom" type="float"/>
             <input_port name="alignement_by_translation" type="bool"/>
-            <input_port name="alpha" type="float"/>
-            <input_port name="normalized_coords" type="bool"/>
             <input_port name="detections" type="AiDetectionArray"/>
         </Action>
         <Action ID="CheckDistance">
@@ -83,16 +81,16 @@
             <input_port name="side" type="std::string">port_side or starboard</input_port>
         </Action>
         <Action ID="TrajectoryAppendPose">
-            <inout_port name="trajectory" type="Trajectory"/>
             <input_port name="precision" default="0" type="int"/>
             <input_port name="speed" default="0" type="int"/>
-            <input_port name="frame" default="1" type="int"/>
             <input_port name="orientationZ" default="0.000000" type="float"/>
-            <input_port name="longRotation" default="false" type="bool"/>
-            <input_port name="positionZ" default="0.000000" type="float"/>
-            <input_port name="positionY" default="0.000000" type="float"/>
             <input_port name="orientationY" default="0.000000" type="float"/>
             <input_port name="orientationX" default="0.000000" type="float"/>
+            <input_port name="frame" default="1" type="int"/>
+            <input_port name="positionZ" default="0.000000" type="float"/>
+            <inout_port name="trajectory" type="Trajectory"/>
+            <input_port name="longRotation" default="false" type="bool"/>
+            <input_port name="positionY" default="0.000000" type="float"/>
             <input_port name="positionX" default="0.000000" type="float"/>
         </Action>
         <Action ID="WaitTargetReached">

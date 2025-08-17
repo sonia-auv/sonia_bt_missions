@@ -14,13 +14,13 @@
         </Action>
         <Action ID="AiFilter">
             <output_port name="detected_object_array" type="AiDetectionArray"/>
+            <input_port name="Max_frame" type="int">maximum allowed frames</input_port>
+            <input_port name="Max_depth" type="float">Maximum allowed depth</input_port>
             <input_port name="Min_detection" type="int">minumum number of frames with at least one detection before sending results</input_port>
             <input_port name="Confidence" default="0.600000" type="float">Ai confidence</input_port>
-            <input_port name="Max_size_output" type="int">Max size of the output array</input_port>
-            <input_port name="Max_depth" type="float">Maximum allowed depth</input_port>
             <input_port name="Object_class" type="std::string">Searched object</input_port>
-            <input_port name="Max_frame" type="int">maximum allowed frames</input_port>
-            <input_port name="Camera" default="1" type="int">1: Front, 0: Bottom</input_port>
+            <input_port name="Max_size_output" type="int">Max size of the output array</input_port>
+            <input_port name="Camera" default="1" type="int">0: Front, 1: Bottom</input_port>
         </Action>
         <SubTree ID="AlignSlalom" editable="true">
             <input_port name="direction" default="left">Side of slalom to move</input_port>
@@ -69,6 +69,9 @@
             <input_port name="orientationZ" default="0.0"/>
             <input_port name="frame" default="1.0"/>
         </SubTree>
+        <SubTree ID="PositionAbsolutAngle" editable="true">
+            <input_port name="angle"/>
+        </SubTree>
         <Action ID="SendTrajectory">
             <input_port name="trajectory" type="Trajectory"/>
             <input_port name="interpolation" default="0" type="int"/>
@@ -98,6 +101,15 @@
         <Action ID="WaitTargetReached">
             <input_port name="timeout" default="5" type="int"/>
         </Action>
+        <SubTree ID="bin_position_bottom" editable="true">
+            <input_port name="object_class"/>
+            <output_port name="y_found"/>
+            <output_port name="x_found"/>
+        </SubTree>
+        <SubTree ID="bin_position_front" editable="true">
+            <input_port name="object_class"/>
+            <output_port name="object_distance"/>
+        </SubTree>
         <SubTree ID="bin_search_bottom" editable="true">
             <input_port name="object_class"/>
             <output_port name="y_found"/>

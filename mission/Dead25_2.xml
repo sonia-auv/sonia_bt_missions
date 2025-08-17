@@ -27,7 +27,13 @@
                orientationY="0.0"
                orientationZ="0.0"
                frame="1.0"/>
-      <Dropper side="port_side"/>
+      <Repeat num_cycles="2">
+        <ForceSuccess>
+          <Delay delay_msec="5000">
+            <Dropper side="port_side"/>
+          </Delay>
+        </ForceSuccess>
+      </Repeat>
       <SubTree ID="MoveSinglePose"
                positionX="0.22"
                positionY="-0.1"
@@ -127,14 +133,16 @@
       <Delay delay_msec="3000">
         <ControlSetMode set_mode="true"/>
       </Delay>
-      <SubTree ID="MoveSinglePose"
-               positionX="0.0"
-               positionY="0.0"
-               positionZ="0.7"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"
-               frame="1.0"/>
+      <Delay delay_msec="5000">
+        <SubTree ID="MoveSinglePose"
+                 positionX="0.0"
+                 positionY="0.0"
+                 positionZ="0.7"
+                 orientationX="0.0"
+                 orientationY="0.0"
+                 orientationZ="0.0"
+                 frame="1.0"/>
+      </Delay>
     </Sequence>
   </BehaviorTree>
 
@@ -209,7 +217,13 @@
                orientationY="0.0"
                orientationZ="0.0"
                frame="1.0"/>
-      <Torpedo side="port_side"/>
+      <Repeat num_cycles="2">
+        <ForceSuccess>
+          <Delay delay_msec="5000">
+            <Torpedo side="port_side"/>
+          </Delay>
+        </ForceSuccess>
+      </Repeat>
       <SubTree ID="MoveSinglePose"
                positionX="0.0"
                positionY="-0.17"
@@ -218,7 +232,13 @@
                orientationY="0.0"
                orientationZ="0.0"
                frame="1.0"/>
-      <Torpedo side="starboard"/>
+      <Repeat num_cycles="2">
+        <ForceSuccess>
+          <Delay delay_msec="5000">
+            <Torpedo side="starboard"/>
+          </Delay>
+        </ForceSuccess>
+      </Repeat>
       <SubTree ID="MoveSinglePose"
                positionX="0.0"
                positionY="0.1"
@@ -277,7 +297,23 @@
                orientationY="0.0"
                orientationZ="0.0"
                frame="1.0"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="-0.5"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
       <SubTree ID="DeadSlalom2"/>
+      <SubTree ID="MoveSinglePose"
+               positionX="0.0"
+               positionY="0.5"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"
+               frame="1.0"/>
       <SubTree ID="DeadBin2"/>
       <SubTree ID="DeadTorpedo2"/>
       <SubTree ID="DeadOcto2"/>

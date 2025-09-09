@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root BTCPP_format="4" project_name="Project">
+    <include path="PoolTest.xml"/>
     <include path="Template.xml"/>
+    <include path="robosub26mission.xml"/>
     <!-- Description of Node Models (used by Groot) -->
     <TreeNodesModel>
         <Action ID="AiActivation">
@@ -55,6 +57,22 @@
             <output_port name="trajectory" type="Trajectory"/>
         </Action>
         <Condition ID="MissionSwitchStatus"/>
+        <SubTree ID="MoveSinglePose" editable="true">
+            <input_port name="frame" default="1.0">Submarine reference type</input_port>
+            <input_port name="positionX" default="0.0">x value to go</input_port>
+            <input_port name="positionY" default="0.0">y value to go</input_port>
+            <input_port name="positionZ" default="0.0">z value to go</input_port>
+            <input_port name="orientationX" default="0.0">z orientation to go</input_port>
+            <input_port name="orientationY" default="0.0">y orientation to go</input_port>
+            <input_port name="orientationZ" default="0.0">x orientation to go</input_port>
+        </SubTree>
+        <SubTree ID="RotateToAbsoluteAngle" editable="true">
+            <input_port name="Angle" default="0">Angle to position the sub with the pool</input_port>
+        </SubTree>
+        <SubTree ID="SearchMissionByRotation" editable="true">
+            <input_port name="StartingAngle" default="0">Angle to give to the sub at the begining of the searching procedure</input_port>
+            <input_port name="Object">The name of the object to search</input_port>
+        </SubTree>
         <Action ID="SendTrajectory">
             <input_port name="trajectory" type="Trajectory"/>
             <input_port name="interpolation" default="0" type="int"/>

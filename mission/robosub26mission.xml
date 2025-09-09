@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4"
+      main_tree_to_execute="Run26">
+  <BehaviorTree ID="Bin">
+    <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
+      <InitializeTrajectory trajectory="{traj}"/>
+      <AiFilter detected_object_array="{detect_array}"
+                Min_detection="1"
+                Confidence="0.6"
+                Max_size_output="1"
+                Max_depth="200"
+                Object_class="gate-shark"
+                Max_frame="20"
+                Camera="1"/>
+      <Alignment TranslationY="{TranslationY}"
+                 RotationZ="{RotationZ}"
+                 traj="{traj}"
+                 Camera_front="false"
+                 alignement_by_translation="true"
+                 TranslationX_CamBottom="{TranslationX_CamBottom}"
+                 detections="{detect_array}"/>
+      <SendTrajectory trajectory="{traj}"
+                      interpolation="0"/>
+      <WaitTargetReached timeout="1"/>
+      <AiFilter detected_object_array="{detect_array}"
+                Min_detection="1"
+                Confidence="0.6"
+                Max_size_output="1"
+                Max_depth="200"
+                Object_class="gate-shark"
+                Max_frame="20"
+                Camera="1"/>
+      <Alignment TranslationY="{TranslationY}"
+                 RotationZ="{RotationZ}"
+                 traj="{traj}"
+                 Camera_front="false"
+                 alignement_by_translation="true"
+                 TranslationX_CamBottom="{TranslationX_CamBottom}"
+                 detections="{detect_array}"/>
+      <SendTrajectory trajectory="{traj}"
+                      interpolation="0"/>
+      <WaitTargetReached timeout="5"/>
+      <Dropper side="port_side"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="CoinFlip">
+    <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
+      <SubTree ID="MoveSinglePose"
+               frame="1.0"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="0.5"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"/>
+      <SubTree ID="MoveSinglePose"
+               frame="2.0"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="Gate">
+    <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
+      <InitializeTrajectory trajectory="{traj}"/>
+      <AiFilter detected_object_array="{detect_array}"
+                Min_detection="1"
+                Confidence="0.6"
+                Max_size_output="1"
+                Max_depth="200"
+                Object_class="gate-shark"
+                Max_frame="20"
+                Camera="1"/>
+      <Alignment TranslationY="{TranslationY}"
+                 RotationZ="{RotationZ}"
+                 traj="{traj}"
+                 Camera_front="false"
+                 alignement_by_translation="true"
+                 TranslationX_CamBottom="{TranslationX_CamBottom}"
+                 detections="{detect_array}"/>
+      <SendTrajectory trajectory="{traj}"
+                      interpolation="0"/>
+      <WaitTargetReached timeout="5"/>
+      <SubTree ID="MoveSinglePose"
+               frame="1.0"
+               positionX="{translation}"
+               positionY="0.0"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"/>
+      <CheckDistance TranslationX="{translation}"
+                     Object="{detect_array}"/>
+      <SubTree ID="MoveSinglePose"
+               frame="1.0"
+               positionX="{translation}"
+               positionY="0.0"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"/>
+      <SubTree ID="MoveSinglePose"
+               frame="1.0"
+               positionX="1"
+               positionY="0.0"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="Octogon">
+    <AlwaysSuccess/>
+  </BehaviorTree>
+
+  <BehaviorTree ID="Run26">
+    <Sequence>
+      <SubTree ID="CoinFlip"/>
+      <SubTree ID="Gate"/>
+      <SubTree ID="TrickshotLegacy"/>
+      <SubTree ID="Bin"/>
+      <SubTree ID="Torpedoes"/>
+      <SubTree ID="Octogon"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="Torpedoes">
+    <AlwaysSuccess/>
+  </BehaviorTree>
+
+  <BehaviorTree ID="Trickshot">
+    <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
+      <SubTree ID="MoveSinglePose"
+               frame="4"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="0.75"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"/>
+      <InitializeTrajectory trajectory="{traj}"/>
+      <TrajectoryAppendPose trajectory="{traj}"
+                            precision="0"
+                            speed="2"
+                            frame="1"
+                            orientationZ="0.000000"
+                            longRotation="false"
+                            positionZ="0.000000"
+                            positionY="0.000000"
+                            orientationY="90"
+                            orientationX="0"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose trajectory="{traj}"
+                            precision="0"
+                            speed="2"
+                            frame="1"
+                            orientationZ="0"
+                            longRotation="false"
+                            positionZ="0.000000"
+                            positionY="0.000000"
+                            orientationY="0.000000"
+                            orientationX="0180"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose trajectory="{traj}"
+                            precision="0"
+                            speed="2"
+                            frame="1"
+                            orientationZ="180"
+                            longRotation="false"
+                            positionZ="0.000000"
+                            positionY="0.000000"
+                            orientationY="0.000000"
+                            orientationX="0.000000"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose trajectory="{traj}"
+                            precision="0"
+                            speed="2"
+                            frame="1"
+                            orientationZ="180"
+                            longRotation="false"
+                            positionZ="0.000000"
+                            positionY="0.000000"
+                            orientationY="0.000000"
+                            orientationX="0"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose trajectory="{traj}"
+                            precision="0"
+                            speed="2"
+                            frame="1"
+                            orientationZ="0"
+                            longRotation="false"
+                            positionZ="0.000000"
+                            positionY="0.000000"
+                            orientationY="-180"
+                            orientationX="0"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose trajectory="{traj}"
+                            precision="0"
+                            speed="2"
+                            frame="1"
+                            orientationZ="0"
+                            longRotation="false"
+                            positionZ="0.000000"
+                            positionY="0.000000"
+                            orientationY="-90"
+                            orientationX="0"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose trajectory="{traj}"
+                            precision="0"
+                            speed="2"
+                            frame="1"
+                            orientationZ="0"
+                            longRotation="false"
+                            positionZ="0.000000"
+                            positionY="0.000000"
+                            orientationY="0.000000"
+                            orientationX="180"
+                            positionX="0.000000"/>
+      <SendTrajectory trajectory="{traj}"
+                      interpolation="0"/>
+      <WaitTargetReached timeout="10"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="TrickshotLegacy">
+    <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
+      <SubTree ID="MoveSinglePose"
+               frame="1"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="0.5"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"/>
+      <InitializeTrajectory trajectory="{traj}"/>
+      <TrajectoryAppendPose trajectory="{traj}"
+                            precision="0"
+                            speed="0"
+                            frame="1"
+                            orientationZ="0.000000"
+                            longRotation="false"
+                            positionZ="0.000000"
+                            positionY="0.000000"
+                            orientationY="90"
+                            orientationX="0.000000"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose trajectory="{traj}"
+                            precision="0"
+                            speed="0"
+                            frame="1"
+                            orientationZ="0.000000"
+                            longRotation="false"
+                            positionZ="0.000000"
+                            positionY="0.000000"
+                            orientationY="0.000000"
+                            orientationX="180"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose trajectory="{traj}"
+                            precision="0"
+                            speed="0"
+                            frame="1"
+                            orientationZ="0.000000"
+                            longRotation="false"
+                            positionZ="0.000000"
+                            positionY="0.000000"
+                            orientationY="0.000000"
+                            orientationX="180"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose trajectory="{traj}"
+                            precision="0"
+                            speed="0"
+                            frame="1"
+                            orientationZ="0.000000"
+                            longRotation="false"
+                            positionZ="0.000000"
+                            positionY="0.000000"
+                            orientationY="90"
+                            orientationX="0.000000"
+                            positionX="0.000000"/>
+      <TrajectoryAppendPose trajectory="{traj}"
+                            precision="0"
+                            speed="0"
+                            frame="1"
+                            orientationZ="0.000000"
+                            longRotation="false"
+                            positionZ="0.000000"
+                            positionY="0.000000"
+                            orientationY="180"
+                            orientationX="0.000000"
+                            positionX="0.000000"/>
+      <SendTrajectory trajectory="{traj}"
+                      interpolation="0"/>
+      <WaitTargetReached timeout="10"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <!-- Description of Node Models (used by Groot) -->
+  <TreeNodesModel>
+    <Action ID="AiFilter">
+      <output_port name="detected_object_array"
+                   type="AiDetectionArray"/>
+      <input_port name="Min_detection"
+                  type="int">minumum number of frames with at least one detection before sending results</input_port>
+      <input_port name="Confidence"
+                  default="0.600000"
+                  type="float">Ai confidence</input_port>
+      <input_port name="Max_size_output"
+                  type="int">Max size of the output array</input_port>
+      <input_port name="Max_depth"
+                  type="float">Maximum allowed depth</input_port>
+      <input_port name="Object_class"
+                  type="std::string">Searched object</input_port>
+      <input_port name="Max_frame"
+                  type="int">maximum allowed frames</input_port>
+      <input_port name="Camera"
+                  default="1"
+                  type="int">1: Front, 0: Bottom</input_port>
+    </Action>
+    <Action ID="Alignment">
+      <output_port name="TranslationY"
+                   type="float"/>
+      <output_port name="RotationZ"
+                   type="float"/>
+      <inout_port name="traj"
+                  type="Trajectory"/>
+      <input_port name="Camera_front"
+                  type="bool"/>
+      <input_port name="alignement_by_translation"
+                  type="bool"/>
+      <output_port name="TranslationX_CamBottom"
+                   type="float"/>
+      <input_port name="detections"
+                  type="AiDetectionArray"/>
+    </Action>
+    <Action ID="CheckDistance">
+      <output_port name="TranslationX"
+                   type="float"/>
+      <input_port name="Object"
+                  type="AiDetectionArray"/>
+    </Action>
+    <Action ID="Dropper">
+      <input_port name="side"
+                  type="std::string">port_side or starboard</input_port>
+    </Action>
+    <Action ID="InitializeTrajectory">
+      <output_port name="trajectory"
+                   type="Trajectory"/>
+    </Action>
+    <Condition ID="MissionSwitchStatus"/>
+    <SubTree ID="MoveSinglePose"
+             editable="true">
+      <input_port name="frame"
+                  default="1.0">Submarine reference type</input_port>
+      <input_port name="positionX"
+                  default="0.0">x value to go</input_port>
+      <input_port name="positionY"
+                  default="0.0">y value to go</input_port>
+      <input_port name="positionZ"
+                  default="0.0">z value to go</input_port>
+      <input_port name="orientationX"
+                  default="0.0">z orientation to go</input_port>
+      <input_port name="orientationY"
+                  default="0.0">y orientation to go</input_port>
+      <input_port name="orientationZ"
+                  default="0.0">x orientation to go</input_port>
+    </SubTree>
+    <Action ID="SendTrajectory">
+      <input_port name="trajectory"
+                  type="Trajectory"/>
+      <input_port name="interpolation"
+                  default="0"
+                  type="int"/>
+    </Action>
+    <Action ID="TrajectoryAppendPose">
+      <inout_port name="trajectory"
+                  type="Trajectory"/>
+      <input_port name="precision"
+                  default="0"
+                  type="int"/>
+      <input_port name="speed"
+                  default="0"
+                  type="int"/>
+      <input_port name="frame"
+                  default="1"
+                  type="int"/>
+      <input_port name="orientationZ"
+                  default="0.000000"
+                  type="float"/>
+      <input_port name="longRotation"
+                  default="false"
+                  type="bool"/>
+      <input_port name="positionZ"
+                  default="0.000000"
+                  type="float"/>
+      <input_port name="positionY"
+                  default="0.000000"
+                  type="float"/>
+      <input_port name="orientationY"
+                  default="0.000000"
+                  type="float"/>
+      <input_port name="orientationX"
+                  default="0.000000"
+                  type="float"/>
+      <input_port name="positionX"
+                  default="0.000000"
+                  type="float"/>
+    </Action>
+    <Action ID="WaitTargetReached">
+      <input_port name="timeout"
+                  default="5"
+                  type="int"/>
+    </Action>
+  </TreeNodesModel>
+
+</root>

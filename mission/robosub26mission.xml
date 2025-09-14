@@ -15,31 +15,11 @@
                 Object_class="gate-shark"
                 Max_frame="20"
                 Camera="1"/>
-      <Alignment TranslationY="{TranslationY}"
-                 RotationZ="{RotationZ}"
-                 traj="{traj}"
-                 Camera_front="false"
-                 alignement_by_translation="true"
-                 TranslationX_CamBottom="{TranslationX_CamBottom}"
-                 detections="{detect_array}"/>
+      <RotateToMission trajectory="{traj}"
+                       detections="{detect_array}"/>
       <SendTrajectory trajectory="{traj}"
                       interpolation="0"/>
       <WaitTargetReached timeout="1"/>
-      <AiFilter detected_object_array="{detect_array}"
-                Min_detection="1"
-                Confidence="0.6"
-                Max_size_output="1"
-                Max_depth="200"
-                Object_class="gate-shark"
-                Max_frame="20"
-                Camera="1"/>
-      <Alignment TranslationY="{TranslationY}"
-                 RotationZ="{RotationZ}"
-                 traj="{traj}"
-                 Camera_front="false"
-                 alignement_by_translation="true"
-                 TranslationX_CamBottom="{TranslationX_CamBottom}"
-                 detections="{detect_array}"/>
       <SendTrajectory trajectory="{traj}"
                       interpolation="0"/>
       <WaitTargetReached timeout="5"/>
@@ -85,13 +65,6 @@
                 Object_class="gate-shark"
                 Max_frame="20"
                 Camera="1"/>
-      <Alignment TranslationY="{TranslationY}"
-                 RotationZ="{RotationZ}"
-                 traj="{traj}"
-                 Camera_front="false"
-                 alignement_by_translation="true"
-                 TranslationX_CamBottom="{TranslationX_CamBottom}"
-                 detections="{detect_array}"/>
       <SendTrajectory trajectory="{traj}"
                       interpolation="0"/>
       <WaitTargetReached timeout="5"/>
@@ -133,8 +106,10 @@
       <SubTree ID="CoinFlip"/>
       <SubTree ID="Gate"/>
       <SubTree ID="TrickshotLegacy"/>
-      <SubTree ID="Bin"/>
-      <SubTree ID="Torpedoes"/>
+      <SubTree ID="Bin"
+               HintAngle="0"/>
+      <SubTree ID="Torpedoes"
+               HintAngle="0"/>
       <SubTree ID="Octogon"/>
     </Sequence>
   </BehaviorTree>
@@ -337,22 +312,11 @@
                   default="1"
                   type="int">1: Front, 0: Bottom</input_port>
     </Action>
-    <Action ID="Alignment">
-      <output_port name="TranslationY"
-                   type="float"/>
-      <output_port name="RotationZ"
-                   type="float"/>
-      <inout_port name="traj"
-                  type="Trajectory"/>
-      <input_port name="Camera_front"
-                  type="bool"/>
-      <input_port name="alignement_by_translation"
-                  type="bool"/>
-      <output_port name="TranslationX_CamBottom"
-                   type="float"/>
-      <input_port name="detections"
-                  type="AiDetectionArray"/>
-    </Action>
+    <SubTree ID="Bin"
+             editable="true">
+      <input_port name="HintAngle"
+                  default="0">The approximation of the angle where the mission is.</input_port>
+    </SubTree>
     <Action ID="CheckDistance">
       <output_port name="TranslationX"
                    type="float"/>
@@ -385,6 +349,12 @@
       <input_port name="orientationZ"
                   default="0.0">x orientation to go</input_port>
     </SubTree>
+    <Action ID="RotateToMission">
+      <inout_port name="trajectory"
+                  type="Trajectory"/>
+      <input_port name="detections"
+                  type="AiDetectionArray"/>
+    </Action>
     <Action ID="SendTrajectory">
       <input_port name="trajectory"
                   type="Trajectory"/>
@@ -392,6 +362,11 @@
                   default="0"
                   type="int"/>
     </Action>
+    <SubTree ID="Torpedoes"
+             editable="true">
+      <input_port name="HintAngle"
+                  default="0">The approximation of the angle where the torpideos is.</input_port>
+    </SubTree>
     <Action ID="TrajectoryAppendPose">
       <inout_port name="trajectory"
                   type="Trajectory"/>

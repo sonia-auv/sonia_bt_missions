@@ -29,6 +29,9 @@
             <output_port name="TranslationX_CamBottom" type="float"/>
             <input_port name="detections" type="AiDetectionArray"/>
         </Action>
+        <SubTree ID="Bin" editable="true">
+            <input_port name="HintAngle" default="0">The approximation of the angle where the mission is.</input_port>
+        </SubTree>
         <Action ID="CheckBoundingBox">
             <input_port name="Object" type="AiDetectionArray"/>
             <output_port name="New_width" type="int"/>
@@ -69,6 +72,10 @@
         <SubTree ID="RotateToAbsoluteAngle" editable="true">
             <input_port name="Angle" default="0">Angle to position the sub with the pool</input_port>
         </SubTree>
+        <Action ID="RotateToMission">
+            <inout_port name="trajectory" type="Trajectory"/>
+            <input_port name="detections" type="AiDetectionArray"/>
+        </Action>
         <SubTree ID="SearchMissionByRotation" editable="true">
             <input_port name="StartingAngle" default="0">Angle to give to the sub at the begining of the searching procedure</input_port>
             <input_port name="Object">The name of the object to search</input_port>
@@ -83,6 +90,9 @@
         <Action ID="Torpedo">
             <input_port name="side" type="std::string">port_side or starboard</input_port>
         </Action>
+        <SubTree ID="Torpedoes" editable="true">
+            <input_port name="HintAngle" default="0">The approximation of the angle where the torpideos is.</input_port>
+        </SubTree>
         <Action ID="TrajectoryAppendPose">
             <inout_port name="trajectory" type="Trajectory"/>
             <input_port name="precision" default="0" type="int"/>

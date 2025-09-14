@@ -15,15 +15,6 @@
             <input_port name="Max_frame" type="int">maximum allowed frames</input_port>
             <input_port name="Camera" type="int" default="1">1: Front, 0: Bottom</input_port>
         </Action>
-        <Action ID="Alignment">
-            <output_port name="TranslationY" type="float"/>
-            <output_port name="RotationZ" type="float"/>
-            <inout_port name="traj" type="Trajectory"/>
-            <input_port name="Camera_front" type="bool"/>
-            <input_port name="alignement_by_translation" type="bool"/>
-            <output_port name="TranslationX_CamBottom" type="float"/>
-            <input_port name="detections" type="AiDetectionArray"/>
-        </Action>
         <Action ID="CheckBoundingBox">
             <input_port name="Object" type="AiDetectionArray"/>
             <output_port name="New_width" type="int"/>
@@ -52,6 +43,10 @@
             <output_port name="trajectory" type="Trajectory"/>
         </Action>
         <Condition ID="MissionSwitchStatus"/>
+        <Action ID="RotateToMission">
+            <inout_port name="trajectory" type="Trajectory"/>
+            <input_port name="detections" type="AiDetectionArray"/>
+        </Action>
         <Action ID="SendTrajectory">
             <input_port name="trajectory" type="Trajectory"/>
             <input_port name="interpolation" type="int" default="0"/>

@@ -11,13 +11,13 @@
             <input_port name="Front" default="false" type="bool">true: ON, talse: OFF</input_port>
         </Action>
         <Action ID="AiFilter">
+            <input_port name="Max_frame_before_exiting" type="int">maximum allowed frames</input_port>
             <output_port name="detected_object_array" type="AiDetectionArray"/>
             <input_port name="Min_detection" type="int">minumum number of frames with at least one detection before sending results</input_port>
             <input_port name="Confidence" default="0.600000" type="float">Ai confidence</input_port>
             <input_port name="Max_size_output" type="int">Max size of the output array</input_port>
             <input_port name="Max_depth" type="float">Maximum allowed depth</input_port>
             <input_port name="Object_class" type="std::string">Searched object</input_port>
-            <input_port name="Max_frame" type="int">maximum allowed frames</input_port>
             <input_port name="Camera" default="1" type="int">1: Front, 0: Bottom</input_port>
         </Action>
         <Action ID="Alignment">
@@ -76,7 +76,7 @@
             <inout_port name="trajectory" type="Trajectory"/>
             <input_port name="detections" type="AiDetectionArray"/>
         </Action>
-        <SubTree ID="SearchMissionByRotation" editable="true">
+        <SubTree ID="SearchObjectByRotation" editable="true">
             <input_port name="StartingAngle" default="0">Angle to give to the sub at the begining of the searching procedure</input_port>
             <input_port name="Object">The name of the object to search</input_port>
         </SubTree>

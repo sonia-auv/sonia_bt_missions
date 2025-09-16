@@ -11,7 +11,7 @@
                 Min_detection="1"
                 Confidence="0.6"
                 Max_size_output="1"
-                Max_depth="200"
+                Max_depth="15"
                 Object_class="gate-shark"
                 Max_frame="20"
                 Camera="1"/>

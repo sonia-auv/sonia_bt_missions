@@ -11,6 +11,49 @@
     </Sequence>
   </BehaviorTree>
 
+  <BehaviorTree ID="MissionFailed">
+    <ForceFailure>
+      <Sequence>
+        <InitializeTrajectory trajectory="{traj}"/>
+        <Repeat num_cycles="2">
+          <TrajectoryAppendPose trajectory="{traj}"
+                                precision="0"
+                                speed="2"
+                                frame="1"
+                                orientationZ="180"
+                                longRotation="false"
+                                positionZ="0.000000"
+                                positionY="0.000000"
+                                orientationY="0.000000"
+                                orientationX="0.000000"
+                                positionX="0.000000"/>
+        </Repeat>
+        <SendTrajectory trajectory="{traj}"/>
+      </Sequence>
+    </ForceFailure>
+  </BehaviorTree>
+
+  <BehaviorTree ID="MissionSuccess">
+    <Sequence>
+      <InitializeTrajectory trajectory="{traj}"/>
+      <Repeat num_cycles="2">
+        <TrajectoryAppendPose trajectory="{traj}"
+                              precision="0"
+                              speed="0"
+                              frame="1"
+                              orientationZ="180"
+                              longRotation="false"
+                              positionZ="0.000000"
+                              positionY="0.000000"
+                              orientationY="0.000000"
+                              orientationX="0.000000"
+                              positionX="0.000000"/>
+      </Repeat>
+      <SendTrajectory trajectory="{traj}"
+                      interpolation="0"/>
+    </Sequence>
+  </BehaviorTree>
+
   <BehaviorTree ID="MoveSinglePose">
     <Sequence>
       <InitializeTrajectory trajectory="{traj}"/>
@@ -31,12 +74,6 @@
     </Sequence>
   </BehaviorTree>
 
-  <BehaviorTree ID="MoveToMission">
-    <SubTree ID="SearchMissionByRotation"
-             StartingAngle="{StartingAngle}"
-             Object="{Object}"/>
-  </BehaviorTree>
-
   <BehaviorTree ID="RotateToAbsoluteAngle">
     <SubTree ID="MoveSinglePose"
              frame="2.0"
@@ -48,18 +85,18 @@
              orientationZ="{Angle}"/>
   </BehaviorTree>
 
-  <BehaviorTree ID="SearchMissionByRotation">
+  <BehaviorTree ID="SearchObjectByRotation">
     <Sequence>
       <SubTree ID="RotateToAbsoluteAngle"
                Angle="{StartingAngle}"/>
-      <IfThenElse>
-        <AiFilter detected_object_array="{detect_array}"
+      <Fallback>
+        <AiFilter Max_frame_before_exiting="5"
+                  detected_object_array="{detect_array}"
                   Min_detection="1"
                   Confidence="0.600000"
                   Max_size_output="1"
                   Max_depth="25"
                   Object_class="{Object}"
-                  Max_frame="5"
                   Camera="1"/>
         <Sequence>
           <SubTree ID="MoveSinglePose"
@@ -71,13 +108,13 @@
                    orientationY="0.0"
                    orientationZ="30"/>
           <Fallback>
-            <AiFilter detected_object_array="{detect_array}"
+            <AiFilter Max_frame_before_exiting="5"
+                      detected_object_array="{detect_array}"
                       Min_detection="1"
                       Confidence="0.600000"
                       Max_size_output="1"
                       Max_depth="25"
                       Object_class="{Object}"
-                      Max_frame="5"
                       Camera="1"/>
             <Sequence>
               <SubTree ID="MoveSinglePose"
@@ -87,15 +124,15 @@
                        positionZ="0.0"
                        orientationX="0.0"
                        orientationY="0.0"
-                       orientationZ="30"/>
+                       orientationZ="-60"/>
               <Fallback>
-                <AiFilter detected_object_array="{detect_array}"
+                <AiFilter Max_frame_before_exiting="5"
+                          detected_object_array="{detect_array}"
                           Min_detection="1"
                           Confidence="0.600000"
                           Max_size_output="1"
                           Max_depth="25"
                           Object_class="{Object}"
-                          Max_frame="5"
                           Camera="1"/>
                 <Sequence>
                   <SubTree ID="MoveSinglePose"
@@ -105,15 +142,15 @@
                            positionZ="0.0"
                            orientationX="0.0"
                            orientationY="0.0"
-                           orientationZ="-90"/>
+                           orientationZ="-30"/>
                   <Fallback>
-                    <AiFilter detected_object_array="{detect_array}"
+                    <AiFilter Max_frame_before_exiting="5"
+                              detected_object_array="{detect_array}"
                               Min_detection="1"
                               Confidence="0.600000"
                               Max_size_output="1"
                               Max_depth="25"
                               Object_class="{Object}"
-                              Max_frame="5"
                               Camera="1"/>
                     <Sequence>
                       <SubTree ID="MoveSinglePose"
@@ -123,15 +160,18 @@
                                positionZ="0.0"
                                orientationX="0.0"
                                orientationY="0.0"
-                               orientationZ="-30"/>
-                      <AiFilter detected_object_array=""
-                                Min_detection="1"
-                                Confidence="0.600000"
-                                Max_size_output="1"
-                                Max_depth="25"
-                                Object_class="{Object}"
-                                Max_frame="5"
-                                Camera="1"/>
+                               orientationZ="120"/>
+                      <IfThenElse>
+                        <AiFilter Max_frame_before_exiting="5"
+                                  detected_object_array="{detections}"
+                                  Min_detection="1"
+                                  Confidence="0.600000"
+                                  Max_size_output="1"
+                                  Max_depth="25"
+                                  Object_class="{Object}"
+                                  Camera="1"/>
+                        <SubTree ID="MissionFailed"/>
+                      </IfThenElse>
                     </Sequence>
                   </Fallback>
                 </Sequence>
@@ -139,13 +179,15 @@
             </Sequence>
           </Fallback>
         </Sequence>
-      </IfThenElse>
+      </Fallback>
     </Sequence>
   </BehaviorTree>
 
   <!-- Description of Node Models (used by Groot) -->
   <TreeNodesModel>
     <Action ID="AiFilter">
+      <input_port name="Max_frame_before_exiting"
+                  type="int">maximum allowed frames</input_port>
       <output_port name="detected_object_array"
                    type="AiDetectionArray"/>
       <input_port name="Min_detection"
@@ -159,8 +201,6 @@
                   type="float">Maximum allowed depth</input_port>
       <input_port name="Object_class"
                   type="std::string">Searched object</input_port>
-      <input_port name="Max_frame"
-                  type="int">maximum allowed frames</input_port>
       <input_port name="Camera"
                   default="1"
                   type="int">1: Front, 0: Bottom</input_port>
@@ -201,12 +241,6 @@
              editable="true">
       <input_port name="Angle"
                   default="0">Angle to position the sub with the pool</input_port>
-    </SubTree>
-    <SubTree ID="SearchMissionByRotation"
-             editable="true">
-      <input_port name="StartingAngle"
-                  default="0">Angle to give to the sub at the begining of the searching procedure</input_port>
-      <input_port name="Object">The name of the object to search</input_port>
     </SubTree>
     <Action ID="SendTrajectory">
       <input_port name="trajectory"

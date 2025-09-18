@@ -89,6 +89,10 @@
             <input_port name="trajectory" type="Trajectory"/>
             <input_port name="interpolation" default="0" type="int"/>
         </Action>
+        <SubTree ID="SendTrajectoryOnly" editable="true">
+            <input_port name="Trajectory">The trajectory to do to the sub</input_port>
+            <input_port name="TimeBeforeFailling" default="5">The time before the sub movement fail</input_port>
+        </SubTree>
         <Action ID="Tare">
             <input_port name="sensor" type="std::string">imu or depth</input_port>
         </Action>

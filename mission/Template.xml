@@ -183,6 +183,14 @@
     </Sequence>
   </BehaviorTree>
 
+  <BehaviorTree ID="SendTrajectoryOnly">
+    <Sequence>
+      <SendTrajectory trajectory="{Trajectory}"
+                      interpolation="0"/>
+      <WaitTargetReached timeout="{TimeBerforeFailling}"/>
+    </Sequence>
+  </BehaviorTree>
+
   <!-- Description of Node Models (used by Groot) -->
   <TreeNodesModel>
     <Action ID="AiFilter">

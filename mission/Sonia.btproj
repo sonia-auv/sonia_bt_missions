@@ -83,6 +83,7 @@
         <SubTree ID="SearchObjectByRotation" editable="true">
             <input_port name="StartingAngle" default="0">Angle to give to the sub at the begining of the searching procedure</input_port>
             <input_port name="Object">The name of the object to search</input_port>
+            <output_port name="FoundAiDetection">The detection of the ai if he found the object</output_port>
         </SubTree>
         <Action ID="SendTrajectory">
             <input_port name="trajectory" type="Trajectory"/>

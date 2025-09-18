@@ -12,25 +12,25 @@
   </BehaviorTree>
 
   <BehaviorTree ID="MissionFailed">
-    <ForceFailure>
-      <Sequence>
-        <InitializeTrajectory trajectory="{traj}"/>
-        <Repeat num_cycles="2">
-          <TrajectoryAppendPose trajectory="{traj}"
-                                precision="0"
-                                speed="2"
-                                frame="1"
-                                orientationZ="180"
-                                longRotation="false"
-                                positionZ="0.000000"
-                                positionY="0.000000"
-                                orientationY="0.000000"
-                                orientationX="0.000000"
-                                positionX="0.000000"/>
-        </Repeat>
-        <SendTrajectory trajectory="{traj}"/>
-      </Sequence>
-    </ForceFailure>
+    <Sequence>
+      <InitializeTrajectory trajectory="{traj}"/>
+      <Repeat num_cycles="2">
+        <TrajectoryAppendPose trajectory="{traj}"
+                              precision="0"
+                              speed="2"
+                              frame="1"
+                              orientationZ="180"
+                              longRotation="false"
+                              positionZ="0.000000"
+                              positionY="0.000000"
+                              orientationY="0.000000"
+                              orientationX="0.000000"
+                              positionX="0.000000"/>
+      </Repeat>
+      <SendTrajectory trajectory="{traj}"
+                      interpolation="0"/>
+      <AlwaysFailure/>
+    </Sequence>
   </BehaviorTree>
 
   <BehaviorTree ID="MissionSuccess">
@@ -90,7 +90,7 @@
       <SubTree ID="RotateToAbsoluteAngle"
                Angle="{StartingAngle}"/>
       <Fallback>
-        <AiFilter Detected_object_array="{detections}"
+        <AiFilter Detected_object_array="{FoundAiDetection}"
                   Max_frame_before_failling="5"
                   Max_frame_depth="25"
                   Min_size_output="1"
@@ -108,7 +108,7 @@
                    orientationY="0.0"
                    orientationZ="30"/>
           <Fallback>
-            <AiFilter Detected_object_array="{detections}"
+            <AiFilter Detected_object_array="{FoundAiDetection}"
                       Max_frame_before_failling="5"
                       Max_frame_depth="25"
                       Min_size_output="1"
@@ -126,7 +126,7 @@
                        orientationY="0.0"
                        orientationZ="-60"/>
               <Fallback>
-                <AiFilter Detected_object_array="{detections}"
+                <AiFilter Detected_object_array="{FoundAiDetection}"
                           Max_frame_before_failling="5"
                           Max_frame_depth="25"
                           Min_size_output="1"
@@ -144,7 +144,7 @@
                            orientationY="0.0"
                            orientationZ="-30"/>
                   <Fallback>
-                    <AiFilter Detected_object_array="{detections}"
+                    <AiFilter Detected_object_array="{FoundAiDetection}"
                               Max_frame_before_failling="5"
                               Max_frame_depth="25"
                               Min_size_output="1"
@@ -162,7 +162,7 @@
                                orientationY="0.0"
                                orientationZ="120"/>
                       <IfThenElse>
-                        <AiFilter Detected_object_array="{detections}"
+                        <AiFilter Detected_object_array="{FoundAiDetection}"
                                   Max_frame_before_failling="5"
                                   Max_frame_depth="25"
                                   Min_size_output="1"

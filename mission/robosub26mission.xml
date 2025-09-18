@@ -59,44 +59,37 @@
       <AiActivation Model="0"
                     Bottom="false"
                     Front="true"/>
-      <InitializeTrajectory trajectory="{traj}"/>
+      <InitializeTrajectory trajectory="{rotation_traj}"/>
       <SubTree ID="SearchObjectByRotation"
                StartingAngle="0"
-               Object="gate-shark"/>
-      <SendTrajectory trajectory="{traj}"
+               Object="gate-shark"
+               FoundAiDetection="{Aidetection}"/>
+      <RotateToMission trajectory="{rotation_traj}"
+                       detections="{Aidetection}"/>
+      <SendTrajectory trajectory="{trajectory}"
                       interpolation="0"/>
-      <WaitTargetReached timeout="5"/>
-      <SubTree ID="MoveSinglePose"
-               frame="1.0"
-               positionX="{translation}"
-               positionY="0.0"
-               positionZ="0.0"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"/>
-      <CheckDistance TranslationX="{translation}"
-                     Object="{detect_array}"/>
-      <SubTree ID="MoveSinglePose"
-               frame="1.0"
-               positionX="{translation}"
-               positionY="0.0"
-               positionZ="0.0"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"/>
-      <SubTree ID="MoveSinglePose"
-               frame="1.0"
-               positionX="1"
-               positionY="0.0"
-               positionZ="0.0"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"/>
+      <InitializeTrajectory trajectory="{forward_traj}"/>
+      <AiFilter Detected_object_array="{AiDetection2}"
+                Max_frame_before_failling="5"
+                Max_frame_depth="25"
+                Min_size_output="1"
+                Confidence="0.600000"
+                Max_size_output="1"
+                Object_class="gate-shark"
+                Camera="1"/>
+      <MoveToMission trajectory="{forward_traj}"
+                     detections="{AiDetection2}"/>
+      <SendTrajectory trajectory="{forward_traj}"
+                      interpolation="0"/>
     </Sequence>
   </BehaviorTree>
 
   <BehaviorTree ID="Octogon">
-    <AlwaysSuccess/>
+    <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
+    </Sequence>
   </BehaviorTree>
 
   <BehaviorTree ID="Run26">
@@ -326,12 +319,6 @@
       <input_port name="HintAngle"
                   default="0">The approximation of the angle where the mission is.</input_port>
     </SubTree>
-    <Action ID="CheckDistance">
-      <output_port name="TranslationX"
-                   type="float"/>
-      <input_port name="Object"
-                  type="AiDetectionArray"/>
-    </Action>
     <Action ID="Dropper">
       <input_port name="side"
                   type="std::string">port_side or starboard</input_port>
@@ -358,6 +345,12 @@
       <input_port name="orientationZ"
                   default="0.0">x orientation to go</input_port>
     </SubTree>
+    <Action ID="MoveToMission">
+      <inout_port name="trajectory"
+                  type="Trajectory"/>
+      <input_port name="detections"
+                  type="AiDetectionArray"/>
+    </Action>
     <Action ID="RotateToMission">
       <inout_port name="trajectory"
                   type="Trajectory"/>
@@ -369,6 +362,7 @@
       <input_port name="StartingAngle"
                   default="0">Angle to give to the sub at the begining of the searching procedure</input_port>
       <input_port name="Object">The name of the object to search</input_port>
+      <output_port name="FoundAiDetection">The detection of the ai if he found the object</output_port>
     </SubTree>
     <Action ID="SendTrajectory">
       <input_port name="trajectory"

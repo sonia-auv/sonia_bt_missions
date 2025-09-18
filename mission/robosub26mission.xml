@@ -6,20 +6,18 @@
       <RetryUntilSuccessful num_attempts="-1">
         <MissionSwitchStatus/>
       </RetryUntilSuccessful>
-      <InitializeTrajectory trajectory="{rotation_traj}"/>
+      <InitializeTrajectory trajectory="{Trajectory}"/>
       <SubTree ID="SearchObjectByRotation"
                StartingAngle="0"
-               Object="gate-shark"
+               Object="bin"
                FoundAiDetection="{Aidetection}"/>
-      <RotateToMission trajectory="{rotation_traj}"
+      <RotateToMission trajectory="{Trajectory}"
                        detections="{Aidetection}"/>
-      <SendTrajectory trajectory="{rotation_traj}"
-                      interpolation="0"/>
-      <InitializeTrajectory trajectory="{forward_traj}"/>
-      <MoveToMission trajectory="{forward_traj}"
-                     detections="{AiDetection}"/>
-      <SendTrajectory trajectory="{forward_traj}"
-                      interpolation="0"/>
+      <MoveToMission trajectory="{Trajectory}"
+                     detections="{Aidetection}"/>
+      <SubTree ID="SendTrajectoryOnly"
+               Trajectory="{Trajectory}"
+               TimeBeforeFailling="5"/>
       <Dropper side="port_side"/>
     </Sequence>
   </BehaviorTree>

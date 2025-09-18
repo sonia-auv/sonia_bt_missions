@@ -66,21 +66,23 @@
                FoundAiDetection="{Aidetection}"/>
       <RotateToMission trajectory="{rotation_traj}"
                        detections="{Aidetection}"/>
-      <SendTrajectory trajectory="{trajectory}"
+      <SendTrajectory trajectory="{rotation_traj}"
                       interpolation="0"/>
       <InitializeTrajectory trajectory="{forward_traj}"/>
-      <AiFilter Detected_object_array="{AiDetection2}"
-                Max_frame_before_failling="5"
-                Max_frame_depth="25"
-                Min_size_output="1"
-                Confidence="0.600000"
-                Max_size_output="1"
-                Object_class="gate-shark"
-                Camera="1"/>
       <MoveToMission trajectory="{forward_traj}"
-                     detections="{AiDetection2}"/>
+                     detections="{AiDetection}"/>
       <SendTrajectory trajectory="{forward_traj}"
                       interpolation="0"/>
+      <SubTree ID="RotateToAbsoluteAngle"
+               Angle="0"/>
+      <SubTree ID="MoveSinglePose"
+               frame="1.0"
+               positionX="0.5"
+               positionY="0.0"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"/>
     </Sequence>
   </BehaviorTree>
 
@@ -351,6 +353,11 @@
       <input_port name="detections"
                   type="AiDetectionArray"/>
     </Action>
+    <SubTree ID="RotateToAbsoluteAngle"
+             editable="true">
+      <input_port name="Angle"
+                  default="0">Angle to position the sub with the pool</input_port>
+    </SubTree>
     <Action ID="RotateToMission">
       <inout_port name="trajectory"
                   type="Trajectory"/>

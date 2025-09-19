@@ -306,7 +306,7 @@
     <SubTree ID="MoveSinglePose"
              editable="true">
       <input_port name="frame"
-                  default="1.0">Submarine reference type</input_port>
+                  default="1.0">0 : Abs, 1 : Rot and Trans Rel, 2 : Rot Abs and Trans Rel, 3 : Rot Rel and Trans Abs, 4 : Prof Abs</input_port>
       <input_port name="positionX"
                   default="0.0">x value to go</input_port>
       <input_port name="positionY"

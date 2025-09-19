@@ -119,13 +119,13 @@
       <SubTree ID="TrickshotLegacy"/>
       <SubTree ID="Bin"
                HintAngle="0"/>
-      <SubTree ID="Torpedoes"
+      <SubTree ID="Torpedos"
                HintAngle="0"/>
       <SubTree ID="Octogon"/>
     </Sequence>
   </BehaviorTree>
 
-  <BehaviorTree ID="Torpedoes">
+  <BehaviorTree ID="Torpedos">
     <AlwaysSuccess/>
   </BehaviorTree>
 
@@ -408,7 +408,7 @@
       <input_port name="TimeBeforeFailling"
                   default="5">The time before the sub movement fail</input_port>
     </SubTree>
-    <SubTree ID="Torpedoes"
+    <SubTree ID="Torpedos"
              editable="true">
       <input_port name="HintAngle"
                   default="0">The approximation of the angle where the torpideos is.</input_port>

@@ -10,15 +10,40 @@
       <SubTree ID="SearchObjectByRotation"
                StartingAngle="0"
                Object="bin"
-               FoundAiDetection="{Aidetection}"/>
+               FoundAiDetection="{FrontAidetection}"/>
       <RotateToMission trajectory="{Trajectory}"
-                       detections="{Aidetection}"/>
+                       detections="{FrontAidetection}"/>
       <MoveToMission trajectory="{Trajectory}"
-                     detections="{Aidetection}"/>
+                     detections="{FrontAidetection}"/>
       <SubTree ID="SendTrajectoryOnly"
                Trajectory="{Trajectory}"
                TimeBeforeFailling="5"/>
+      <AiActivation Model="0"
+                    Bottom="true"
+                    Front="false"/>
+      <InitializeTrajectory trajectory="{Trajectory}"/>
+      <Repeat num_cycles="3">
+        <Sequence>
+          <InitializeTrajectory trajectory="{Trajectory}"/>
+          <AiFilter Detected_object_array="{BotomAIDetection}"
+                    Max_frame_before_failling="7"
+                    Max_frame_depth="25"
+                    Min_size_output="1"
+                    Confidence="0.600000"
+                    Max_size_output="1"
+                    Object_class="shark"
+                    Camera="0"/>
+          <BinAlignementForDroppers Trajectory="{Trajectory}"
+                                    Detections="{BotomAIDetection}"/>
+          <SubTree ID="SendTrajectoryOnly"
+                   Trajectory="{Trajectory}"
+                   TimeBeforeFailling="5"/>
+        </Sequence>
+      </Repeat>
       <Dropper side="port_side"/>
+      <AiActivation Model="0"
+                    Bottom="false"
+                    Front="true"/>
     </Sequence>
   </BehaviorTree>
 
@@ -289,11 +314,37 @@
                   default="false"
                   type="bool">true: ON, talse: OFF</input_port>
     </Action>
+    <Action ID="AiFilter">
+      <output_port name="Detected_object_array"
+                   type="AiDetectionArray"/>
+      <input_port name="Max_frame_before_failling"
+                  type="int">maximum allowed frames</input_port>
+      <input_port name="Max_frame_depth"
+                  type="float">Maximum allowed depth</input_port>
+      <input_port name="Min_size_output"
+                  type="int">minumum number of frames with at least one detection before sending results</input_port>
+      <input_port name="Confidence"
+                  default="0.600000"
+                  type="float">Ai confidence</input_port>
+      <input_port name="Max_size_output"
+                  type="int">Max size of the output array</input_port>
+      <input_port name="Object_class"
+                  type="std::string">Searched object</input_port>
+      <input_port name="Camera"
+                  default="1"
+                  type="int">1: Front, 0: Bottom</input_port>
+    </Action>
     <SubTree ID="Bin"
              editable="true">
       <input_port name="HintAngle"
                   default="0">The approximation of the angle where the mission is.</input_port>
     </SubTree>
+    <Action ID="BinAlignementForDroppers">
+      <inout_port name="Trajectory"
+                  type="Trajectory"/>
+      <input_port name="Detections"
+                  type="AiDetectionArray"/>
+    </Action>
     <Action ID="Dropper">
       <input_port name="side"
                   type="std::string">port_side or starboard</input_port>

@@ -15,6 +15,10 @@
             <input_port name="Object_class" type="std::string">Searched object</input_port>
             <input_port name="Camera" type="int" default="1">1: Front, 0: Bottom</input_port>
         </Action>
+        <Action ID="BinAlignementForDroppers">
+            <inout_port name="Trajectory" type="Trajectory"/>
+            <input_port name="Detections" type="AiDetectionArray"/>
+        </Action>
         <Action ID="CheckBoundingBox">
             <input_port name="Object" type="AiDetectionArray"/>
             <output_port name="New_width" type="int"/>

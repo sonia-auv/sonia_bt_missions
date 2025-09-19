@@ -32,6 +32,10 @@
         <SubTree ID="Bin" editable="true">
             <input_port name="HintAngle" default="0">The approximation of the angle where the mission is.</input_port>
         </SubTree>
+        <Action ID="BinAlignementForDroppers">
+            <inout_port name="Trajectory" type="Trajectory"/>
+            <input_port name="Detections" type="AiDetectionArray"/>
+        </Action>
         <Action ID="CheckBoundingBox">
             <input_port name="Object" type="AiDetectionArray"/>
             <output_port name="New_width" type="int"/>

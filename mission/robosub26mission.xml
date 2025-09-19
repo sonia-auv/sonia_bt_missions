@@ -126,7 +126,7 @@
   </BehaviorTree>
 
   <BehaviorTree ID="Torpedoes">
-    <AlwaysSuccess/>
+    <SubTree ID="Gate"/>
   </BehaviorTree>
 
   <BehaviorTree ID="Trickshot">

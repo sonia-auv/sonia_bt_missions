@@ -30,20 +30,14 @@
   <BehaviorTree ID="MissionFailed">
     <Sequence>
       <InitializeTrajectory trajectory="{traj}"/>
-      <TrajectoryAppendPose trajectory="{traj}"
-                            precision="0"
-                            speed="0"
-                            frame="1"
-                            orientationZ="0.000000"
-                            longRotation="false"
-                            positionZ="0.000000"
-                            positionY="0.000000"
-                            orientationY="0.000000"
-                            orientationX="180.00"
-                            positionX="0.000000"/>
-      <SubTree ID="SendTrajectoryOnly"
-               Trajectory="{traj}"
-               TimeBeforeFailling="5"/>
+      <SubTree ID="MoveSinglePose"
+               frame="1.0"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="0.0"
+               orientationX="90.0"
+               orientationY="0.0"
+               orientationZ="0.0"/>
       <ControlSetMode set_mode="false"/>
       <AlwaysFailure/>
     </Sequence>

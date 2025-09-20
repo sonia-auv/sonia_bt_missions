@@ -3,9 +3,6 @@
       main_tree_to_execute="Run26">
   <BehaviorTree ID="Bin">
     <Sequence>
-      <RetryUntilSuccessful num_attempts="-1">
-        <MissionSwitchStatus/>
-      </RetryUntilSuccessful>
       <InitializeTrajectory trajectory="{Trajectory}"/>
       <SubTree ID="SearchObjectByRotation"
                StartingAngle="0"
@@ -48,34 +45,18 @@
   </BehaviorTree>
 
   <BehaviorTree ID="CoinFlip">
-    <Sequence>
-      <RetryUntilSuccessful num_attempts="-1">
-        <MissionSwitchStatus/>
-      </RetryUntilSuccessful>
-      <SubTree ID="MoveSinglePose"
-               frame="1.0"
-               positionX="0.0"
-               positionY="0.0"
-               positionZ="0.5"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"/>
-      <SubTree ID="MoveSinglePose"
-               frame="2.0"
-               positionX="0.0"
-               positionY="0.0"
-               positionZ="0.0"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"/>
-    </Sequence>
+    <SubTree ID="MoveSinglePose"
+             frame="2.0"
+             positionX="0.0"
+             positionY="0.0"
+             positionZ="0.0"
+             orientationX="0.0"
+             orientationY="0.0"
+             orientationZ="0.0"/>
   </BehaviorTree>
 
   <BehaviorTree ID="Gate">
     <Sequence>
-      <RetryUntilSuccessful num_attempts="-1">
-        <MissionSwitchStatus/>
-      </RetryUntilSuccessful>
       <AiActivation Model="0"
                     Bottom="false"
                     Front="true"/>
@@ -114,6 +95,8 @@
 
   <BehaviorTree ID="Run26">
     <Sequence>
+      <SubTree ID="InitialSubmerge"
+               Depth="1"/>
       <SubTree ID="CoinFlip"/>
       <SubTree ID="Gate"/>
       <SubTree ID="TrickshotLegacy"/>
@@ -127,6 +110,12 @@
 
   <BehaviorTree ID="Torpedos">
     <Sequence>
+      <InitializeTrajectory trajectory="{Trajectory}"/>
+      <SubTree ID="SearchObjectByRotation"
+               StartingAngle="0"
+               Object="torpedo-poster"
+               FoundAiDetection="{AiDetection}"/>
+      <InitializeTrajectory trajectory="{Trajectory}"/>
       <AiFilter Detected_object_array="{AiDetection}"
                 Max_frame_before_failling="15"
                 Max_frame_depth="25"
@@ -141,14 +130,22 @@
       <SubTree ID="SendTrajectoryOnly"
                Trajectory="{Trajectory}"
                TimeBeforeFailling="5"/>
+      <InitializeTrajectory trajectory="{Trajectory}"/>
+      <AiFilter Detected_object_array="{AiDetection}"
+                Max_frame_before_failling="15"
+                Max_frame_depth="25"
+                Min_size_output="4"
+                Confidence="0.600000"
+                Max_size_output="4"
+                Object_class="torpedo-poster"
+                Camera="1"/>
+      <TorpedoAimingAlignement Trajectory="{Trajectory}"
+                               Detections="{AiDetection}"/>
     </Sequence>
   </BehaviorTree>
 
   <BehaviorTree ID="Trickshot">
     <Sequence>
-      <RetryUntilSuccessful num_attempts="-1">
-        <MissionSwitchStatus/>
-      </RetryUntilSuccessful>
       <SubTree ID="MoveSinglePose"
                frame="4"
                positionX="0.0"
@@ -243,17 +240,6 @@
 
   <BehaviorTree ID="TrickshotLegacy">
     <Sequence>
-      <RetryUntilSuccessful num_attempts="-1">
-        <MissionSwitchStatus/>
-      </RetryUntilSuccessful>
-      <SubTree ID="MoveSinglePose"
-               frame="1"
-               positionX="0.0"
-               positionY="0.0"
-               positionZ="0.5"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"/>
       <InitializeTrajectory trajectory="{traj}"/>
       <TrajectoryAppendPose trajectory="{traj}"
                             precision="0"
@@ -364,6 +350,11 @@
       <input_port name="side"
                   type="std::string">port_side or starboard</input_port>
     </Action>
+    <SubTree ID="InitialSubmerge"
+             editable="true">
+      <input_port name="Depth"
+                  default="1">The depth that the sub will be in the water</input_port>
+    </SubTree>
     <Action ID="InitializeTrajectory">
       <output_port name="trajectory"
                    type="Trajectory"/>
@@ -423,6 +414,12 @@
       <input_port name="TimeBeforeFailling"
                   default="5">The time before the sub movement fail</input_port>
     </SubTree>
+    <Action ID="TorpedoAimingAlignement">
+      <inout_port name="Trajectory"
+                  type="Trajectory"/>
+      <input_port name="Detections"
+                  type="AiDetectionArray"/>
+    </Action>
     <Action ID="TorpedoDriftingAlignement">
       <input_port name="RotationAngle"
                   type="float"/>

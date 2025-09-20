@@ -60,6 +60,9 @@
         <Action ID="EnableDisableDVL">
             <input_port name="dvl_input" default="false" type="bool">true: start, false: stop</input_port>
         </Action>
+        <SubTree ID="InitialSubmerge" editable="true">
+            <input_port name="Depth" default="1">The depth that the sub will be in the water</input_port>
+        </SubTree>
         <Action ID="InitializeTrajectory">
             <output_port name="trajectory" type="Trajectory"/>
         </Action>
@@ -102,6 +105,10 @@
         </Action>
         <Action ID="Torpedo">
             <input_port name="side" type="std::string">port_side or starboard</input_port>
+        </Action>
+        <Action ID="TorpedoAimingAlignement">
+            <inout_port name="Trajectory" type="Trajectory"/>
+            <input_port name="Detections" type="AiDetectionArray"/>
         </Action>
         <Action ID="TorpedoDriftingAlignement">
             <input_port name="RotationAngle" type="float"/>

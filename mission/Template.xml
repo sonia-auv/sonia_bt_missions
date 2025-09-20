@@ -11,6 +11,22 @@
     </Sequence>
   </BehaviorTree>
 
+  <BehaviorTree ID="InitialSubmerge">
+    <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
+      <SubTree ID="MoveSinglePose"
+               frame="1.0"
+               positionX="0.0"
+               positionY="0.0"
+               positionZ="{Depth}"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"/>
+    </Sequence>
+  </BehaviorTree>
+
   <BehaviorTree ID="MissionFailed">
     <Sequence>
       <InitializeTrajectory trajectory="{traj}"/>
@@ -231,7 +247,7 @@
     <SubTree ID="MoveSinglePose"
              editable="true">
       <input_port name="frame"
-                  default="1.0">Submarine reference type</input_port>
+                  default="1.0">0 : Abs, 1 : Rot and Trans Rel, 2 : Rot Abs and Trans Rel, 3 : Rot Rel and Trans Abs, 4 : Prof Abs</input_port>
       <input_port name="positionX"
                   default="0.0">x value to go</input_port>
       <input_port name="positionY"

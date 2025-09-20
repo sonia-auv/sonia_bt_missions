@@ -75,8 +75,8 @@
                Depth="0.3"/>
       <SubTree ID="MoveSinglePose"
                frame="1.0"
-               positionX="0.7"
-               positionY="0.0"
+               positionX="0.0"
+               positionY="0.7"
                positionZ="0.0"
                orientationX="0.0"
                orientationY="0.0"
@@ -86,8 +86,8 @@
       </Delay>
       <SubTree ID="MoveSinglePose"
                frame="1.0"
-               positionX="-1.4"
-               positionY="0.0"
+               positionX="0.0"
+               positionY="-1.4"
                positionZ="0.0"
                orientationX="0.0"
                orientationY="0.0"
@@ -97,8 +97,8 @@
       </Delay>
       <SubTree ID="MoveSinglePose"
                frame="1.0"
-               positionX="0.7"
-               positionY="0.0"
+               positionX="0.0"
+               positionY="0.7"
                positionZ="0.0"
                orientationX="0.0"
                orientationY="0.0"

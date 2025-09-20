@@ -65,6 +65,11 @@
         <Action ID="Torpedo">
             <input_port name="side" type="std::string">port_side or starboard</input_port>
         </Action>
+        <Action ID="TorpedoDriftingAlignement">
+            <input_port name="RotationAngle" type="float"/>
+            <inout_port name="Trajectory" type="Trajectory"/>
+            <input_port name="Detections" type="AiDetectionArray"/>
+        </Action>
         <Action ID="TrajectoryAppendPose">
             <inout_port name="trajectory" type="Trajectory"/>
             <input_port name="precision" type="int" default="0"/>

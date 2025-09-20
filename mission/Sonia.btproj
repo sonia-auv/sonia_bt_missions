@@ -103,6 +103,11 @@
         <Action ID="Torpedo">
             <input_port name="side" type="std::string">port_side or starboard</input_port>
         </Action>
+        <Action ID="TorpedoDriftingAlignement">
+            <input_port name="RotationAngle" type="float"/>
+            <inout_port name="Trajectory" type="Trajectory"/>
+            <input_port name="Detections" type="AiDetectionArray"/>
+        </Action>
         <SubTree ID="Torpedos" editable="true">
             <input_port name="HintAngle" default="0">The approximation of the angle where the torpideos is.</input_port>
         </SubTree>

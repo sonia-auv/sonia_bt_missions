@@ -30,21 +30,21 @@
   <BehaviorTree ID="MissionFailed">
     <Sequence>
       <InitializeTrajectory trajectory="{traj}"/>
-      <Repeat num_cycles="2">
-        <TrajectoryAppendPose trajectory="{traj}"
-                              precision="0"
-                              speed="2"
-                              frame="1"
-                              orientationZ="180"
-                              longRotation="false"
-                              positionZ="0.000000"
-                              positionY="0.000000"
-                              orientationY="0.000000"
-                              orientationX="0.000000"
-                              positionX="0.000000"/>
-      </Repeat>
-      <SendTrajectory trajectory="{traj}"
-                      interpolation="0"/>
+      <TrajectoryAppendPose trajectory="{traj}"
+                            precision="0"
+                            speed="0"
+                            frame="1"
+                            orientationZ="0.000000"
+                            longRotation="false"
+                            positionZ="0.000000"
+                            positionY="0.000000"
+                            orientationY="0.000000"
+                            orientationX="180.00"
+                            positionX="0.000000"/>
+      <SubTree ID="SendTrajectoryOnly"
+               Trajectory="{traj}"
+               TimeBeforeFailling="5"/>
+      <ControlSetMode set_mode="false"/>
       <AlwaysFailure/>
     </Sequence>
   </BehaviorTree>
@@ -52,21 +52,21 @@
   <BehaviorTree ID="MissionSuccess">
     <Sequence>
       <InitializeTrajectory trajectory="{traj}"/>
-      <Repeat num_cycles="2">
-        <TrajectoryAppendPose trajectory="{traj}"
-                              precision="0"
-                              speed="0"
-                              frame="1"
-                              orientationZ="180"
-                              longRotation="false"
-                              positionZ="0.000000"
-                              positionY="0.000000"
-                              orientationY="0.000000"
-                              orientationX="0.000000"
-                              positionX="0.000000"/>
-      </Repeat>
-      <SendTrajectory trajectory="{traj}"
-                      interpolation="0"/>
+      <TrajectoryAppendPose trajectory="{traj}"
+                            precision="0"
+                            speed="0"
+                            frame="1"
+                            orientationZ="180"
+                            longRotation="false"
+                            positionZ="0.000000"
+                            positionY="0.000000"
+                            orientationY="0.000000"
+                            orientationX="0.000000"
+                            positionX="0.000000"/>
+      <SubTree ID="SendTrajectoryOnly"
+               Trajectory="{traj}"
+               TimeBeforeFailling="5"/>
+      <ControlSetMode set_mode="false"/>
     </Sequence>
   </BehaviorTree>
 
@@ -273,6 +273,12 @@
                   default="0"
                   type="int"/>
     </Action>
+    <SubTree ID="SendTrajectoryOnly"
+             editable="true">
+      <input_port name="Trajectory">The trajectory to do to the sub</input_port>
+      <input_port name="TimeBeforeFailling"
+                  default="5">The time before the sub movement fail</input_port>
+    </SubTree>
     <Action ID="Tare">
       <input_port name="sensor"
                   type="std::string">imu or depth</input_port>

@@ -44,7 +44,6 @@
 
   <BehaviorTree ID="MissionSuccess">
     <Sequence>
-      <InitializeTrajectory trajectory="{traj}"/>
       <SubTree ID="MoveSinglePose"
                frame="1.0"
                positionX="0.0"

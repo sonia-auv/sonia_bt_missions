@@ -56,33 +56,36 @@
   </BehaviorTree>
 
   <BehaviorTree ID="Gate">
-    <Sequence>
-      <AiActivation Model="0"
-                    Bottom="false"
-                    Front="true"/>
-      <InitializeTrajectory trajectory="{Trajectory}"/>
-      <SubTree ID="SearchObjectByRotation"
-               StartingAngle="0"
-               Object="gate-shark"
-               FoundAiDetection="{Aidetection}"/>
-      <RotateToMission trajectory="{Trajectory}"
-                       detections="{Aidetection}"/>
-      <MoveToMission trajectory="{Trajectory}"
-                     detections="{AiDetection}"/>
-      <SubTree ID="SendTrajectoryOnly"
-               Trajectory="{Trajectory}"
-               TimeBeforeFailling="7"/>
-      <SubTree ID="RotateToAbsoluteAngle"
-               Angle="0"/>
-      <SubTree ID="MoveSinglePose"
-               frame="1.0"
-               positionX="0.5"
-               positionY="0.0"
-               positionZ="0.0"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"/>
-    </Sequence>
+    <Fallback>
+      <Sequence>
+        <AiActivation Model="0"
+                      Bottom="false"
+                      Front="true"/>
+        <InitializeTrajectory trajectory="{Trajectory}"/>
+        <SubTree ID="SearchObjectByRotation"
+                 StartingAngle="0"
+                 Object="gate-shark"
+                 FoundAiDetection="{Aidetection}"/>
+        <RotateToMission trajectory="{Trajectory}"
+                         detections="{Aidetection}"/>
+        <MoveToMission trajectory="{Trajectory}"
+                       detections="{AiDetection}"/>
+        <SubTree ID="SendTrajectoryOnly"
+                 Trajectory="{Trajectory}"
+                 TimeBeforeFailling="7"/>
+        <SubTree ID="RotateToAbsoluteAngle"
+                 Angle="0"/>
+        <SubTree ID="MoveSinglePose"
+                 frame="1.0"
+                 positionX="0.5"
+                 positionY="0.0"
+                 positionZ="0.0"
+                 orientationX="0.0"
+                 orientationY="0.0"
+                 orientationZ="0.0"/>
+      </Sequence>
+      <AlwaysSuccess/>
+    </Fallback>
   </BehaviorTree>
 
   <BehaviorTree ID="Octogon">

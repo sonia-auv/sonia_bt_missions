@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root BTCPP_format="4">
   <BehaviorTree ID="AiFront">
-    <AiFilter Detected_object_array="{AiDetections}"
-              Max_frame_before_failling="5"
-              Max_frame_depth="25"
-              Min_size_output="1"
-              Confidence="0.600000"
-              Max_size_output="1"
-              Object_class="gate-shark"
-              Camera="1"/>
+    <Sequence>
+      <AiActivation Model="0"
+                    Bottom="false"
+                    Front="true"/>
+      <AiFilter Detected_object_array="{AiDetections}"
+                Max_frame_before_failling="5"
+                Max_frame_depth="25"
+                Min_size_output="1"
+                Confidence="0.3000"
+                Max_size_output="1"
+                Object_class="gate-shark"
+                Camera="1"/>
+    </Sequence>
   </BehaviorTree>
 
   <BehaviorTree ID="PoolAIFront">

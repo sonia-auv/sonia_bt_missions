@@ -14,7 +14,7 @@
                 Min_size_output="1"
                 Confidence="0.3000"
                 Max_size_output="1"
-                Object_class="shark"
+                Object_class="path"
                 Camera="1"/>
     </Sequence>
   </BehaviorTree>

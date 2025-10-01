@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root BTCPP_format="4">
+  <BehaviorTree ID="AiFront">
+    <AiFilter Detected_object_array="{AiDetections}"
+              Max_frame_before_failling="5"
+              Max_frame_depth="25"
+              Min_size_output="1"
+              Confidence="0.600000"
+              Max_size_output="1"
+              Object_class="gate-shark"
+              Camera="1"/>
+  </BehaviorTree>
+
   <BehaviorTree ID="PoolAIFront">
     <Sequence>
       <SubTree ID="InitialSubmerge"
@@ -62,48 +73,12 @@
       <SubTree ID="InitialSubmerge"
                Depth="0.5"/>
       <IfThenElse>
-        <SubTree ID="Gate"/>
+        <SubTree ID="Gate"
+                 DetectedObject=""
+                 SelectedObject=""/>
         <SubTree ID="MissionSuccess"/>
         <SubTree ID="MissionFailed"/>
       </IfThenElse>
-    </Sequence>
-  </BehaviorTree>
-
-  <BehaviorTree ID="PoolLaunchTorpedo">
-    <Sequence>
-      <SubTree ID="InitialSubmerge"
-               Depth="0.3"/>
-      <SubTree ID="MoveSinglePose"
-               frame="1.0"
-               positionX="0.0"
-               positionY="0.7"
-               positionZ="0.0"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"/>
-      <Delay delay_msec="500">
-        <Torpedo side="starboard"/>
-      </Delay>
-      <SubTree ID="MoveSinglePose"
-               frame="1.0"
-               positionX="0.0"
-               positionY="-1.4"
-               positionZ="0.0"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"/>
-      <Delay delay_msec="500">
-        <Torpedo side="port_side"/>
-      </Delay>
-      <SubTree ID="MoveSinglePose"
-               frame="1.0"
-               positionX="0.0"
-               positionY="0.7"
-               positionZ="0.0"
-               orientationX="0.0"
-               orientationY="0.0"
-               orientationZ="0.0"/>
-      <ControlSetMode set_mode="false"/>
     </Sequence>
   </BehaviorTree>
 
@@ -249,11 +224,10 @@
       <input_port name="HintAngle"
                   default="0">The approximation of the angle where the mission is.</input_port>
     </SubTree>
-    <Action ID="ControlSetMode">
-      <input_port name="set_mode"
-                  default="false"
-                  type="bool"/>
-    </Action>
+    <SubTree ID="Gate"
+             editable="true">
+      <input_port name="DetectedObject">The type of object that the sub will working to</input_port>
+    </SubTree>
     <SubTree ID="InitialSubmerge"
              editable="true">
       <input_port name="Depth"
@@ -293,10 +267,6 @@
       <input_port name="TimeBeforeFailling"
                   default="5">The time before the sub movement fail</input_port>
     </SubTree>
-    <Action ID="Torpedo">
-      <input_port name="side"
-                  type="std::string">port_side or starboard</input_port>
-    </Action>
     <Action ID="TrajectoryAppendPose">
       <inout_port name="trajectory"
                   type="Trajectory"/>

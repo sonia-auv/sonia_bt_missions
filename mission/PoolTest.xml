@@ -2,6 +2,9 @@
 <root BTCPP_format="4">
   <BehaviorTree ID="AiFront">
     <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
       <AiActivation Model="0"
                     Bottom="false"
                     Front="true"/>
@@ -242,6 +245,7 @@
       <output_port name="trajectory"
                    type="Trajectory"/>
     </Action>
+    <Condition ID="MissionSwitchStatus"/>
     <SubTree ID="MoveSinglePose"
              editable="true">
       <input_port name="frame"

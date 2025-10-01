@@ -60,6 +60,9 @@
         <Action ID="EnableDisableDVL">
             <input_port name="dvl_input" default="false" type="bool">true: start, false: stop</input_port>
         </Action>
+        <SubTree ID="Gate" editable="true">
+            <input_port name="DetectedObject">The type of object that the sub will working to</input_port>
+        </SubTree>
         <SubTree ID="InitialSubmerge" editable="true">
             <input_port name="Depth" default="1">The depth that the sub will be in the water</input_port>
         </SubTree>

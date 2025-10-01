@@ -56,36 +56,45 @@
   </BehaviorTree>
 
   <BehaviorTree ID="Gate">
-    <Fallback>
-      <Sequence>
-        <AiActivation Model="0"
-                      Bottom="false"
-                      Front="true"/>
-        <InitializeTrajectory trajectory="{Trajectory}"/>
-        <SubTree ID="SearchObjectByRotation"
-                 StartingAngle="0"
-                 Object="gate-shark"
-                 FoundAiDetection="{Aidetection}"/>
-        <RotateToMission trajectory="{Trajectory}"
-                         detections="{Aidetection}"/>
-        <MoveToMission trajectory="{Trajectory}"
-                       detections="{AiDetection}"/>
-        <SubTree ID="SendTrajectoryOnly"
-                 Trajectory="{Trajectory}"
-                 TimeBeforeFailling="7"/>
-        <SubTree ID="RotateToAbsoluteAngle"
-                 Angle="0"/>
-        <SubTree ID="MoveSinglePose"
-                 frame="1.0"
-                 positionX="0.5"
-                 positionY="0.0"
-                 positionZ="0.0"
-                 orientationX="0.0"
-                 orientationY="0.0"
-                 orientationZ="0.0"/>
-      </Sequence>
-      <AlwaysSuccess/>
-    </Fallback>
+    <Sequence>
+      <AiActivation Model="0"
+                    Bottom="false"
+                    Front="true"/>
+      <InitializeTrajectory trajectory="{Trajectory}"/>
+      <Fallback>
+        <Sequence>
+          <SubTree ID="SearchObjectByRotation"
+                   StartingAngle="0"
+                   Object="gate-shark"
+                   FoundAiDetection="{Aidetection}"/>
+          <Script code="DetectedObject:=gate_shark"/>
+        </Sequence>
+        <Sequence>
+          <SubTree ID="SearchObjectByRotation"
+                   StartingAngle="0"
+                   Object="gate-sawfish"
+                   FoundAiDetection="{Aidetection}"/>
+          <Script code="DetectedObject:=gate_sawfish"/>
+        </Sequence>
+      </Fallback>
+      <RotateToMission trajectory="{Trajectory}"
+                       detections="{Aidetection}"/>
+      <MoveToMission trajectory="{Trajectory}"
+                     detections="{AiDetection}"/>
+      <SubTree ID="SendTrajectoryOnly"
+               Trajectory="{Trajectory}"
+               TimeBeforeFailling="7"/>
+      <SubTree ID="RotateToAbsoluteAngle"
+               Angle="0"/>
+      <SubTree ID="MoveSinglePose"
+               frame="1.0"
+               positionX="0.5"
+               positionY="0.0"
+               positionZ="0.0"
+               orientationX="0.0"
+               orientationY="0.0"
+               orientationZ="0.0"/>
+    </Sequence>
   </BehaviorTree>
 
   <BehaviorTree ID="Octogon">
@@ -101,13 +110,22 @@
       <SubTree ID="InitialSubmerge"
                Depth="1"/>
       <SubTree ID="CoinFlip"/>
-      <SubTree ID="Gate"/>
+      <ForceSuccess>
+        <SubTree ID="Gate"
+                 DetectedObject="{FishDetected}"/>
+      </ForceSuccess>
       <SubTree ID="TrickshotLegacy"/>
-      <SubTree ID="Bin"
-               HintAngle="0"/>
-      <SubTree ID="Torpedos"
-               HintAngle="0"/>
-      <SubTree ID="Octogon"/>
+      <ForceSuccess>
+        <SubTree ID="Bin"
+                 HintAngle="0"/>
+      </ForceSuccess>
+      <ForceSuccess>
+        <SubTree ID="Torpedos"
+                 HintAngle="0"/>
+      </ForceSuccess>
+      <ForceSuccess>
+        <SubTree ID="Octogon"/>
+      </ForceSuccess>
     </Sequence>
   </BehaviorTree>
 
@@ -353,6 +371,10 @@
       <input_port name="side"
                   type="std::string">port_side or starboard</input_port>
     </Action>
+    <SubTree ID="Gate"
+             editable="true">
+      <input_port name="DetectedObject">The type of object that the sub will working to</input_port>
+    </SubTree>
     <SubTree ID="InitialSubmerge"
              editable="true">
       <input_port name="Depth"

@@ -19,28 +19,6 @@
     </Sequence>
   </BehaviorTree>
 
-  <BehaviorTree ID="PoolAIFront">
-    <Sequence>
-      <SubTree ID="InitialSubmerge"
-               Depth="0.5"/>
-      <AiActivation Model="0"
-                    Bottom="false"
-                    Front="true"/>
-      <IfThenElse>
-        <AiFilter Detected_object_array="{AiDetections}"
-                  Max_frame_before_failling="5"
-                  Max_frame_depth="25"
-                  Min_size_output="1"
-                  Confidence="0.600000"
-                  Max_size_output="1"
-                  Object_class="gate-shark"
-                  Camera="1"/>
-        <SubTree ID="MissionSuccess"/>
-        <SubTree ID="MissionFailed"/>
-      </IfThenElse>
-    </Sequence>
-  </BehaviorTree>
-
   <BehaviorTree ID="PoolAiBottom">
     <Sequence>
       <SubTree ID="InitialSubmerge"
@@ -60,6 +38,24 @@
         <SubTree ID="MissionSuccess"/>
         <SubTree ID="MissionFailed"/>
       </IfThenElse>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="PoolAiFront">
+    <Sequence>
+      <SubTree ID="InitialSubmerge"
+               Depth="0.5"/>
+      <AiActivation Model="0"
+                    Bottom="false"
+                    Front="true"/>
+      <AiFilter Detected_object_array="{AiDetections}"
+                Max_frame_before_failling="5"
+                Max_frame_depth="25"
+                Min_size_output="1"
+                Confidence="0.3000"
+                Max_size_output="1"
+                Object_class="bin-inner"
+                Camera="1"/>
     </Sequence>
   </BehaviorTree>
 

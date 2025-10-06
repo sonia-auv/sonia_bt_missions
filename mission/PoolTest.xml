@@ -43,8 +43,6 @@
 
   <BehaviorTree ID="PoolAiFront">
     <Sequence>
-      <SubTree ID="InitialSubmerge"
-               Depth="0.5"/>
       <AiActivation Model="0"
                     Bottom="false"
                     Front="true"/>

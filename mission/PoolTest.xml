@@ -10,10 +10,10 @@
                     Front="true"/>
       <AiFilter Detected_object_array="{AiDetections}"
                 Max_frame_before_failling="5"
-                Max_frame_depth="25"
                 Min_size_output="1"
                 Confidence="0.3000"
                 Max_size_output="1"
+                Max_depth=""
                 Object_class="path"
                 Camera="1"/>
     </Sequence>
@@ -29,10 +29,10 @@
       <IfThenElse>
         <AiFilter Detected_object_array="{AiDetections}"
                   Max_frame_before_failling="5"
-                  Max_frame_depth="25"
                   Min_size_output="1"
                   Confidence="0.600000"
                   Max_size_output="1"
+                  Max_depth=""
                   Object_class="gate-shark"
                   Camera="0"/>
         <SubTree ID="MissionSuccess"/>
@@ -48,10 +48,10 @@
                     Front="true"/>
       <AiFilter Detected_object_array="{AiDetections}"
                 Max_frame_before_failling="100"
-                Max_frame_depth="25"
                 Min_size_output="1"
                 Confidence="0.3000"
                 Max_size_output="1"
+                Max_depth="25"
                 Object_class="bin-inner"
                 Camera="1"/>
     </Sequence>
@@ -206,8 +206,6 @@
                    type="AiDetectionArray"/>
       <input_port name="Max_frame_before_failling"
                   type="int">maximum allowed frames</input_port>
-      <input_port name="Max_frame_depth"
-                  type="float">Maximum allowed depth</input_port>
       <input_port name="Min_size_output"
                   type="int">minumum number of frames with at least one detection before sending results</input_port>
       <input_port name="Confidence"
@@ -215,6 +213,8 @@
                   type="float">Ai confidence</input_port>
       <input_port name="Max_size_output"
                   type="int">Max size of the output array</input_port>
+      <input_port name="Max_depth"
+                  type="float">Maximum allowed depth</input_port>
       <input_port name="Object_class"
                   type="std::string">Searched object</input_port>
       <input_port name="Camera"

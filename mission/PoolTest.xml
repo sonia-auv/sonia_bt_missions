@@ -43,11 +43,14 @@
 
   <BehaviorTree ID="PoolAiFront">
     <Sequence>
+      <RetryUntilSuccessful num_attempts="-1">
+        <MissionSwitchStatus/>
+      </RetryUntilSuccessful>
       <AiActivation Model="0"
                     Bottom="false"
                     Front="true"/>
       <AiFilter Detected_object_array="{AiDetections}"
-                Max_frame_before_failling="100"
+                Max_frame_before_failling="200"
                 Min_size_output="1"
                 Confidence="0.3000"
                 Max_size_output="1"

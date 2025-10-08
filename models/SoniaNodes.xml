@@ -8,10 +8,10 @@
         <Action ID="AiFilter">
             <output_port name="Detected_object_array" type="AiDetectionArray"/>
             <input_port name="Max_frame_before_failling" type="int">maximum allowed frames</input_port>
-            <input_port name="Max_frame_depth" type="float">Maximum allowed depth</input_port>
             <input_port name="Min_size_output" type="int">minumum number of frames with at least one detection before sending results</input_port>
             <input_port name="Confidence" type="float" default="0.600000">Ai confidence</input_port>
             <input_port name="Max_size_output" type="int">Max size of the output array</input_port>
+            <input_port name="Max_depth" type="float">Maximum allowed depth</input_port>
             <input_port name="Object_class" type="std::string">Searched object</input_port>
             <input_port name="Camera" type="int" default="1">1: Front, 0: Bottom</input_port>
         </Action>
@@ -66,11 +66,11 @@
             <input_port name="side" type="std::string">port_side or starboard</input_port>
         </Action>
         <Action ID="TorpedoAimingAlignement">
+            <input_port name="LaunchingSide" type="std::string"/>
             <inout_port name="Trajectory" type="Trajectory"/>
             <input_port name="Detections" type="AiDetectionArray"/>
         </Action>
         <Action ID="TorpedoDriftingAlignement">
-            <input_port name="RotationAngle" type="float"/>
             <inout_port name="Trajectory" type="Trajectory"/>
             <input_port name="Detections" type="AiDetectionArray"/>
         </Action>

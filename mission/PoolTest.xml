@@ -52,7 +52,7 @@
                 Confidence="0.3000"
                 Max_size_output="1"
                 Max_depth="25"
-                Object_class="bin-inner"
+                Object_class="torpedo-poster"
                 Camera="1"/>
     </Sequence>
   </BehaviorTree>

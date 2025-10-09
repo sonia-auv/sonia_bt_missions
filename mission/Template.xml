@@ -102,7 +102,7 @@
       <Fallback>
         <AiFilter Detected_object_array="{FoundAiDetection}"
                   Max_frame_before_failling="5"
-                  Max_frame_depth="25"
+                  Max_depth="25"
                   Min_size_output="1"
                   Confidence="0.600000"
                   Max_size_output="1"
@@ -120,7 +120,7 @@
           <Fallback>
             <AiFilter Detected_object_array="{FoundAiDetection}"
                       Max_frame_before_failling="5"
-                      Max_frame_depth="25"
+                      Max_depth="25"
                       Min_size_output="1"
                       Confidence="0.600000"
                       Max_size_output="1"
@@ -138,7 +138,7 @@
               <Fallback>
                 <AiFilter Detected_object_array="{FoundAiDetection}"
                           Max_frame_before_failling="5"
-                          Max_frame_depth="25"
+                          Max_depth="25"
                           Min_size_output="1"
                           Confidence="0.600000"
                           Max_size_output="1"
@@ -156,7 +156,7 @@
                   <Fallback>
                     <AiFilter Detected_object_array="{FoundAiDetection}"
                               Max_frame_before_failling="5"
-                              Max_frame_depth="25"
+                              Max_depth="25"
                               Min_size_output="1"
                               Confidence="0.600000"
                               Max_size_output="1"
@@ -174,7 +174,7 @@
                       <IfThenElse>
                         <AiFilter Detected_object_array="{FoundAiDetection}"
                                   Max_frame_before_failling="5"
-                                  Max_frame_depth="25"
+                                  Max_depth="25"
                                   Min_size_output="1"
                                   Confidence="0.600000"
                                   Max_size_output="1"
@@ -204,24 +204,14 @@
   <!-- Description of Node Models (used by Groot) -->
   <TreeNodesModel>
     <Action ID="AiFilter">
-      <output_port name="Detected_object_array"
-                   type="AiDetectionArray"/>
-      <input_port name="Max_frame_before_failling"
-                  type="int">maximum allowed frames</input_port>
-      <input_port name="Max_frame_depth"
-                  type="float">Maximum allowed depth</input_port>
-      <input_port name="Min_size_output"
-                  type="int">minumum number of frames with at least one detection before sending results</input_port>
-      <input_port name="Confidence"
-                  default="0.600000"
-                  type="float">Ai confidence</input_port>
-      <input_port name="Max_size_output"
-                  type="int">Max size of the output array</input_port>
-      <input_port name="Object_class"
-                  type="std::string">Searched object</input_port>
-      <input_port name="Camera"
-                  default="1"
-                  type="int">1: Front, 0: Bottom</input_port>
+        <output_port name="Detected_object_array" type="AiDetectionArray"/>
+        <input_port name="Max_frame_before_failling" type="int">maximum allowed frames</input_port>
+        <input_port name="Min_size_output" type="int">minumum number of frames with at least one detection before sending results</input_port>
+        <input_port name="Confidence" type="float" default="0.600000">Ai confidence</input_port>
+        <input_port name="Max_size_output" type="int">Max size of the output array</input_port>
+        <input_port name="Max_depth" type="float">Maximum allowed depth</input_port>
+        <input_port name="Object_class" type="std::string">Searched object</input_port>
+        <input_port name="Camera" type="int" default="1">1: Front, 0: Bottom</input_port>
     </Action>
     <Action ID="ControlSetMode">
       <input_port name="set_mode"
